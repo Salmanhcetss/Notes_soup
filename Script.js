@@ -9,20 +9,7 @@ function loadNotes() {
     if (savedNotes) {
         const notes = JSON.parse(savedNotes);
         notes.forEach(note => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            
-            const noteTitle = document.createElement('h3');
-            noteTitle.textContent = note;
-            
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
-            deleteBtn.classList.add('delete-btn');
-            deleteBtn.onclick = () => deleteNote(note, card);
-            
-            card.appendChild(noteTitle);
-            card.appendChild(deleteBtn);
-            notesList.appendChild(card);
+            displayNote(note);
         });
     }
 }
@@ -31,20 +18,7 @@ function loadNotes() {
 function saveNote() {
     const noteText = noteInput.value.trim();
     if (noteText) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        
-        const noteTitle = document.createElement('h3');
-        noteTitle.textContent = noteText;
-        
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.onclick = () => deleteNote(noteText, card);
-        
-        card.appendChild(noteTitle);
-        card.appendChild(deleteBtn);
-        notesList.appendChild(card);
+        displayNote(noteText);
         
         // Save to cookies
         let notes = getCookie("notes") ? JSON.parse(getCookie("notes")) : [];
@@ -57,6 +31,24 @@ function saveNote() {
     }
 }
 
+// Display the note in the notes section
+function displayNote(noteText) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    
+    const noteTitle = document.createElement('h3');
+    noteTitle.textContent = noteText;
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.onclick = () => deleteNote(noteText, card);
+    
+    card.appendChild(noteTitle);
+    card.appendChild(deleteBtn);
+    notesList.appendChild(card);
+}
+
 // Delete note function
 function deleteNote(noteText, card) {
     card.remove();
@@ -66,4 +58,10 @@ function deleteNote(noteText, card) {
 }
 
 // Get cookie function
-function getCookie(name
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+}
+
+// Set cookie function
+function
