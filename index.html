@@ -82,6 +82,32 @@
       z-index: -1;
     }
 
+    /* Pocket Bird placeholder styling */
+    #pocket-bird-game {
+      width: 100%;
+      height: 300px;  /* Set height for the Pocket Bird game */
+      background-color: #333; /* Match gray color */
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Button styling for audio */
+    .play-music-button {
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 1.2em;
+      transition: background-color 0.3s ease;
+    }
+
+    .play-music-button:hover {
+      background-color: #333;
+    }
+
   </style>
 
   <!-- Pocket Bird Script -->
@@ -132,16 +158,35 @@
       <h3>Cat Mario</h3>
     </div>
 
-    <!-- OneNote -->
-    <div class="game-card" onclick="window.location.href='onenote.html'">
-      <h3>OneNote</h3>
+    <!-- Pocket Bird -->
+    <div class="game-card" onclick="document.getElementById('pocket-bird-game').innerHTML = ''">
+      <h3>Pocket Bird</h3>
     </div>
 
   </div>
 
+  <!-- Pocket Bird Embed -->
+  <div id="pocket-bird-game" onclick="birbEmbed('#pocket-bird-game')"></div>
+
+  <!-- Music Button -->
+  <div style="text-align: center;">
+    <button class="play-music-button" onclick="playMusic()">Play Music</button>
+  </div>
+
+  <!-- Audio Element for Wii Music -->
+  <audio id="wii-music" src="/mnt/data/Wii music.mp3" preload="auto"></audio>
+
   <footer>
     <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
   </footer>
+
+  <script>
+    // Function to play the music when the button is clicked
+    function playMusic() {
+      var audio = document.getElementById('wii-music');
+      audio.play();
+    }
+  </script>
 
 </body>
 </html>
