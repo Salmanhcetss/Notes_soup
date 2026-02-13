@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Gallery</title>
+  <title>Soups Gallery</title>
   <style>
     /* Body and general page styling */
     body {
@@ -23,6 +23,7 @@
       padding: 1rem;
       font-size: 2rem;
       letter-spacing: 1px;
+      position: relative;
     }
 
     /* Container for games */
@@ -83,26 +84,135 @@
       z-index: -1;
     }
 
-    /* Pocket Bird placeholder styling */
-    #pocket-bird-game {
-      width: 100%;
-      height: 300px;
-      background-color: #333;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    /* Sidebar Styling */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #1e1e1e;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      z-index: 1000;
+      color: #fff;
     }
-  </style>
 
-  <!-- Pocket Bird Script -->
-  <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
-  
+    .sidebar a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: #ddd;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 36px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Toggle button for sidebar */
+    .open-sidebar-btn {
+      font-size: 1.5rem;
+      background-color: #1e1e1e;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 1100;
+    }
+
+    /* ChatGPT Input & Output */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 1rem;
+    }
+
+    .chat-output {
+      flex-grow: 1;
+      overflow-y: auto;
+      background-color: #333;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .chat-input {
+      display: flex;
+    }
+
+    .chat-input textarea {
+      width: 80%;
+      padding: 0.8rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #222;
+      color: #fff;
+      resize: none;
+    }
+
+    .chat-input button {
+      width: 15%;
+      padding: 0.8rem;
+      background-color: #1e1e1e;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  </style>
+  <script>
+    // Toggle sidebar
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "300px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+
+    // Simulating ChatGPT interaction
+    function sendChat() {
+      const input = document.getElementById("chat-input").value;
+      const chatOutput = document.getElementById("chat-output");
+      const userMessage = document.createElement("div");
+      userMessage.textContent = "You: " + input;
+      chatOutput.appendChild(userMessage);
+
+      // Simulating a bot response
+      const botMessage = document.createElement("div");
+      botMessage.textContent = "ChatGPT: I'm here to chat!";
+      chatOutput.appendChild(botMessage);
+
+      document.getElementById("chat-input").value = "";
+      chatOutput.scrollTop = chatOutput.scrollHeight; // Auto-scroll to the bottom
+    }
+  </script>
 </head>
 <body>
 
   <div class="background"></div>
 
   <header>
-    Game Gallery
+    Soups Gallery
+    <button class="open-sidebar-btn" onclick="openSidebar()">Open Chat</button>
   </header>
 
   <div class="game-container">
@@ -134,12 +244,24 @@
     <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
       <h3>Cat Mario</h3>
     </div>
+  </div>
 
-  <!-- Pocket Bird Embed -->
-  <div id="pocket-bird-game" onclick="birbEmbed('#pocket-bird-game')"></div>
+  <!-- Sidebar for ChatGPT -->
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+    <div class="chat-container">
+      <div id="chat-output" class="chat-output">
+        <!-- Chat history will appear here -->
+      </div>
+      <div class="chat-input">
+        <textarea id="chat-input" rows="3" placeholder="Type your message..."></textarea>
+        <button onclick="sendChat()">Send</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
+    <p>&copy; 2026 Soups Gallery | All Rights Reserved</p>
   </footer>
 
 </body>
