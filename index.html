@@ -1,58 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Links</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes Soup</title>
+  <style>
+    /* ===========================
+       Add your CSS code here
+       =========================== */
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .note {
+      background-color: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .note h2 {
+      margin-top: 0;
+    }
+
+    /* Add more CSS as needed */
+  </style>
 </head>
 <body>
-    <!-- Audio Player for Wii Music -->
-    <div id="audioPlayer">
-        <audio id="wiiMusic" autoplay loop>
-            <!-- Replace with the actual Wii music URL or use a valid MP3 link -->
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+
+  <header>
+    <h1>Notes Soup</h1>
+  </header>
+
+  <div class="container">
+    <!-- Sample Note -->
+    <div class="note">
+      <h2>Sample Note</h2>
+      <p>This is a sample note content. Edit it as you like!</p>
     </div>
 
-    <div class="container">
-        <h1>Game Links</h1>
+    <!-- Add your dynamic content here -->
+  </div>
 
-        <div class="gallery">
-            <div class="card-container">
-                <div class="card">
-                    <a href="https://veck.io/#E9CJFLX8" target="_blank">Veck.io</a>
-                </div>
-                <div class="card">
-                    <a href="https://eu3-browse.startpage.com/av/proxy?ep=4b6d49364d5441784d48463242587074526e7067417a51754b4431724a7a41794a573055597a64384e44456e59696f375953737a654877694957596b4a576b384e3274726369416b6432496d4a573970597a6b33646e64346357416d4a6a74754a69736865416b564947634941445273545355664d676b415a6d6342595777624a69776965487879656a4" target="_blank">Poki</a>
-                </div>
-                <div class="card">
-                    <a href="https://slowroads.io/" target="_blank">Slow Roads</a>
-                </div>
-                <div class="card">
-                    <a href="https://eaglercraft.q13x.com/1.8.8/js/?retina=true" target="_blank">EaglerCraft</a>
-                </div>
-                <div class="card">
-                    <a href="https://neal.fun/" target="_blank">Neal.fun</a>
-                </div>
-                <div class="card">
-                    <a href="https://www.kodub.com/apps/polytrack" target="_blank">Polytrack</a>
-                </div>
-                <div class="card">
-                    <a href="https://gamesnacks.com/" target="_blank">Game Snacks</a>
-                </div>
-                <div class="card">
-                    <a href="https://kour.io/" target="_blank">Kour.io</a>
-                </div>
-            </div>
-        </div>
+  <script>
+    // ===========================
+    // Add your JavaScript code here
+    // ===========================
 
-        <div class="navigation">
-            <a href="notes.html">Go to Notes Page</a>
-        </div>
-    </div>
+    // Example: A simple script to log a message
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("Notes Soup app is running!");
+      
+      // Example: Dynamic content, like adding new notes
+      const noteContainer = document.querySelector('.container');
+      const newNote = document.createElement('div');
+      newNote.classList.add('note');
+      newNote.innerHTML = '<h2>New Note</h2><p>This is a dynamically created note!</p>';
+      noteContainer.appendChild(newNote);
+    });
 
-    <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script> <!-- Pocket Bird -->
+    // Add more JavaScript functionality here
+  </script>
+
 </body>
 </html>
