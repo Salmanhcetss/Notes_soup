@@ -51,12 +51,11 @@
       transform: translateY(-10px);
     }
 
-    /* Game Icon styling */
-    .game-card img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      margin-bottom: 10px;
+    /* Game Title Styling */
+    .game-card h3 {
+      font-size: 1.5em;
+      margin: 0;
+      color: #2d3e50;
     }
 
     /* Footer styling */
@@ -80,9 +79,6 @@
     }
   </style>
 
-  <!-- Pocket Bird Script -->
-  <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
-
 </head>
 <body>
 
@@ -95,63 +91,44 @@
   <div class="game-container">
     <!-- Veck -->
     <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Veck" alt="Veck">
-      <p>Veck</p>
+      <h3>Veck</h3>
     </div>
 
     <!-- Neal.fun -->
     <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Neal.fun" alt="Neal.fun">
-      <p>Neal.fun</p>
+      <h3>Neal.fun</h3>
     </div>
 
     <!-- Eaglercraft -->
     <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Eaglercraft" alt="Eaglercraft">
-      <p>Eaglercraft</p>
+      <h3>Eaglercraft</h3>
     </div>
 
     <!-- Slow Roads -->
     <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Slow+Roads" alt="Slow Roads">
-      <p>Slow Roads</p>
+      <h3>Slow Roads</h3>
     </div>
 
     <!-- Game Snacks -->
     <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Game+Snacks" alt="Game Snacks">
-      <p>Game Snacks</p>
+      <h3>Game Snacks</h3>
     </div>
 
     <!-- Polytrack -->
     <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Polytrack" alt="Polytrack">
-      <p>Polytrack</p>
+      <h3>Polytrack</h3>
     </div>
 
     <!-- Cat Mario -->
     <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
-      <img src="https://via.placeholder.com/100x100?text=Cat+Mario" alt="Cat Mario">
-      <p>Cat Mario</p>
+      <h3>Cat Mario</h3>
     </div>
 
-    <!-- Pocket Bird -->
-    <div class="game-card" id="pocket-bird-game">
-      <img src="https://via.placeholder.com/100x100?text=Pocket+Bird" alt="Pocket Bird">
-      <p>Pocket Bird</p>
-    </div>
   </div>
 
   <footer>
     <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
   </footer>
-
-  <script>
-    // Initialize Pocket Bird game when the div is clicked
-    document.getElementById("pocket-bird-game").addEventListener("click", function() {
-      birbEmbed("#pocket-bird-game");
-    });
-  </script>
 
 </body>
 </html>
