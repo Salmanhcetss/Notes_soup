@@ -19,7 +19,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 900px;
-    margin-top: 20px;
 }
 
 h1 {
@@ -28,16 +27,22 @@ h1 {
     margin-bottom: 20px;
 }
 
+.navigation {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.navigation a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
 /* Notes Section */
-.notes-section {
-    margin-bottom: 40px;
-}
-
-.notes-section h2 {
-    color: #444;
-    margin-bottom: 10px;
-}
-
 .input-box {
     background-color: #f9f9f9;
     padding: 20px;
@@ -70,11 +75,7 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Links Gallery */
-.gallery {
-    padding: 20px 0;
-}
-
+/* Card Container */
 .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
