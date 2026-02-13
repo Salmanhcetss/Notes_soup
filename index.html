@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,7 @@
       position: relative;
     }
 
-    /* Container for games */
+    /* Game Cards Container */
     .game-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -40,7 +41,6 @@
       background-color: #333;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
       transition: transform 0.3s ease;
       cursor: pointer;
       text-align: center;
@@ -64,24 +64,13 @@
       color: #fff;
     }
 
-    /* Footer styling */
+    /* Footer */
     footer {
       background-color: #1e1e1e;
       color: #fff;
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
-    }
-
-    /* Background styling */
-    .background {
-      background: linear-gradient(135deg, #121212, #1e1e1e);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
     }
 
     /* Sidebar Styling */
@@ -136,7 +125,7 @@
       z-index: 1100;
     }
 
-    /* ChatGPT Input & Output */
+    /* Chat Input and Output */
     .chat-container {
       display: flex;
       flex-direction: column;
@@ -161,108 +150,7 @@
       width: 80%;
       padding: 0.8rem;
       border-radius: 5px;
-      border: 1px solid #ccc;
       background-color: #222;
       color: #fff;
       resize: none;
-    }
-
-    .chat-input button {
-      width: 15%;
-      padding: 0.8rem;
-      background-color: #1e1e1e;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-  </style>
-  <script>
-    // Toggle sidebar
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "300px";
-    }
-
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
-    }
-
-    // Simulating ChatGPT interaction
-    function sendChat() {
-      const input = document.getElementById("chat-input").value;
-      const chatOutput = document.getElementById("chat-output");
-      const userMessage = document.createElement("div");
-      userMessage.textContent = "You: " + input;
-      chatOutput.appendChild(userMessage);
-
-      // Simulating a bot response
-      const botMessage = document.createElement("div");
-      botMessage.textContent = "ChatGPT: I'm here to chat!";
-      chatOutput.appendChild(botMessage);
-
-      document.getElementById("chat-input").value = "";
-      chatOutput.scrollTop = chatOutput.scrollHeight; // Auto-scroll to the bottom
-    }
-  </script>
-</head>
-<body>
-
-  <div class="background"></div>
-
-  <header>
-    Soups Gallery
-    <button class="open-sidebar-btn" onclick="openSidebar()">Open Chat</button>
-  </header>
-
-  <div class="game-container">
-    <!-- Game Cards -->
-    <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
-      <h3>Veck</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
-      <h3>Neal.fun</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
-      <h3>Eaglercraft</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
-      <h3>Slow Roads</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
-      <h3>Game Snacks</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
-      <h3>Polytrack</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
-      <h3>Cat Mario</h3>
-    </div>
-  </div>
-
-  <!-- Sidebar for ChatGPT -->
-  <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
-    <div class="chat-container">
-      <div id="chat-output" class="chat-output">
-        <!-- Chat history will appear here -->
-      </div>
-      <div class="chat-input">
-        <textarea id="chat-input" rows="3" placeholder="Type your message..."></textarea>
-        <button onclick="sendChat()">Send</button>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2026 Soups Gallery | All Rights Reserved</p>
-  </footer>
-
-</body>
-</html>
+      border: 1p
