@@ -3,81 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes Soup</title>
+  <title>Game Gallery</title>
   <style>
-    /* ===========================
-       Add your CSS code here
-       =========================== */
-    
+    /* Body and general page styling */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      background: #f7f7f7; /* Light background */
+      color: #333;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      box-sizing: border-box;
     }
 
+    /* Header */
     header {
-      background-color: #333;
+      background-color: #2d3e50;
       color: #fff;
-      padding: 10px 0;
       text-align: center;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
       padding: 20px;
+      font-size: 2em;
+      letter-spacing: 1px;
     }
 
-    .note {
-      background-color: #fff;
+    /* Container for games */
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 20px;
+      justify-items: center;
+    }
+
+    /* Styling individual game cards */
+    .game-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px);
+    }
+
+    /* Game Card Titles */
+    .game-card h2 {
+      background-color: #2d3e50;
+      color: white;
+      margin: 0;
+      padding: 10px;
+      font-size: 1.2em;
+    }
+
+    /* Game iframe styling */
+    .game-card iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: #2d3e50;
+      color: white;
+      text-align: center;
       padding: 15px;
-      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    /* Button styling */
+    .sound-button {
+      background-color: #ff5733;
+      color: white;
+      padding: 12px 25px;
+      border: none;
       border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
     }
 
-    .note h2 {
-      margin-top: 0;
+    .sound-button:hover {
+      background-color: #e94e28;
     }
 
-    /* Add more CSS as needed */
+    /* Background styling */
+    .background {
+      background: linear-gradient(135deg, #f7f7f7, #e2e2e2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
 
+  <div class="background"></div>
+
   <header>
-    <h1>Notes Soup</h1>
+    Game Gallery
   </header>
 
-  <div class="container">
-    <!-- Sample Note -->
-    <div class="note">
-      <h2>Sample Note</h2>
-      <p>This is a sample note content. Edit it as you like!</p>
+  <div class="game-container">
+    <!-- Veck -->
+    <div class="game-card">
+      <h2>Veck</h2>
+      <iframe src="https://veck.io/" title="Veck Game"></iframe>
     </div>
 
-    <!-- Add your dynamic content here -->
+    <!-- Neal.fun -->
+    <div class="game-card">
+      <h2>Neal.fun</h2>
+      <iframe src="https://neal.fun/" title="Neal.fun Game"></iframe>
+    </div>
+
+    <!-- Eaglercraft -->
+    <div class="game-card">
+      <h2>Eaglercraft</h2>
+      <iframe src="https://eaglercraft.q13x.com/1.8.8/js/?retina=true" title="Eaglercraft Game"></iframe>
+    </div>
+
+    <!-- Slow Roads -->
+    <div class="game-card">
+      <h2>Slow Roads</h2>
+      <iframe src="https://slowroads.io/" title="Slow Roads Game"></iframe>
+    </div>
+
+    <!-- Game Snacks -->
+    <div class="game-card">
+      <h2>Game Snacks</h2>
+      <iframe src="https://gamesnacks.com/" title="Game Snacks Game"></iframe>
+    </div>
+
+    <!-- Polytrack -->
+    <div class="game-card">
+      <h2>Polytrack</h2>
+      <iframe src="https://www.kodub.com/apps/polytrack" title="Polytrack Game"></iframe>
+    </div>
+
+    <!-- Cat Mario -->
+    <div class="game-card">
+      <h2>Cat Mario</h2>
+      <iframe src="https://catmario.eu/" title="Cat Mario Game"></iframe>
+    </div>
+
+    <!-- Pocket Bird (Add link for Pocket Bird game here) -->
+    <div class="game-card">
+      <h2>Pocket Bird</h2>
+      <iframe src="URL_OF_POCKET_BIRD_GAME" title="Pocket Bird Game"></iframe>
+    </div>
   </div>
 
+  <div style="text-align: center;">
+    <button class="sound-button" onclick="playMemeSound()">Play Meme Sound</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
+  </footer>
+
+  <audio id="meme-sound" src="wii-meme-sound.mp3" preload="auto"></audio>
+
   <script>
-    // ===========================
-    // Add your JavaScript code here
-    // ===========================
-
-    // Example: A simple script to log a message
-    document.addEventListener('DOMContentLoaded', function () {
-      console.log("Notes Soup app is running!");
-      
-      // Example: Dynamic content, like adding new notes
-      const noteContainer = document.querySelector('.container');
-      const newNote = document.createElement('div');
-      newNote.classList.add('note');
-      newNote.innerHTML = '<h2>New Note</h2><p>This is a dynamically created note!</p>';
-      noteContainer.appendChild(newNote);
-    });
-
-    // Add more JavaScript functionality here
+    function playMemeSound() {
+      var sound = document.getElementById('meme-sound');
+      sound.play();
+    }
   </script>
 
 </body>
