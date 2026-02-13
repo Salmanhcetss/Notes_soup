@@ -28,7 +28,7 @@
     /* Container for games */
     .game-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 20px;
       margin: 30px 20px;
       justify-items: center;
@@ -43,27 +43,20 @@
       transition: transform 0.3s ease;
       width: 100%;
       cursor: pointer;
+      text-align: center;
+      padding: 20px;
     }
 
     .game-card:hover {
       transform: translateY(-10px);
     }
 
-    /* Game Card Titles */
-    .game-card h2 {
-      background-color: #2d3e50;
-      color: white;
-      margin: 0;
-      padding: 10px;
-      font-size: 1.2em;
-    }
-
-    /* Game iframe styling */
-    .game-card iframe {
-      width: 100%;
-      height: 200px;
-      border: none;
-      border-radius: 0 0 10px 10px;
+    /* Game Icon styling */
+    .game-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 10px;
     }
 
     /* Footer styling */
@@ -86,6 +79,10 @@
       z-index: -1;
     }
   </style>
+
+  <!-- Pocket Bird Script -->
+  <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
+
 </head>
 <body>
 
@@ -98,56 +95,63 @@
   <div class="game-container">
     <!-- Veck -->
     <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
-      <h2>Veck</h2>
-      <iframe src="https://veck.io/" title="Veck Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Veck" alt="Veck">
+      <p>Veck</p>
     </div>
 
     <!-- Neal.fun -->
     <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
-      <h2>Neal.fun</h2>
-      <iframe src="https://neal.fun/" title="Neal.fun Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Neal.fun" alt="Neal.fun">
+      <p>Neal.fun</p>
     </div>
 
     <!-- Eaglercraft -->
     <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
-      <h2>Eaglercraft</h2>
-      <iframe src="https://eaglercraft.q13x.com/1.8.8/js/?retina=true" title="Eaglercraft Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Eaglercraft" alt="Eaglercraft">
+      <p>Eaglercraft</p>
     </div>
 
     <!-- Slow Roads -->
     <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
-      <h2>Slow Roads</h2>
-      <iframe src="https://slowroads.io/" title="Slow Roads Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Slow+Roads" alt="Slow Roads">
+      <p>Slow Roads</p>
     </div>
 
     <!-- Game Snacks -->
     <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
-      <h2>Game Snacks</h2>
-      <iframe src="https://gamesnacks.com/" title="Game Snacks Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Game+Snacks" alt="Game Snacks">
+      <p>Game Snacks</p>
     </div>
 
     <!-- Polytrack -->
     <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
-      <h2>Polytrack</h2>
-      <iframe src="https://www.kodub.com/apps/polytrack" title="Polytrack Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Polytrack" alt="Polytrack">
+      <p>Polytrack</p>
     </div>
 
     <!-- Cat Mario -->
     <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
-      <h2>Cat Mario</h2>
-      <iframe src="https://catmario.eu/" title="Cat Mario Game"></iframe>
+      <img src="https://via.placeholder.com/100x100?text=Cat+Mario" alt="Cat Mario">
+      <p>Cat Mario</p>
     </div>
 
-    <!-- Pocket Bird (Add link for Pocket Bird game here) -->
-    <div class="game-card" onclick="window.open('URL_OF_POCKET_BIRD_GAME', '_blank')">
-      <h2>Pocket Bird</h2>
-      <iframe src="URL_OF_POCKET_BIRD_GAME" title="Pocket Bird Game"></iframe>
+    <!-- Pocket Bird -->
+    <div class="game-card" id="pocket-bird-game">
+      <img src="https://via.placeholder.com/100x100?text=Pocket+Bird" alt="Pocket Bird">
+      <p>Pocket Bird</p>
     </div>
   </div>
 
   <footer>
     <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
   </footer>
+
+  <script>
+    // Initialize Pocket Bird game when the div is clicked
+    document.getElementById("pocket-bird-game").addEventListener("click", function() {
+      birbEmbed("#pocket-bird-game");
+    });
+  </script>
 
 </body>
 </html>
