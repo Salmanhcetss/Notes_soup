@@ -12,7 +12,7 @@
   <style>
     /* Body and general page styling */
     body {
-      font-family: 'Fredoka', sans-serif; /* Applying Fredoka font */
+      font-family: 'Fredoka', sans-serif;
       background: #121212;
       color: #fff;
       margin: 0;
@@ -22,13 +22,13 @@
 
     /* Header */
     header {
-      font-family: 'Fredoka', sans-serif; /* Ensuring the title uses Fredoka */
+      font-family: 'Fredoka', sans-serif;
       background-color: #1e1e1e;
       color: #fff;
       text-align: center;
       padding: 1.5rem;
-      font-size: 3rem;  /* Bigger font size for title */
-      font-weight: 700; /* Bolder font */
+      font-size: 3rem;
+      font-weight: 700;
       letter-spacing: 1px;
       position: relative;
     }
@@ -147,6 +147,11 @@
       display: none;
       margin-top: 1rem;
     }
+
+    /* Hide the content until the password is entered */
+    .hidden-content {
+      display: none;
+    }
   </style>
 </head>
 
@@ -159,46 +164,49 @@
   </header>
 
   <!-- Password Section -->
-  <div class="password-section">
+  <div class="password-section" id="password-section">
     <h2>Enter Password</h2>
     <input type="password" id="password" placeholder="Enter your password">
     <button onclick="checkPassword()">Submit</button>
     <div class="success-message" id="success-message">Access Granted!</div>
   </div>
 
-  <div class="game-container">
-    <!-- Game Cards -->
-    <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
-      <h3>Veck</h3>
+  <!-- Hidden Content (Only visible after password is entered correctly) -->
+  <div class="hidden-content" id="content">
+    <div class="game-container">
+      <!-- Game Cards -->
+      <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
+        <h3>Veck</h3>
+      </div>
+
+      <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
+        <h3>Neal.fun</h3>
+      </div>
+
+      <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
+        <h3>Eaglercraft</h3>
+      </div>
+
+      <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
+        <h3>Slow Roads</h3>
+      </div>
+
+      <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
+        <h3>Game Snacks</h3>
+      </div>
+
+      <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
+        <h3>Polytrack</h3>
+      </div>
+
+      <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
+        <h3>Cat Mario</h3>
+      </div>
     </div>
 
-    <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
-      <h3>Neal.fun</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
-      <h3>Eaglercraft</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
-      <h3>Slow Roads</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
-      <h3>Game Snacks</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
-      <h3>Polytrack</h3>
-    </div>
-
-    <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
-      <h3>Cat Mario</h3>
-    </div>
+    <!-- Pocket Bird Embed -->
+    <div id="pocket-bird-game"></div>
   </div>
-
-  <!-- Pocket Bird Embed -->
-  <div id="pocket-bird-game"></div>
 
   <!-- Pocket Bird Script -->
   <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
@@ -209,10 +217,13 @@
       const password = document.getElementById('password').value;
       const correctPassword = "282012"; // Change this to your desired password
       const successMessage = document.getElementById('success-message');
+      const content = document.getElementById('content');
+      const passwordSection = document.getElementById('password-section');
       
       if (password === correctPassword) {
         successMessage.style.display = 'block';  // Show success message
-        // You can also add additional actions here (e.g., show hidden content, redirect, etc.)
+        content.style.display = 'block';  // Show the website content
+        passwordSection.style.display = 'none';  // Hide the password section
       } else {
         alert("Incorrect password! Try again.");
       }
