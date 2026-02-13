@@ -8,7 +8,7 @@
     /* Body and general page styling */
     body {
       font-family: 'Arial', sans-serif;
-      background: #121212; /* Dark background */
+      background: #121212;
       color: #fff;
       margin: 0;
       padding: 0;
@@ -20,8 +20,8 @@
       background-color: #1e1e1e;
       color: #fff;
       text-align: center;
-      padding: 20px;
-      font-size: 2em;
+      padding: 1rem;
+      font-size: 2rem;
       letter-spacing: 1px;
     }
 
@@ -29,26 +29,27 @@
     .game-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px; /* Increased gap between the boxes to 30px */
-      margin: 40px 20px;
+      gap: 1.5rem;
+      margin: 2rem 1rem;
       justify-items: center;
     }
 
     /* Styling individual game cards */
     .game-card {
-      background-color: #333; /* Gray background for cards */
+      background-color: #333;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
       overflow: hidden;
       transition: transform 0.3s ease;
-      width: 300px;  /* Increased width for bigger boxes */
-      height: 150px; /* Increased height */
       cursor: pointer;
       text-align: center;
-      padding: 30px 20px;  /* Increased padding */
+      padding: 2rem 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      max-width: 300px;
+      height: 150px;
     }
 
     .game-card:hover {
@@ -57,9 +58,9 @@
 
     /* Game Title Styling */
     .game-card h3 {
-      font-size: 1.8em;
+      font-size: 1.5rem;
       margin: 0;
-      color: #fff; /* White text color */
+      color: #fff;
     }
 
     /* Footer styling */
@@ -67,8 +68,8 @@
       background-color: #1e1e1e;
       color: #fff;
       text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
+      padding: 1rem;
+      font-size: 0.9rem;
     }
 
     /* Background styling */
@@ -85,34 +86,16 @@
     /* Pocket Bird placeholder styling */
     #pocket-bird-game {
       width: 100%;
-      height: 300px;  /* Set height for the Pocket Bird game */
-      background-color: #333; /* Match gray color */
+      height: 300px;
+      background-color: #333;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
-
-    /* Button styling for audio */
-    .play-music-button {
-      background-color: #1e1e1e;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-      font-size: 1.2em;
-      transition: background-color 0.3s ease;
-    }
-
-    .play-music-button:hover {
-      background-color: #333;
-    }
-
   </style>
 
   <!-- Pocket Bird Script -->
   <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
-
+  
 </head>
 <body>
 
@@ -123,70 +106,46 @@
   </header>
 
   <div class="game-container">
-    <!-- Veck -->
+    <!-- Game Cards -->
     <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
       <h3>Veck</h3>
     </div>
 
-    <!-- Neal.fun -->
     <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
       <h3>Neal.fun</h3>
     </div>
 
-    <!-- Eaglercraft -->
     <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
       <h3>Eaglercraft</h3>
     </div>
 
-    <!-- Slow Roads -->
     <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
       <h3>Slow Roads</h3>
     </div>
 
-    <!-- Game Snacks -->
     <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
       <h3>Game Snacks</h3>
     </div>
 
-    <!-- Polytrack -->
     <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
       <h3>Polytrack</h3>
     </div>
 
-    <!-- Cat Mario -->
     <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
       <h3>Cat Mario</h3>
     </div>
 
-    <!-- Pocket Bird -->
     <div class="game-card" onclick="document.getElementById('pocket-bird-game').innerHTML = ''">
       <h3>Pocket Bird</h3>
     </div>
-
   </div>
 
   <!-- Pocket Bird Embed -->
   <div id="pocket-bird-game" onclick="birbEmbed('#pocket-bird-game')"></div>
 
-  <!-- Music Button -->
-  <div style="text-align: center;">
-    <button class="play-music-button" onclick="playMusic()">Play Music</button>
-  </div>
-
-  <!-- Audio Element for Wii Music -->
-  <audio id="wii-music" src="/mnt/data/Wii music.mp3" preload="auto"></audio>
-
   <footer>
     <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
   </footer>
-
-  <script>
-    // Function to play the music when the button is clicked
-    function playMusic() {
-      var audio = document.getElementById('wii-music');
-      audio.play();
-    }
-  </script>
 
 </body>
 </html>
