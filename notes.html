@@ -12,7 +12,12 @@
 
         <div class="input-box">
             <textarea id="noteInput" placeholder="Write your note here..."></textarea>
-            <button id="saveNoteBtn">Save Note</button>
+        </div>
+
+        <div class="button-container">
+            <button id="exportNotesBtn">Export Notes</button>
+            <input type="file" id="importFileInput" accept=".txt" />
+            <button id="importNotesBtn">Import Notes</button>
         </div>
 
         <div id="notesList" class="card-container"></div>
@@ -23,7 +28,5 @@
     </div>
 
     <script src="script.js"></script> <!-- Your custom JS for note management -->
-    
-    <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script> <!-- Pocket Bird -->
 </body>
 </html>
