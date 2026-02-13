@@ -28,23 +28,28 @@
     /* Container for games */
     .game-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 20px;
-      margin: 30px 20px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 40px 20px;
       justify-items: center;
     }
 
     /* Styling individual game cards */
     .game-card {
       background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       transition: transform 0.3s ease;
-      width: 100%;
+      width: 300px;  /* Increased width for bigger boxes */
+      height: 150px; /* Increased height */
       cursor: pointer;
       text-align: center;
-      padding: 20px;
+      padding: 30px 20px;  /* Increased padding */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     .game-card:hover {
@@ -53,7 +58,7 @@
 
     /* Game Title Styling */
     .game-card h3 {
-      font-size: 1.5em;
+      font-size: 1.8em;
       margin: 0;
       color: #2d3e50;
     }
