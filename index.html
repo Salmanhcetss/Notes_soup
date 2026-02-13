@@ -42,6 +42,7 @@
       overflow: hidden;
       transition: transform 0.3s ease;
       width: 100%;
+      cursor: pointer;
     }
 
     .game-card:hover {
@@ -74,23 +75,6 @@
       font-size: 0.9em;
     }
 
-    /* Button styling */
-    .sound-button {
-      background-color: #ff5733;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-      cursor: pointer;
-      margin-top: 15px;
-      transition: background-color 0.3s ease;
-    }
-
-    .sound-button:hover {
-      background-color: #e94e28;
-    }
-
     /* Background styling */
     .background {
       background: linear-gradient(135deg, #f7f7f7, #e2e2e2);
@@ -113,70 +97,57 @@
 
   <div class="game-container">
     <!-- Veck -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://veck.io/', '_blank')">
       <h2>Veck</h2>
       <iframe src="https://veck.io/" title="Veck Game"></iframe>
     </div>
 
     <!-- Neal.fun -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://neal.fun/', '_blank')">
       <h2>Neal.fun</h2>
       <iframe src="https://neal.fun/" title="Neal.fun Game"></iframe>
     </div>
 
     <!-- Eaglercraft -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://eaglercraft.q13x.com/1.8.8/js/?retina=true', '_blank')">
       <h2>Eaglercraft</h2>
       <iframe src="https://eaglercraft.q13x.com/1.8.8/js/?retina=true" title="Eaglercraft Game"></iframe>
     </div>
 
     <!-- Slow Roads -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://slowroads.io/', '_blank')">
       <h2>Slow Roads</h2>
       <iframe src="https://slowroads.io/" title="Slow Roads Game"></iframe>
     </div>
 
     <!-- Game Snacks -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://gamesnacks.com/', '_blank')">
       <h2>Game Snacks</h2>
       <iframe src="https://gamesnacks.com/" title="Game Snacks Game"></iframe>
     </div>
 
     <!-- Polytrack -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://www.kodub.com/apps/polytrack', '_blank')">
       <h2>Polytrack</h2>
       <iframe src="https://www.kodub.com/apps/polytrack" title="Polytrack Game"></iframe>
     </div>
 
     <!-- Cat Mario -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('https://catmario.eu/', '_blank')">
       <h2>Cat Mario</h2>
       <iframe src="https://catmario.eu/" title="Cat Mario Game"></iframe>
     </div>
 
     <!-- Pocket Bird (Add link for Pocket Bird game here) -->
-    <div class="game-card">
+    <div class="game-card" onclick="window.open('URL_OF_POCKET_BIRD_GAME', '_blank')">
       <h2>Pocket Bird</h2>
       <iframe src="URL_OF_POCKET_BIRD_GAME" title="Pocket Bird Game"></iframe>
     </div>
   </div>
 
-  <div style="text-align: center;">
-    <button class="sound-button" onclick="playMemeSound()">Play Meme Sound</button>
-  </div>
-
   <footer>
     <p>&copy; 2026 Game Gallery | All Rights Reserved</p>
   </footer>
-
-  <audio id="meme-sound" src="wii-meme-sound.mp3" preload="auto"></audio>
-
-  <script>
-    function playMemeSound() {
-      var sound = document.getElementById('meme-sound');
-      sound.play();
-    }
-  </script>
 
 </body>
 </html>
