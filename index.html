@@ -37,7 +37,7 @@
     .game-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
+      gap: 3rem;
       margin: 2rem 1rem;
       justify-items: center;
     }
@@ -68,6 +68,16 @@
       font-size: 1.5rem;
       margin: 0;
       color: #fff;
+    }
+
+    /* Pocket Bird Embed Styling */
+    #pocket-bird-game {
+      width: 100%;
+      height: 400px;
+      background-color: #333;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      margin: 2rem auto;
     }
 
     /* Footer */
@@ -130,6 +140,12 @@
       <h3>Cat Mario</h3>
     </div>
   </div>
+
+  <!-- Pocket Bird Embed -->
+  <div id="pocket-bird-game"></div>
+
+  <!-- Pocket Bird Script -->
+  <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
 
   <footer>
     <p>&copy; 2026 Soups Gallery | All Rights Reserved</p>
