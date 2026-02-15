@@ -152,6 +152,24 @@
     .hidden-content {
       display: none;
     }
+
+    /* Button for leading to iframe page */
+    .iframe-button {
+      display: block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #333;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .iframe-button:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 
@@ -221,6 +239,9 @@
       </div>
     </div>
 
+    <!-- Button to Open the New Page with iframe -->
+    <a href="canva.html" class="iframe-button">Go to Canva Page</a>
+
     <!-- Pocket Bird Embed -->
     <div id="pocket-bird-game"></div>
   </div>
@@ -230,6 +251,7 @@
 
   <!-- Password Check Script -->
   <script>
+    // Function to check password
     function checkPassword() {
       const password = document.getElementById('password').value;
       const correctPassword = "282012"; // Change this to your desired password
@@ -237,20 +259,4 @@
       const content = document.getElementById('content');
       const passwordSection = document.getElementById('password-section');
       
-      if (password === correctPassword) {
-        successMessage.style.display = 'block';  // Show success message
-        content.style.display = 'block';  // Show the website content
-        passwordSection.style.display = 'none';  // Hide the password section
-      } else {
-        alert("Incorrect password! Try again.");
-      }
-    }
-  </script>
-
-  <footer>
-    <p>&copy; 2026 Soups Gallery | All Rights Reserved</p>
-  </footer>
-
-</body>
-
-</html>
+     
