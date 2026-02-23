@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soups Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       GLOBAL
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #121212, #1e1e1e);
+      min-height: 100vh;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    header {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    /* =============================================
+       NAV TABS
+    ============================================= */
+    .nav-tabs {
+      display: none; /* hidden until logged in */
+      background-color: #181818;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+    }
+
+    .nav-tabs.visible { display: flex; }
+
+    .nav-tab {
+      padding: 0.55rem 1.6rem;
+      font-size: 1.1rem;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #333;
+      border: none;
+      border-radius: 8px;
+      color: #ccc;
+      cursor: pointer;
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    .nav-tab:hover { background-color: #444; color: #fff; }
+    .nav-tab.active { background-color: #555; color: #fff; }
+
+    /* =============================================
+       PASSWORD SECTION
+    ============================================= */
+    .password-section {
+      text-align: center;
+      padding: 2rem;
+      background-color: #222;
+      border-radius: 12px;
+      margin: 2rem auto;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .password-section input {
+      padding: 1rem;
+      font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: none;
+      border-radius: 8px;
+      width: 80%;
+      margin: 1rem 0;
+      background-color: #444;
+      color: #fff;
+      outline: none;
+    }
+
+    .password-section button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #333;
+      border-radius: 8px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .password-section button:hover,
+    .password-section button:focus { background-color: #444; }
+
+    .error-message {
+      background-color: #c0392b;
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      display: none;
+      margin-top: 1rem;
+    }
+
+    /* =============================================
+       PAGES (hidden until logged in)
+    ============================================= */
+    .page { display: none; flex: 1; }
+    .page.active { display: flex; flex-direction: column; }
+
+    /* =============================================
+       GAMES PAGE
+    ============================================= */
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 3rem;
+      margin: 2rem 1rem;
+      justify-items: center;
+    }
+
+    .game-card {
+      background-color: #333;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      text-align: center;
+      padding: 2rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 300px;
+      height: 150px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .game-card:hover,
+    .game-card:focus { transform: translateY(-10px); outline: 2px solid #888; }
+
+    .game-card h3 { font-size: 1.5rem; margin: 0; }
+
+    /* =============================================
+       NOTES PAGE
+    ============================================= */
+    .notes-page {
+      flex: 1;
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* compose panel */
+    .compose-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 340px;
+      flex-shrink: 0;
+    }
+
+    .compose-panel h2 { margin: 0; font-size: 1.6rem; color: #ddd; }
+
+    .compose-panel input[type="text"],
+    .compose-panel textarea {
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: none;
+      border-radius: 8px;
+      background-color: #2e2e2e;
+      color: #fff;
+      outline: none;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    .compose-panel input[type="text"]:focus,
+    .compose-panel textarea:focus { background-color: #3a3a3a; }
+
+    .compose-panel textarea {
+      resize: vertical;
+      min-height: 180px;
+      line-height: 1.5;
+    }
+
+    .colour-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .colour-row span { font-size: 0.95rem; color: #aaa; }
+
+    .colour-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .colour-dot:hover { transform: scale(1.15); }
+    .colour-dot.selected { border-color: #fff; }
+
+    .notes-save-btn {
+      padding: 0.9rem;
+      font-size: 1.2rem;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #444;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.25s;
+    }
+
+    .notes-save-btn:hover { background-color: #555; }
+
+    /* saved notes panel */
+    .notes-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .notes-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .notes-header-row h2 { margin: 0; font-size: 1.6rem; color: #ddd; }
+
+    .search-input {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: none;
+      border-radius: 8px;
+      background-color: #2e2e2e;
+      color: #fff;
+      outline: none;
+      width: 200px;
+      transition: background-color 0.2s;
+    }
+
+    .search-input:focus { background-color: #3a3a3a; }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .note-card {
+      border-radius: 12px;
+      padding: 1.1rem 1.1rem 0.8rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: relative;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .note-card:hover { transform: translateY(-4px); }
+    .note-card .card-title { font-size: 1.1rem; font-weight: 700; color: rgba(0,0,0,0.75); word-break: break-word; }
+    .note-card .card-body  { font-size: 0.9rem; color: rgba(0,0,0,0.65); white-space: pre-wrap; word-break: break-word; flex: 1; }
+    .note-card .card-date  { font-size: 0.75rem; color: rgba(0,0,0,0.45); margin-top: 0.3rem; }
+
+    .note-card .card-delete {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.6rem;
+      background: rgba(0,0,0,0.18);
+      border: none;
+      border-radius: 6px;
+      color: rgba(0,0,0,0.55);
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.1rem 0.45rem;
+      font-family: 'Fredoka', sans-serif;
+      transition: background 0.2s;
+    }
+
+    .note-card .card-delete:hover { background: rgba(0,0,0,0.32); }
+
+    .empty-state {
+      color: #555;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    /* =============================================
+       EDIT MODAL
+    ============================================= */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #2a2a2a;
+      border-radius: 14px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+
+    .modal h3 { margin: 0; font-size: 1.5rem; }
+
+    .modal input, .modal textarea {
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: none;
+      border-radius: 8px;
+      background-color: #3a3a3a;
+      color: #fff;
+      outline: none;
+      width: 100%;
+    }
+
+    .modal textarea { min-height: 130px; resize: vertical; }
+
+    .modal-btns { display: flex; gap: 0.8rem; justify-content: flex-end; }
+
+    .modal-btns button {
+      padding: 0.7rem 1.4rem;
+      font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-save-modal   { background: #555; color: #fff; }
+    .btn-save-modal:hover   { background: #666; }
+    .btn-cancel-modal { background: #3a3a3a; color: #aaa; }
+    .btn-cancel-modal:hover { background: #444; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 700px) {
+      .notes-page { flex-direction: column; }
+      .compose-panel { width: 100%; }
+      header { font-size: 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="main-header">Soups Gallery</header>
+
+  <!-- Nav tabs (shown after login) -->
+  <nav class="nav-tabs" id="nav-tabs">
+    <button class="nav-tab active" id="tab-games" onclick="switchPage('games')">🎮 Games</button>
+    <button class="nav-tab"        id="tab-notes" onclick="switchPage('notes')">📝 Notes</button>
+  </nav>
+
+  <!-- ── PASSWORD GATE ── -->
+  <div class="password-section" id="password-section">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Enter your password" aria-label="Password">
+    <br>
+    <button id="submit-btn">Submit</button>
+    <div class="error-message" id="error-message" role="alert">
+      Incorrect password. Try again.
+    </div>
+  </div>
+
+  <!-- ── GAMES PAGE ── -->
+  <div class="page" id="page-games">
+    <div class="game-container" id="game-container"></div>
+  </div>
+
+  <!-- ── NOTES PAGE ── -->
+  <div class="page" id="page-notes">
+    <div class="notes-page">
+
+      <!-- LEFT: compose -->
+      <div class="compose-panel">
+        <h2>New Note</h2>
+        <input type="text" id="note-title" placeholder="Title…" maxlength="80">
+        <textarea id="note-body" placeholder="Write your note here…"></textarea>
+        <div class="colour-row" id="colour-row">
+          <span>Colour:</span>
+        </div>
+        <button class="notes-save-btn" id="notes-save-btn">＋ Save Note</button>
+      </div>
+
+      <!-- RIGHT: saved notes -->
+      <div class="notes-panel">
+        <div class="notes-header-row">
+          <h2>Saved Notes</h2>
+          <input type="text" class="search-input" id="search-input" placeholder="Search…">
+        </div>
+        <div class="notes-grid" id="notes-grid"></div>
+        <p class="empty-state" id="empty-state">No notes yet. Create one!</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Soups Gallery | All Rights Reserved</p>
+  </footer>
+
+  <!-- Edit modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h3>Edit Note</h3>
+      <input type="text" id="modal-title" placeholder="Title…" maxlength="80">
+      <textarea id="modal-body" placeholder="Note…"></textarea>
+      <div class="modal-btns">
+        <button class="btn-cancel-modal" id="modal-cancel">Cancel</button>
+        <button class="btn-save-modal"   id="modal-save">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pocket Bird -->
+  <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
+
+  <script>
+    /* =============================================
+       ★ ADD YOUR SITES HERE ★
+    ============================================= */
+    var SITES = [
+      { name: "Veck",                   url: "https://veck.io/" },
+      { name: "Neal.fun",               url: "https://neal.fun/" },
+      { name: "Eaglercraft",            url: "https://eaglercraft.q13x.com/1.8.8/js/?retina=true" },
+      { name: "Slow Roads",             url: "https://slowroads.io/" },
+      { name: "Game Snacks",            url: "https://gamesnacks.com/" },
+      { name: "Polytrack",              url: "https://www.kodub.com/apps/polytrack" },
+      { name: "Cat Mario",              url: "https://catmario.eu/" },
+      { name: "Among Us",               url: "https://scratch.mit.edu/projects/523967150/" },
+      { name: "PIXEL VALLEY Online",    url: "https://scratch.mit.edu/projects/551905179/" },
+      { name: "Getting Over It Online", url: "https://scratch.mit.edu/projects/390983761/" },
+      { name: "Downgrade2 Online",      url: "https://turbowarp.org/1115559391/fullscreen?fps=60&clones=Infinity&limitless&hqpen&size=640x360" },
+      { name: "portal (scratch)",       url: "https://turbowarp.org/1165334435/fullscreen" },
+    ];
+
+    /* =============================================
+       ★ CHANGE THE PASSWORD HERE ★
+       NOTE: Not truly secure — visible in page source.
+    ============================================= */
+    var PASSWORD = "2244";
+
+
+    /* =============================================
+       PAGE SWITCHING
+    ============================================= */
+    function switchPage(name) {
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+      document.getElementById('page-' + name).classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+
+    /* =============================================
+       PASSWORD CHECK
+    ============================================= */
+    function checkPassword() {
+      var input = document.getElementById('password-input');
+      var errorMessage = document.getElementById('error-message');
+
+      if (input.value === PASSWORD) {
+        document.getElementById('password-section').style.display = 'none';
+        document.getElementById('nav-tabs').classList.add('visible');
+        switchPage('games');
+      } else {
+        errorMessage.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', checkPassword);
+    document.getElementById('password-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') checkPassword();
+    });
+
+    /* =============================================
+       BUILD GAME CARDS
+    ============================================= */
+    function buildCards() {
+      var container = document.getElementById('game-container');
+      SITES.forEach(function(site) {
+        var card = document.createElement('a');
+        card.className = 'game-card';
+        card.href = site.url;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.innerHTML = '<h3>' + site.name + '</h3>';
+        container.appendChild(card);
+      });
+    }
+
+    buildCards();
+
+    /* =============================================
+       NOTES — COLOURS
+    ============================================= */
+    var COLOURS = [
+      { hex: "#f9e08a", label: "Yellow"  },
+      { hex: "#a8e6a3", label: "Green"   },
+      { hex: "#a8d4f5", label: "Blue"    },
+      { hex: "#f5a8c0", label: "Pink"    },
+      { hex: "#f5c6a8", label: "Orange"  },
+      { hex: "#d1a8f5", label: "Purple"  },
+      { hex: "#e0e0e0", label: "White"   },
+    ];
+
+    var selectedColour = COLOURS[0].hex;
+
+    var colourRow = document.getElementById('colour-row');
+    COLOURS.forEach(function(c) {
+      var dot = document.createElement('div');
+      dot.className = 'colour-dot' + (c.hex === selectedColour ? ' selected' : '');
+      dot.style.backgroundColor = c.hex;
+      dot.title = c.label;
+      dot.addEventListener('click', function() {
+        document.querySelectorAll('.colour-dot').forEach(function(d) { d.classList.remove('selected'); });
+        dot.classList.add('selected');
+        selectedColour = c.hex;
+      });
+      colourRow.appendChild(dot);
+    });
+
+    /* =============================================
+       NOTES — STORAGE
+    ============================================= */
+    var STORAGE_KEY = 'soups_notes_v1';
+
+    function loadNotes() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch(e) { return []; }
+    }
+
+    function saveNotes(notes) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    }
+
+    /* =============================================
+       NOTES — RENDER
+    ============================================= */
+    function renderNotes(filter) {
+      filter = filter || '';
+      var notes = loadNotes();
+      var grid  = document.getElementById('notes-grid');
+      var empty = document.getElementById('empty-state');
+      grid.innerHTML = '';
+
+      var filtered = filter
+        ? notes.filter(function(n) {
+            return n.title.toLowerCase().includes(filter.toLowerCase()) ||
+                   n.body.toLowerCase().includes(filter.toLowerCase());
+          })
+        : notes;
+
+      if (filtered.length === 0) {
+        empty.style.display = 'block';
+        empty.textContent = filter ? 'No notes match your search.' : 'No notes yet. Create one!';
+        return;
+      }
+
+      empty.style.display = 'none';
+
+      filtered.slice().reverse().forEach(function(note) {
+        var card = document.createElement('div');
+        card.className = 'note-card';
+        card.style.backgroundColor = note.colour || COLOURS[0].hex;
+
+        var delBtn = document.createElement('button');
+        delBtn.className = 'card-delete';
+        delBtn.textContent = '✕';
+        delBtn.title = 'Delete note';
+        delBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          deleteNote(note.id);
+        });
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'card-title';
+        titleEl.textContent = note.title || '(no title)';
+
+        var bodyEl = document.createElement('div');
+        bodyEl.className = 'card-body';
+        bodyEl.textContent = note.body;
+
+        var dateEl = document.createElement('div');
+        dateEl.className = 'card-date';
+        dateEl.textContent = new Date(note.created).toLocaleDateString(undefined, {
+          month: 'short', day: 'numeric', year: 'numeric'
+        });
+
+        card.appendChild(delBtn);
+        card.appendChild(titleEl);
+        card.appendChild(bodyEl);
+        card.appendChild(dateEl);
+
+        card.addEventListener('click', function() { openEditModal(note.id); });
+
+        grid.appendChild(card);
+      });
+    }
+
+    /* =============================================
+       NOTES — CRUD
+    ============================================= */
+    function addNote(title, body, colour) {
+      var notes = loadNotes();
+      notes.push({
+        id: Date.now().toString(),
+        title: title.trim(),
+        body: body.trim(),
+        colour: colour,
+        created: Date.now(),
+      });
+      saveNotes(notes);
+      renderNotes(document.getElementById('search-input').value);
+    }
+
+    function deleteNote(id) {
+      saveNotes(loadNotes().filter(function(n) { return n.id !== id; }));
+      renderNotes(document.getElementById('search-input').value);
+    }
+
+    /* =============================================
+       NOTES — EDIT MODAL
+    ============================================= */
+    var editingId = null;
+
+    function openEditModal(id) {
+      var note = loadNotes().find(function(n) { return n.id === id; });
+      if (!note) return;
+      editingId = id;
+      document.getElementById('modal-title').value = note.title;
+      document.getElementById('modal-body').value  = note.body;
+      document.getElementById('modal-overlay').classList.add('open');
+    }
+
+    document.getElementById('modal-cancel').addEventListener('click', function() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      editingId = null;
+    });
+
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+      if (e.target === document.getElementById('modal-overlay')) {
+        document.getElementById('modal-overlay').classList.remove('open');
+        editingId = null;
+      }
+    });
+
+    document.getElementById('modal-save').addEventListener('click', function() {
+      if (!editingId) return;
+      var notes = loadNotes().map(function(n) {
+        if (n.id !== editingId) return n;
+        return Object.assign({}, n, {
+          title: document.getElementById('modal-title').value.trim(),
+          body:  document.getElementById('modal-body').value.trim(),
+        });
+      });
+      saveNotes(notes);
+      renderNotes(document.getElementById('search-input').value);
+      document.getElementById('modal-overlay').classList.remove('open');
+      editingId = null;
+    });
+
+    /* =============================================
+       NOTES — SAVE NEW
+    ============================================= */
+    document.getElementById('notes-save-btn').addEventListener('click', function() {
+      var title = document.getElementById('note-title').value;
+      var body  = document.getElementById('note-body').value;
+      if (!title.trim() && !body.trim()) return;
+      addNote(title, body, selectedColour);
+      document.getElementById('note-title').value = '';
+      document.getElementById('note-body').value  = '';
+    });
+
+    /* =============================================
+       NOTES — SEARCH
+    ============================================= */
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      renderNotes(e.target.value);
+    });
+
+    /* init notes */
+    renderNotes();
+  </script>
+
+</body>
+</html>
