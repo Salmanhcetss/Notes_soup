@@ -1,4 +1,13 @@
-<style>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
     /* =============================================
        CSS VARIABLES / THEMES
     ============================================= */
@@ -41,23 +50,10 @@
     /* =============================================
        GLOBAL
     ============================================= */
-    *, *::before, *::after { box-sizing: border-box; }
-
-    /* ── GLOBAL ELEMENT DEFAULTS ── */
-    button, input, select, textarea {
-      font-family: inherit;
-    }
-    button { cursor: pointer; }
-    input, select, textarea {
-      transition: background .2s, border-color .2s;
-    }
-    input:focus, select:focus, textarea:focus {
-      background: var(--bg-input-focus);
-      border-color: var(--accent);
-    }
+    *, *::before, *::after { box-sizing: border-box; font-family: 'Fredoka', sans-serif; }
 
     body {
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-base);
       min-height: 100vh;
       color: var(--text-primary);
@@ -98,7 +94,8 @@
       padding: 0.4rem 1rem;
       font-size: 1.2rem;
       cursor: pointer;
-    
+      color: var(--text-primary);
+      font-family: 'Fredoka', sans-serif;
       transition: background 0.2s;
       flex-shrink: 0;
     }
@@ -122,7 +119,7 @@
     .nav-tab {
       padding: 0.5rem 1.2rem;
       font-size: 1rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background-color: var(--bg-btn);
       border: none;
       border-radius: 8px;
@@ -154,10 +151,14 @@
     .password-section input {
       padding: 0.9rem 1.2rem;
       font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 10px;
       width: 85%;
       margin-bottom: 1rem;
       background-color: var(--bg-input);
+      color: var(--text-primary);
+      outline: none;
       transition: border-color 0.2s, background 0.2s;
     }
 
@@ -169,7 +170,7 @@
     .password-section button {
       padding: 0.9rem 2.5rem;
       font-size: 1.2rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background-color: var(--accent);
       border-radius: 10px;
       border: none;
@@ -228,7 +229,7 @@
       border-radius: 20px;
       padding: 0.35rem 1rem;
       font-size: 0.9rem;
-    
+      font-family: 'Fredoka', sans-serif;
       text-decoration: none;
       transition: background 0.2s, transform 0.15s;
     }
@@ -261,6 +262,7 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      color: var(--text-primary);
       border: 1px solid var(--border);
     }
 
@@ -295,9 +297,14 @@
     .compose-panel select {
       padding: 0.75rem 1rem;
       font-size: 0.95rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 8px;
       background-color: var(--bg-input);
+      color: var(--text-primary);
+      outline: none;
       width: 100%;
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .compose-panel input:focus,
@@ -323,7 +330,7 @@
     .notes-save-btn {
       padding: 0.8rem;
       font-size: 1.1rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background-color: var(--accent);
       border: none; border-radius: 8px;
       color: #fff; cursor: pointer;
@@ -343,9 +350,13 @@
     .search-input, .filter-select {
       padding: 0.55rem 0.9rem;
       font-size: 0.9rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 8px;
       background-color: var(--bg-input);
       color: var(--text-primary);
+      outline: none;
+      transition: background 0.2s, border-color 0.2s;
     }
     .search-input { width: 160px; }
     .search-input:focus, .filter-select:focus { background-color: var(--bg-input-focus); border-color: var(--accent); }
@@ -386,7 +397,7 @@
     .note-card .card-actions button {
       background: rgba(0,0,0,0.15); border: none; border-radius: 6px;
       color: rgba(0,0,0,0.55); font-size: 0.85rem; cursor: pointer;
-      padding: 0.1rem 0.4rem;
+      padding: 0.1rem 0.4rem; font-family: 'Fredoka', sans-serif;
       transition: background 0.2s;
     }
     .note-card .card-actions button:hover { background: rgba(0,0,0,0.3); }
@@ -416,25 +427,32 @@
       flex: 1;
       padding: 0.8rem 1rem;
       font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 10px;
-      
+      background: var(--bg-input);
       color: var(--text-primary);
+      outline: none;
+      transition: background 0.2s, border-color 0.2s;
     }
     .todo-add-row input:focus { background: var(--bg-input-focus); border-color: var(--accent); }
 
     .todo-add-row select {
       padding: 0.8rem 0.8rem;
       font-size: 0.9rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 10px;
-      
+      background: var(--bg-input);
       color: var(--text-primary);
+      outline: none;
       cursor: pointer;
     }
 
     .todo-add-btn {
       padding: 0.8rem 1.4rem;
       font-size: 1.1rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--accent);
       border: none; border-radius: 10px;
       color: #fff; cursor: pointer;
@@ -450,7 +468,7 @@
     .todo-filter-btn {
       padding: 0.4rem 1rem;
       font-size: 0.9rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-btn);
       border: none; border-radius: 20px;
       color: var(--text-secondary); cursor: pointer;
@@ -514,7 +532,7 @@
       align-self: flex-end;
       padding: 0.5rem 1.2rem;
       font-size: 0.9rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-btn); border: none; border-radius: 8px;
       color: var(--text-muted); cursor: pointer;
       transition: background 0.2s, color 0.2s;
@@ -542,7 +560,7 @@
     .timer-mode-tab {
       padding: 0.5rem 1.4rem;
       font-size: 1rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: none; border: none; border-radius: 8px;
       color: var(--text-secondary); cursor: pointer;
       transition: background 0.2s, color 0.2s;
@@ -586,7 +604,7 @@
     .timer-btn {
       padding: 0.8rem 2rem;
       font-size: 1.2rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-btn); border: none; border-radius: 12px;
       color: var(--text-primary); cursor: pointer;
       transition: background 0.2s, transform 0.15s;
@@ -603,9 +621,10 @@
     .preset-btn {
       padding: 0.45rem 1rem;
       font-size: 0.9rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 20px; color: var(--text-secondary); transition: background 0.2s, color 0.2s, border-color 0.2s;
+      border-radius: 20px; color: var(--text-secondary);
+      cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
     .preset-btn:hover { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
 
@@ -643,16 +662,20 @@
       min-width: 180px;
       padding: 0.75rem 1rem;
       font-size: 0.95rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 8px;
-      
+      background: var(--bg-input);
       color: var(--text-primary);
+      outline: none;
+      transition: background 0.2s, border-color 0.2s;
     }
     .links-add-form input:focus { background: var(--bg-input-focus); border-color: var(--accent); }
 
     .links-add-btn {
       padding: 0.75rem 1.6rem;
       font-size: 1rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--accent); border: none; border-radius: 8px;
       color: #fff; cursor: pointer;
       transition: opacity 0.2s, transform 0.15s;
@@ -669,8 +692,14 @@
     .links-search {
       padding: 0.55rem 0.9rem;
       font-size: 0.9rem;
+      font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent;
       border-radius: 8px;
+      background: var(--bg-input);
+      color: var(--text-primary);
+      outline: none;
       width: 180px;
+      transition: background 0.2s, border-color 0.2s;
     }
     .links-search:focus { background: var(--bg-input-focus); border-color: var(--accent); }
 
@@ -761,9 +790,11 @@
     .calc-btn {
       padding: 1rem 0;
       font-size: 1.2rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-btn);
       border: none; border-radius: 12px;
+      color: var(--text-primary);
+      cursor: pointer;
       transition: background 0.15s, transform 0.1s;
       border: 1px solid var(--border);
     }
@@ -802,9 +833,11 @@
 
     .modal input, .modal textarea, .modal select {
       padding: 0.75rem 1rem;
-      font-size: 0.95rem; border-radius: 8px;
+      font-size: 0.95rem; font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent; border-radius: 8px;
       background-color: var(--bg-input);
-      color: var(--text-primary); width: 100%;
+      color: var(--text-primary); outline: none; width: 100%;
+      transition: background 0.2s, border-color 0.2s;
     }
     .modal input:focus, .modal textarea:focus, .modal select:focus {
       background: var(--bg-input-focus); border-color: var(--accent);
@@ -814,7 +847,7 @@
     .modal-btns { display: flex; gap: 0.8rem; justify-content: flex-end; }
     .modal-btns button {
       padding: 0.65rem 1.3rem; font-size: 0.95rem;
-     border: none; border-radius: 8px;
+      font-family: 'Fredoka', sans-serif; border: none; border-radius: 8px;
       cursor: pointer; transition: background 0.2s;
     }
     .btn-save-modal   { background: var(--accent); color: #fff; }
@@ -883,7 +916,7 @@
     .file-toolbar-btn {
       padding: 0.45rem 1rem;
       font-size: 0.9rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--bg-btn); border: none; border-radius: 8px;
       color: var(--text-secondary); cursor: pointer;
       transition: background 0.2s, color 0.2s;
@@ -893,8 +926,11 @@
 
     .file-search {
       padding: 0.45rem 0.9rem;
-      font-size: 0.9rem; border-radius: 8px;
-      background: var(--bg-input); color: var(--text-primary); width: 180px;
+      font-size: 0.9rem; font-family: 'Fredoka', sans-serif;
+      border: 2px solid transparent; border-radius: 8px;
+      background: var(--bg-input); color: var(--text-primary);
+      outline: none; width: 180px;
+      transition: background 0.2s, border-color 0.2s;
       margin-left: auto;
     }
     .file-search:focus { background: var(--bg-input-focus); border-color: var(--accent); }
@@ -977,7 +1013,7 @@
 
     .file-viewer-dl {
       padding: 0.45rem 1rem; font-size: 0.9rem;
-    
+      font-family: 'Fredoka', sans-serif;
       background: var(--accent); border: none; border-radius: 8px;
       color: #fff; cursor: pointer; text-decoration: none;
       transition: opacity 0.2s;
@@ -1076,434 +1112,15 @@
     .game-card:hover .game-card-del { opacity: 1; }
     .game-card { position: relative; }
 
+
+
+
     @media (max-width: 700px) {
       .notes-page { flex-direction: column; }
       .compose-panel { width: 100%; }
       header { font-size: 1.8rem; padding: 1rem; }
       .clock-display { font-size: 4rem; }
       .progress-ring-wrap { width: 220px; height: 220px; }
-    }
-
-    /* =============================================
-       TRANSLATOR
-    ============================================= */
-    .translator-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-
-    .translator-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .translator-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .translator-lang-select {
-      padding: 0.4rem 0.7rem;
-      font-size: 0.88rem;
-      border-radius: 8px;
-      
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-    .translator-lang-select:focus { border-color: var(--accent); }
-
-    .translator-btn {
-      padding: 0.65rem;
-      font-size: 1rem;
-    
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      transition: opacity 0.2s, transform 0.15s;
-      font-weight: 600;
-    }
-    .translator-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .translator-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .translator-result {
-      background: var(--bg-input);
-      border-radius: 8px;
-      padding: 0.75rem 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      animation: fadeInUp 0.25s ease;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .translator-result-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .translator-result-text {
-      font-size: 0.92rem;
-      color: var(--text-primary);
-      line-height: 1.55;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .translator-copy-btn {
-      align-self: flex-end;
-      padding: 0.25rem 0.7rem;
-      font-size: 0.8rem;
-    
-      background: var(--bg-btn);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-    }
-    .translator-copy-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
-
-    .translator-loading {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .translator-spinner {
-      width: 16px; height: 16px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-
-    .translator-error {
-      font-size: 0.85rem;
-      color: #e74c3c;
-      background: rgba(231,76,60,0.1);
-      border-radius: 8px;
-      padding: 0.55rem 0.8rem;
-    }
-
-    /* =============================================
-       WARP CIRCLE BAR
-    ============================================= */
-    .warp-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      padding: 0.5rem 1rem;
-      background: linear-gradient(90deg, rgba(126,184,247,0.08), rgba(167,139,250,0.08));
-      border-bottom: 1px solid var(--accent);
-      flex-shrink: 0;
-    }
-
-    .warp-bar-hint {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      flex: 1;
-    }
-
-    .warp-bar-btns {
-      display: flex;
-      gap: 0.4rem;
-      flex-wrap: wrap;
-    }
-
-    .warp-bar-btn {
-      padding: 0.3rem 0.75rem;
-      font-size: 0.85rem;
-    
-      background: var(--bg-btn);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-secondary);
-      transition: background 0.15s, color 0.15s, transform 0.1s;
-      white-space: nowrap;
-    }
-    .warp-bar-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); transform: translateY(-1px); }
-    .warp-bar-btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .warp-bar-btn.accent:hover { opacity: 0.88; }
-    .warp-bar-btn.canva { background: #7c3aed; color: #fff; border-color: #7c3aed; }
-    .warp-bar-btn.canva:hover { background: #6d28d9; }
-    .warp-bar-btn.danger { color: #e74c3c; border-color: rgba(231,76,60,0.3); }
-    .warp-bar-btn.danger:hover { background: rgba(231,76,60,0.15); }
-
-    /* =============================================
-       DRAW PAGE
-    ============================================= */
-    .draw-page {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 112px);
-      overflow: hidden;
-      user-select: none;
-    }
-
-    /* Toolbar */
-    .draw-toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.4rem 1rem;
-      padding: 0.6rem 1rem;
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    .draw-tool-group {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding-right: 0.8rem;
-      border-right: 1px solid var(--border);
-    }
-    .draw-tool-group:last-child { border-right: none; }
-
-    .draw-group-label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      margin-right: 0.2rem;
-    }
-
-    .draw-tool-btn {
-      width: 34px; height: 34px;
-      background: var(--bg-btn);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    
-    }
-    .draw-tool-btn:hover { background: var(--bg-btn-hover); transform: translateY(-1px); }
-    .draw-tool-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-    .draw-color-pick {
-      width: 34px; height: 34px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      background: none;
-      padding: 2px;
-    }
-
-    .draw-slider {
-      width: 80px;
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
-
-    .draw-val-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      min-width: 32px;
-    }
-
-    .draw-toggle-label {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      cursor: pointer;
-    }
-
-    .draw-action-btn {
-      padding: 0.35rem 0.8rem;
-      font-size: 0.85rem;
-    
-      background: var(--bg-btn);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-secondary);
-      transition: background 0.15s, color 0.15s;
-      white-space: nowrap;
-    }
-    .draw-action-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
-    .draw-action-btn.danger { color: #e74c3c; border-color: rgba(231,76,60,0.3); }
-    .draw-action-btn.danger:hover { background: rgba(231,76,60,0.15); }
-    .draw-action-btn.accent { color: var(--accent); border-color: var(--accent-dim); }
-    .draw-action-btn.accent:hover { background: var(--accent-dim); }
-
-    /* Main area */
-    .draw-main {
-      flex: 1;
-      display: flex;
-      overflow: hidden;
-    }
-
-    /* Canvas wrap */
-    .draw-canvas-wrap {
-      flex: 1;
-      position: relative;
-      overflow: auto;
-      background:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 24px 24px;
-      background-color: var(--bg-base);
-      cursor: crosshair;
-    }
-
-    #draw-canvas, #draw-preview-canvas {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 4px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-    }
-    #draw-canvas {
-      background: #ffffff;
-    }
-    #draw-preview-canvas {
-      pointer-events: none;
-    }
-
-    /* Layers panel */
-    .draw-layers-panel {
-      width: 200px;
-      flex-shrink: 0;
-      background: var(--bg-surface);
-      border-left: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .draw-layers-header {
-      padding: 0.65rem 0.9rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-    }
-
-    .draw-layers-add-btn {
-      background: var(--accent);
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 1.1rem;
-      width: 26px; height: 26px;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.2s;
-    }
-    .draw-layers-add-btn:hover { opacity: 0.82; }
-
-    .draw-layers-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0.4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .draw-layer-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.45rem 0.65rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-      font-size: 0.85rem;
-    }
-    .draw-layer-item:hover { background: var(--bg-input); }
-    .draw-layer-item.active { border-color: var(--accent); background: var(--accent-dim); }
-
-    .draw-layer-vis {
-      cursor: pointer;
-      font-size: 1rem;
-      flex-shrink: 0;
-      opacity: 0.7;
-      transition: opacity 0.15s;
-    }
-    .draw-layer-vis:hover { opacity: 1; }
-
-    .draw-layer-name {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      color: var(--text-secondary);
-    }
-    .draw-layer-item.active .draw-layer-name { color: var(--accent); font-weight: 600; }
-
-    .draw-layer-name-input {
-      flex: 1;
-      background: var(--bg-input);
-      border: 1px solid var(--accent);
-      border-radius: 4px;
-      color: var(--text-primary);
-    
-      font-size: 0.82rem;
-      padding: 0.1rem 0.4rem;
-    }
-
-    .draw-layer-btns {
-      display: flex;
-      gap: 0.2rem;
-      flex-shrink: 0;
-    }
-
-    .draw-layer-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.78rem;
-      padding: 0.1rem 0.25rem;
-      border-radius: 4px;
-      transition: color 0.15s, background 0.15s;
-    }
-    .draw-layer-btn:hover { color: var(--text-primary); background: var(--bg-btn); }
-    .draw-layer-btn.danger:hover { color: #e74c3c; }
-
-    /* Statusbar */
-    .draw-statusbar {
-      display: flex;
-      align-items: center;
-      padding: 0.3rem 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      background: var(--bg-surface);
-      border-top: 1px solid var(--border);
-      flex-shrink: 0;
     }
   </style>
 </head>
@@ -1525,7 +1142,6 @@
     <button class="nav-tab"        id="tab-links"  onclick="switchPage('links')">🔗 Links</button>
     <button class="nav-tab"        id="tab-calc"   onclick="switchPage('calc')">🧮 Calculator</button>
     <button class="nav-tab"        id="tab-files"  onclick="switchPage('files')">📂 Files</button>
-    <button class="nav-tab"        id="tab-draw"   onclick="switchPage('draw')">🎨 Draw</button>
     <button class="nav-tab" id="tab-panic" onclick="panicOut()" style="display:none; background:#c0392b; color:#fff;">🚨 Panic</button>
   </nav>
 
@@ -1548,6 +1164,7 @@
     </div>
     <div class="game-container" id="game-container"></div>
   </div>
+
 
   <!-- ══ GAME IFRAME OVERLAY ══ -->
   <div id="game-overlay" style="display:none; position:fixed; inset:0; z-index:500; flex-direction:column; background:#000;">
@@ -1579,27 +1196,6 @@
         </select>
         <div class="colour-row" id="colour-row"><span>Colour:</span></div>
         <button class="notes-save-btn" id="notes-save-btn">＋ Save Note</button>
-
-        <!-- Translator -->
-        <div class="translator-box">
-          <div class="translator-header">
-            <span class="translator-title">🌍 Translate Note</span>
-            <select id="translate-lang" class="translator-lang-select">
-              <option value="Spanish">🇪🇸 Spanish</option>
-              <option value="Irish">🇮🇪 Irish</option>
-            </select>
-          </div>
-          <button class="translator-btn" id="translate-btn">✨ Translate</button>
-          <div class="translator-result" id="translator-result" style="display:none">
-            <div class="translator-result-label" id="translator-result-label">Translation</div>
-            <div class="translator-result-text" id="translator-result-text"></div>
-            <button class="translator-copy-btn" id="translator-copy-btn" title="Copy translation">📋 Copy</button>
-          </div>
-          <div class="translator-loading" id="translator-loading" style="display:none">
-            <div class="translator-spinner"></div> Translating…
-          </div>
-          <div class="translator-error" id="translator-error" style="display:none"></div>
-        </div>
       </div>
       <div class="notes-panel">
         <div class="notes-header-row">
@@ -1782,99 +1378,6 @@
     </div>
   </div>
 
-  <!-- ══ DRAW PAGE ══ -->
-  <div class="page" id="page-draw">
-    <div class="draw-page">
-
-      <!-- Toolbar top -->
-      <div class="draw-toolbar">
-        <!-- Tools -->
-        <div class="draw-tool-group">
-          <span class="draw-group-label">Tools</span>
-          <button class="draw-tool-btn active" id="dtool-pen"      data-tool="pen"      title="Pen (freehand)">✏️</button>
-          <button class="draw-tool-btn"        id="dtool-eraser"   data-tool="eraser"   title="Eraser">🧹</button>
-          <button class="draw-tool-btn"        id="dtool-line"     data-tool="line"     title="Line">╱</button>
-          <button class="draw-tool-btn"        id="dtool-rect"     data-tool="rect"     title="Rectangle">▭</button>
-          <button class="draw-tool-btn"        id="dtool-ellipse"  data-tool="ellipse"  title="Ellipse">◯</button>
-          <button class="draw-tool-btn"        id="dtool-triangle" data-tool="triangle" title="Triangle">△</button>
-          <button class="draw-tool-btn"        id="dtool-star"     data-tool="star"     title="Star">★</button>
-          <button class="draw-tool-btn"        id="dtool-warpcirc" data-tool="warpcirc" title="Warp Circle — click canvas to place, drag points to sculpt">⊙</button>
-          <button class="draw-tool-btn"        id="dtool-text"     data-tool="text"     title="Text">T</button>
-          <button class="draw-tool-btn"        id="dtool-select"   data-tool="select"   title="Select / Move">↖</button>
-        </div>
-
-        <!-- Stroke -->
-        <div class="draw-tool-group">
-          <span class="draw-group-label">Stroke</span>
-          <input type="color" id="draw-stroke-color" value="#7eb8f7" title="Stroke colour" class="draw-color-pick">
-          <input type="range" id="draw-stroke-width" min="1" max="40" value="4" title="Stroke width" class="draw-slider">
-          <span id="draw-stroke-val" class="draw-val-label">4px</span>
-        </div>
-
-        <!-- Fill -->
-        <div class="draw-tool-group">
-          <span class="draw-group-label">Fill</span>
-          <input type="color" id="draw-fill-color" value="#2a2a2a" title="Fill colour" class="draw-color-pick">
-          <label class="draw-toggle-label" title="Enable fill">
-            <input type="checkbox" id="draw-fill-enable"> Fill
-          </label>
-        </div>
-
-        <!-- Opacity -->
-        <div class="draw-tool-group">
-          <span class="draw-group-label">Opacity</span>
-          <input type="range" id="draw-opacity" min="5" max="100" value="100" class="draw-slider">
-          <span id="draw-opacity-val" class="draw-val-label">100%</span>
-        </div>
-
-        <!-- Actions -->
-        <div class="draw-tool-group">
-          <span class="draw-group-label">Actions</span>
-          <button class="draw-action-btn" id="draw-undo-btn" title="Undo (Ctrl+Z)">↩ Undo</button>
-          <button class="draw-action-btn" id="draw-redo-btn" title="Redo (Ctrl+Y)">↪ Redo</button>
-          <button class="draw-action-btn danger" id="draw-clear-btn" title="Clear current layer">🗑 Clear</button>
-          <button class="draw-action-btn accent" id="draw-export-btn" title="Export as PNG">⬇ Export</button>
-        </div>
-      </div>
-
-      <!-- Warp Circle control bar (shown only when warpcirc tool active) -->
-      <div class="warp-bar" id="warp-bar" style="display:none">
-        <span class="warp-bar-hint">⊙ Click canvas to place · Drag <span style="color:#f5c518">●</span> points to warp · Scroll to resize</span>
-        <div class="warp-bar-btns">
-          <button class="warp-bar-btn" id="warp-add-pt">+ Point</button>
-          <button class="warp-bar-btn" id="warp-remove-pt">− Point</button>
-          <button class="warp-bar-btn accent" id="warp-commit">✔ Commit to Layer</button>
-          <button class="warp-bar-btn canva" id="warp-export-svg">📐 Export SVG for Canva</button>
-          <button class="warp-bar-btn danger" id="warp-cancel">✕ Cancel</button>
-        </div>
-      </div>
-
-      <!-- Main area: canvas + layers panel -->
-      <div class="draw-main">
-        <!-- Canvas container -->
-        <div class="draw-canvas-wrap" id="draw-canvas-wrap">
-          <canvas id="draw-canvas"></canvas>
-          <canvas id="draw-preview-canvas"></canvas>
-        </div>
-
-        <!-- Layers panel -->
-        <div class="draw-layers-panel">
-          <div class="draw-layers-header">
-            <span>Layers</span>
-            <button class="draw-layers-add-btn" id="draw-add-layer-btn" title="Add layer">＋</button>
-          </div>
-          <div class="draw-layers-list" id="draw-layers-list"></div>
-        </div>
-      </div>
-
-      <!-- Status bar -->
-      <div class="draw-statusbar">
-        <span id="draw-status">Ready · Click to draw</span>
-        <span id="draw-coords" style="margin-left:auto;font-size:0.8rem;color:var(--text-muted)"></span>
-      </div>
-
-    </div>
-  </div>
 
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal">
@@ -1942,21 +1445,12 @@
     ============================================================ */
     var toastTimer;
     function showToast(msg) {
-      var t = $('toast');
+      var t = document.getElementById('toast');
       t.textContent = msg;
       t.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2200);
     }
-
-
-    /* ── DOM + STORAGE HELPERS ── */
-    var $ = function(id) { return $(id); };
-    function lsLoad(key, def) {
-      try { return JSON.parse(localStorage.getItem(key)) || def; } catch(e) { return def; }
-    }
-    function lsSave(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-    function debounce(fn, ms) { var t; return function() { clearTimeout(t); t = setTimeout(fn, ms); }; }
 
     /* ============================================================
        THEME TOGGLE
@@ -1967,11 +1461,11 @@
     function applyTheme(t) {
       currentTheme = t;
       document.documentElement.setAttribute('data-theme', t);
-      $('theme-toggle').textContent = t === 'dark' ? '🌙' : '☀️';
+      document.getElementById('theme-toggle').textContent = t === 'dark' ? '🌙' : '☀️';
       localStorage.setItem('soups_theme', t);
     }
 
-    $('theme-toggle').addEventListener('click', function() {
+    document.getElementById('theme-toggle').addEventListener('click', function() {
       applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
@@ -1981,32 +1475,32 @@
     function switchPage(name) {
       document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
       document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
-      $('page-' + name).classList.add('active');
-      $('tab-' + name).classList.add('active');
+      document.getElementById('page-' + name).classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
     }
 
     /* ============================================================
        PASSWORD
     ============================================================ */
     function checkPassword() {
-      var input = $('password-input');
-      var err   = $('error-message');
+      var input = document.getElementById('password-input');
+      var err   = document.getElementById('error-message');
       var val   = input.value;
 
       hashInput(val).then(function(hash) {
         if (hash === GAMES_PASSWORD_HASH) {
           // Secret code — show everything including Games
-          $('password-section').style.display = 'none';
-          $('nav-tabs').classList.add('visible');
-          $('tab-games').style.display = '';
-          $('tab-panic').style.display = '';
+          document.getElementById('password-section').style.display = 'none';
+          document.getElementById('nav-tabs').classList.add('visible');
+          document.getElementById('tab-games').style.display = '';
+          document.getElementById('tab-panic').style.display = '';
           switchPage('games');
           renderRecent();
         } else if (hash === PASSWORD_HASH) {
           // Normal password — hide Games tab
-          $('password-section').style.display = 'none';
-          $('nav-tabs').classList.add('visible');
-          $('tab-games').style.display = 'none';
+          document.getElementById('password-section').style.display = 'none';
+          document.getElementById('nav-tabs').classList.add('visible');
+          document.getElementById('tab-games').style.display = 'none';
           switchPage('notes');
         } else {
           err.style.display = 'block';
@@ -2016,14 +1510,14 @@
       });
     }
 
-    $('submit-btn').addEventListener('click', checkPassword);
-    $('password-input').addEventListener('keypress', function(e) {
+    document.getElementById('submit-btn').addEventListener('click', checkPassword);
+    document.getElementById('password-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') checkPassword();
     });
 
     function panicOut() {
-      $('tab-games').style.display = 'none';
-      $('tab-panic').style.display = 'none';
+      document.getElementById('tab-games').style.display = 'none';
+      document.getElementById('tab-panic').style.display = 'none';
       switchPage('notes');
     }
 
@@ -2031,11 +1525,11 @@
        GAMES — BUILD CARDS
     ============================================================ */
     var CUSTOM_GAMES_KEY = 'soups_custom_games_v1';
-    function loadCustomGames() { return lsLoad(CUSTOM_GAMES_KEY, []); }
-    function saveCustomGames(g) { lsSave(CUSTOM_GAMES_KEY, g); }
+    function loadCustomGames() { try { return JSON.parse(localStorage.getItem(CUSTOM_GAMES_KEY)) || []; } catch(e) { return []; } }
+    function saveCustomGames(g) { localStorage.setItem(CUSTOM_GAMES_KEY, JSON.stringify(g)); }
 
     function buildCards() {
-      var container = $('game-container');
+      var container = document.getElementById('game-container');
       container.innerHTML = '';
 
       // Built-in sites
@@ -2088,15 +1582,15 @@
     }
 
     function openGameOverlay(site) {
-      $('game-overlay-title').textContent = '🎮 ' + site.name;
-      $('game-overlay-newtab').href = site.url;
-      $('game-iframe').src = site.url;
-      $('game-overlay').style.display = 'flex';
+      document.getElementById('game-overlay-title').textContent = '🎮 ' + site.name;
+      document.getElementById('game-overlay-newtab').href = site.url;
+      document.getElementById('game-iframe').src = site.url;
+      document.getElementById('game-overlay').style.display = 'flex';
     }
 
-    $('game-overlay-close').addEventListener('click', function() {
-      $('game-overlay').style.display = 'none';
-      $('game-iframe').src = '';
+    document.getElementById('game-overlay-close').addEventListener('click', function() {
+      document.getElementById('game-overlay').style.display = 'none';
+      document.getElementById('game-iframe').src = '';
     });
     buildCards();
 
@@ -2106,7 +1600,7 @@
     var RECENT_KEY = 'soups_recent_v1';
 
     function getRecent() {
-      return lsLoad(RECENT_KEY, []);
+      try { return JSON.parse(localStorage.getItem(RECENT_KEY)) || []; } catch(e) { return []; }
     }
 
     function addRecent(site) {
@@ -2118,8 +1612,8 @@
 
     function renderRecent() {
       var arr   = getRecent();
-      var sec   = $('recently-section');
-      var strip = $('recent-strip');
+      var sec   = document.getElementById('recently-section');
+      var strip = document.getElementById('recent-strip');
       if (!arr.length) { sec.style.display = 'none'; return; }
       sec.style.display = 'block';
       strip.innerHTML = '';
@@ -2149,7 +1643,7 @@
     ];
 
     var selectedColour = COLOURS[0].hex;
-    var colourRow = $('colour-row');
+    var colourRow = document.getElementById('colour-row');
     COLOURS.forEach(function(c) {
       var dot = document.createElement('div');
       dot.className = 'colour-dot' + (c.hex === selectedColour ? ' selected' : '');
@@ -2168,17 +1662,19 @@
     ============================================================ */
     var NOTES_KEY = 'soups_notes_v2';
 
-    function loadNotes() { return lsLoad(NOTES_KEY, []); }
-    function saveNotes(n) { lsSave(NOTES_KEY, n); }
+    function loadNotes() {
+      try { return JSON.parse(localStorage.getItem(NOTES_KEY)) || []; } catch(e) { return []; }
+    }
+    function saveNotes(notes) { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); }
 
     var TAG_ICONS = { school:'🎒', ideas:'💡', reminders:'🔔', other:'📌' };
 
     function renderNotes() {
-      var filter = $('search-input').value.toLowerCase();
-      var tagFilter = $('filter-tag').value;
+      var filter = document.getElementById('search-input').value.toLowerCase();
+      var tagFilter = document.getElementById('filter-tag').value;
       var notes  = loadNotes();
-      var grid   = $('notes-grid');
-      var empty  = $('empty-state');
+      var grid   = document.getElementById('notes-grid');
+      var empty  = document.getElementById('empty-state');
       grid.innerHTML = '';
 
       var filtered = notes.filter(function(n) {
@@ -2272,42 +1768,42 @@
       renderNotes();
     }
 
-    $('notes-save-btn').addEventListener('click', function() {
-      var title = $('note-title').value;
-      var body  = $('note-body').value;
+    document.getElementById('notes-save-btn').addEventListener('click', function() {
+      var title = document.getElementById('note-title').value;
+      var body  = document.getElementById('note-body').value;
       if (!title.trim() && !body.trim()) return;
 
       // Check if the title is the secret games code
       hashInput(title.trim()).then(function(hash) {
         if (hash === GAMES_PASSWORD_HASH) {
           // Secret code typed as title — unlock games, don't save the note
-          $('note-title').value = '';
-          $('note-body').value  = '';
-          $('note-tag').value   = '';
-          $('tab-games').style.display = '';
-          $('tab-panic').style.display = '';
+          document.getElementById('note-title').value = '';
+          document.getElementById('note-body').value  = '';
+          document.getElementById('note-tag').value   = '';
+          document.getElementById('tab-games').style.display = '';
+          document.getElementById('tab-panic').style.display = '';
           switchPage('games');
           renderRecent();
         } else {
           // Normal note save
-          addNote(title, body, selectedColour, $('note-tag').value);
-          $('note-title').value = '';
-          $('note-body').value  = '';
-          $('note-tag').value   = '';
+          addNote(title, body, selectedColour, document.getElementById('note-tag').value);
+          document.getElementById('note-title').value = '';
+          document.getElementById('note-body').value  = '';
+          document.getElementById('note-tag').value   = '';
           showToast('Note saved ✓');
         }
       });
     });
 
     // Ctrl+Enter to save
-    $('note-body').addEventListener('keydown', function(e) {
+    document.getElementById('note-body').addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-        $('notes-save-btn').click();
+        document.getElementById('notes-save-btn').click();
       }
     });
 
-    $('search-input').addEventListener('input', debounce(renderNotes, 150));
-    $('filter-tag').addEventListener('change', renderNotes);
+    document.getElementById('search-input').addEventListener('input', renderNotes);
+    document.getElementById('filter-tag').addEventListener('change', renderNotes);
     renderNotes();
 
     /* ============================================================
@@ -2319,37 +1815,37 @@
       var note = loadNotes().find(function(n) { return n.id === id; });
       if (!note) return;
       editingId = id;
-      $('modal-title').value = note.title;
-      $('modal-body').value  = note.body;
-      $('modal-tag').value   = note.tag || '';
-      $('modal-overlay').classList.add('open');
+      document.getElementById('modal-title').value = note.title;
+      document.getElementById('modal-body').value  = note.body;
+      document.getElementById('modal-tag').value   = note.tag || '';
+      document.getElementById('modal-overlay').classList.add('open');
     }
 
-    $('modal-cancel').addEventListener('click', function() {
-      $('modal-overlay').classList.remove('open');
+    document.getElementById('modal-cancel').addEventListener('click', function() {
+      document.getElementById('modal-overlay').classList.remove('open');
       editingId = null;
     });
 
-    $('modal-overlay').addEventListener('click', function(e) {
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
       if (e.target === this) {
         this.classList.remove('open');
         editingId = null;
       }
     });
 
-    $('modal-save').addEventListener('click', function() {
+    document.getElementById('modal-save').addEventListener('click', function() {
       if (!editingId) return;
       var ns = loadNotes().map(function(n) {
         if (n.id !== editingId) return n;
         return Object.assign({}, n, {
-          title: $('modal-title').value.trim(),
-          body:  $('modal-body').value.trim(),
-          tag:   $('modal-tag').value,
+          title: document.getElementById('modal-title').value.trim(),
+          body:  document.getElementById('modal-body').value.trim(),
+          tag:   document.getElementById('modal-tag').value,
         });
       });
       saveNotes(ns);
       renderNotes();
-      $('modal-overlay').classList.remove('open');
+      document.getElementById('modal-overlay').classList.remove('open');
       editingId = null;
       showToast('Note updated ✓');
     });
@@ -2360,13 +1856,13 @@
     var TODO_KEY = 'soups_todos_v1';
     var todoFilter = 'all';
 
-    function loadTodos() { return lsLoad(TODO_KEY, []); }
-    function saveTodos(t) { lsSave(TODO_KEY, t); }
+    function loadTodos() { try { return JSON.parse(localStorage.getItem(TODO_KEY)) || []; } catch(e) { return []; } }
+    function saveTodos(t) { localStorage.setItem(TODO_KEY, JSON.stringify(t)); }
 
     function renderTodos() {
       var todos = loadTodos();
-      var list  = $('todo-list');
-      var empty = $('todo-empty');
+      var list  = document.getElementById('todo-list');
+      var empty = document.getElementById('todo-empty');
       list.innerHTML = '';
 
       var filtered = todos.filter(function(t) {
@@ -2429,14 +1925,14 @@
     }
 
     function addTodo() {
-      var input = $('todo-input');
+      var input = document.getElementById('todo-input');
       var text  = input.value.trim();
       if (!text) return;
       var todos = loadTodos();
       todos.push({
         id: Date.now().toString(),
         text: text,
-        priority: $('todo-priority').value,
+        priority: document.getElementById('todo-priority').value,
         done: false,
         created: Date.now(),
       });
@@ -2446,12 +1942,12 @@
       showToast('Task added ✓');
     }
 
-    $('todo-add-btn').addEventListener('click', addTodo);
-    $('todo-input').addEventListener('keypress', function(e) {
+    document.getElementById('todo-add-btn').addEventListener('click', addTodo);
+    document.getElementById('todo-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') addTodo();
     });
 
-    $('todo-clear-btn').addEventListener('click', function() {
+    document.getElementById('todo-clear-btn').addEventListener('click', function() {
       saveTodos(loadTodos().filter(function(t) { return !t.done; }));
       renderTodos();
       showToast('Completed tasks cleared');
@@ -2494,7 +1990,7 @@
 
     function updateRing(fraction) {
       var offset = RING_CIRC * (1 - fraction);
-      $('ring-fill').style.strokeDashoffset = offset;
+      document.getElementById('ring-fill').style.strokeDashoffset = offset;
     }
 
     function fmtTime(secs) {
@@ -2516,12 +2012,12 @@
       timerMode = mode;
       timerStop();
 
-      $('tab-pomodoro').classList.toggle('active',  mode === 'pomodoro');
-      $('tab-stopwatch').classList.toggle('active', mode === 'stopwatch');
-      $('pomodoro-presets').style.display = mode === 'pomodoro' ? 'flex' : 'none';
-      $('session-counter').style.display  = mode === 'pomodoro' ? 'block' : 'none';
+      document.getElementById('tab-pomodoro').classList.toggle('active',  mode === 'pomodoro');
+      document.getElementById('tab-stopwatch').classList.toggle('active', mode === 'stopwatch');
+      document.getElementById('pomodoro-presets').style.display = mode === 'pomodoro' ? 'flex' : 'none';
+      document.getElementById('session-counter').style.display  = mode === 'pomodoro' ? 'block' : 'none';
 
-      var clock = $('clock-display');
+      var clock = document.getElementById('clock-display');
       clock.classList.remove('warning', 'done');
 
       if (mode === 'pomodoro') {
@@ -2539,8 +2035,8 @@
       timerStop();
       timerTotal = min * 60 + sec;
       timerRemaining = timerTotal;
-      $('clock-display').textContent = fmtTime(timerRemaining);
-      $('clock-display').classList.remove('warning', 'done');
+      document.getElementById('clock-display').textContent = fmtTime(timerRemaining);
+      document.getElementById('clock-display').classList.remove('warning', 'done');
       updateRing(1);
     }
 
@@ -2549,12 +2045,12 @@
         timerStop();
       } else {
         timerRunning = true;
-        $('timer-start-btn').textContent = '⏸ Pause';
+        document.getElementById('timer-start-btn').textContent = '⏸ Pause';
 
         if (timerMode === 'pomodoro') {
           timerInterval = setInterval(function() {
             timerRemaining--;
-            var clock = $('clock-display');
+            var clock = document.getElementById('clock-display');
             clock.textContent = fmtTime(timerRemaining);
             updateRing(timerRemaining / timerTotal);
 
@@ -2566,7 +2062,7 @@
               clock.classList.add('done');
               clock.textContent = '00:00';
               updateRing(0);
-              $('timer-start-btn').textContent = '▶ Start';
+              document.getElementById('timer-start-btn').textContent = '▶ Start';
               sessionsToday++;
               localStorage.setItem('soups_sessions', sessionsToday);
               localStorage.setItem('soups_session_date', todayStr);
@@ -2580,7 +2076,7 @@
           stopwatchStart = Date.now() - stopwatchMs;
           timerInterval = setInterval(function() {
             stopwatchMs = Date.now() - stopwatchStart;
-            $('clock-display').textContent = fmtStopwatch(stopwatchMs);
+            document.getElementById('clock-display').textContent = fmtStopwatch(stopwatchMs);
           }, 10);
         }
       }
@@ -2589,12 +2085,12 @@
     function timerStop() {
       timerRunning = false;
       clearInterval(timerInterval);
-      $('timer-start-btn').textContent = '▶ Start';
+      document.getElementById('timer-start-btn').textContent = '▶ Start';
     }
 
     function timerReset() {
       timerStop();
-      var clock = $('clock-display');
+      var clock = document.getElementById('clock-display');
       clock.classList.remove('warning', 'done');
       if (timerMode === 'pomodoro') {
         timerRemaining = timerTotal;
@@ -2608,7 +2104,7 @@
     }
 
     function updateSessionCounter() {
-      $('session-counter').textContent = 'Sessions today: ' + sessionsToday;
+      document.getElementById('session-counter').textContent = 'Sessions today: ' + sessionsToday;
     }
 
     /* ============================================================
@@ -2616,8 +2112,8 @@
     ============================================================ */
     var LINKS_KEY = 'soups_links_v1';
 
-    function loadLinks() { return lsLoad(LINKS_KEY, []); }
-    function saveLinks(l) { lsSave(LINKS_KEY, l); }
+    function loadLinks() { try { return JSON.parse(localStorage.getItem(LINKS_KEY)) || []; } catch(e) { return []; } }
+    function saveLinks(l) { localStorage.setItem(LINKS_KEY, JSON.stringify(l)); }
 
     function getFavicon(url) {
       try {
@@ -2629,8 +2125,8 @@
     function renderLinks(filter) {
       filter = (filter || '').toLowerCase();
       var links = loadLinks();
-      var grid  = $('links-grid');
-      var empty = $('links-empty');
+      var grid  = document.getElementById('links-grid');
+      var empty = document.getElementById('links-empty');
       grid.innerHTML = '';
 
       var filtered = filter
@@ -2683,7 +2179,7 @@
         delBtn.title = 'Remove';
         delBtn.addEventListener('click', function() {
           saveLinks(loadLinks().filter(function(l) { return l.id !== link.id; }));
-          renderLinks($('links-search').value);
+          renderLinks(document.getElementById('links-search').value);
           showToast('Link removed');
         });
 
@@ -2695,10 +2191,10 @@
       });
     }
 
-    $('links-add-btn').addEventListener('click', function() {
-      var name = $('link-name-input').value.trim();
-      var url  = $('link-url-input').value.trim();
-      var addToGames = $('add-to-games-check').checked;
+    document.getElementById('links-add-btn').addEventListener('click', function() {
+      var name = document.getElementById('link-name-input').value.trim();
+      var url  = document.getElementById('link-url-input').value.trim();
+      var addToGames = document.getElementById('add-to-games-check').checked;
       if (!name || !url) { showToast('Please enter both a name and URL'); return; }
       if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
       var id = Date.now().toString();
@@ -2716,19 +2212,19 @@
         showToast('Link saved ✓');
       }
 
-      $('link-name-input').value = '';
-      $('link-url-input').value  = '';
-      $('add-to-games-check').checked = false;
-      renderLinks($('links-search').value);
+      document.getElementById('link-name-input').value = '';
+      document.getElementById('link-url-input').value  = '';
+      document.getElementById('add-to-games-check').checked = false;
+      renderLinks(document.getElementById('links-search').value);
     });
 
-    $('links-search').addEventListener('input', function() {
+    document.getElementById('links-search').addEventListener('input', function() {
       renderLinks(this.value);
     });
 
     // Allow Enter on URL field to submit
-    $('link-url-input').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') $('links-add-btn').click();
+    document.getElementById('link-url-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') document.getElementById('links-add-btn').click();
     });
 
     renderLinks();
@@ -2744,8 +2240,8 @@
     };
 
     function calcUpdate() {
-      $('calc-current').textContent = calcState.current;
-      $('calc-history').textContent =
+      document.getElementById('calc-current').textContent = calcState.current;
+      document.getElementById('calc-history').textContent =
         calcState.previous && calcState.operator
           ? calcState.previous + ' ' + calcState.operator
           : '';
@@ -2838,67 +2334,6 @@
     calcUpdate();
 
     /* ============================================================
-       TRANSLATOR
-    ============================================================ */
-    $('translate-btn').addEventListener('click', async function() {
-      var text = ($('note-body').value || '').trim();
-      if (!text) {
-        var errEl = $('translator-error');
-        errEl.textContent = 'Please write something in the note body first!';
-        errEl.style.display = '';
-        setTimeout(function() { errEl.style.display = 'none'; }, 3000);
-        return;
-      }
-
-      var lang = $('translate-lang').value;
-      var btn  = $('translate-btn');
-      var loadEl = $('translator-loading');
-      var resultEl = $('translator-result');
-      var resultText = $('translator-result-text');
-      var resultLabel = $('translator-result-label');
-      var errEl2 = $('translator-error');
-
-      btn.disabled = true;
-      loadEl.style.display = 'flex';
-      resultEl.style.display = 'none';
-      errEl2.style.display = 'none';
-
-      try {
-        var response = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1000,
-            system: 'You are a professional translator. Translate the user\'s text accurately into the requested language. Return ONLY the translated text with no explanations, preamble, or extra commentary.',
-            messages: [{ role: 'user', content: 'Translate the following into ' + lang + ':\n\n' + text }]
-          })
-        });
-
-        var data = await response.json();
-        if (!response.ok) throw new Error(data.error && data.error.message || 'API error');
-
-        var translated = data.content && data.content[0] && data.content[0].text || '';
-        resultLabel.textContent = (lang === 'Spanish' ? '🇪🇸' : '🇮🇪') + ' ' + lang + ' Translation';
-        resultText.textContent = translated;
-        resultEl.style.display = 'flex';
-      } catch (err) {
-        errEl2.textContent = 'Translation failed: ' + err.message;
-        errEl2.style.display = '';
-      } finally {
-        loadEl.style.display = 'none';
-        btn.disabled = false;
-      }
-    });
-
-    $('translator-copy-btn').addEventListener('click', function() {
-      var text = $('translator-result-text').textContent;
-      navigator.clipboard.writeText(text).then(function() {
-        showToast('Translation copied!');
-      });
-    });
-
-    /* ============================================================
        FILE OPENER
     ============================================================ */
     var openedFiles = []; // { id, name, size, type, objectUrl, file }
@@ -2956,11 +2391,11 @@
     }
 
     function renderFiles(filter) {
-      filter = (filter !== undefined ? filter : $('file-search').value).toLowerCase();
-      var grid  = $('files-grid');
-      var empty = $('files-empty');
-      var toolbar = $('file-toolbar');
-      var count = $('file-count');
+      filter = (filter !== undefined ? filter : document.getElementById('file-search').value).toLowerCase();
+      var grid  = document.getElementById('files-grid');
+      var empty = document.getElementById('files-empty');
+      var toolbar = document.getElementById('file-toolbar');
+      var count = document.getElementById('file-count');
       grid.innerHTML = '';
 
       if (!openedFiles.length) {
@@ -3031,9 +2466,9 @@
     }
 
     function openViewer(f) {
-      var body    = $('viewer-body');
-      var title   = $('viewer-title');
-      var dlBtn   = $('viewer-dl');
+      var body    = document.getElementById('viewer-body');
+      var title   = document.getElementById('viewer-title');
+      var dlBtn   = document.getElementById('viewer-dl');
       body.innerHTML = '';
       title.textContent = f.name;
       dlBtn.href     = f.objectUrl;
@@ -3087,18 +2522,18 @@
         body.appendChild(unsup);
       }
 
-      $('file-viewer-overlay').classList.add('open');
+      document.getElementById('file-viewer-overlay').classList.add('open');
     }
 
     function closeViewer() {
-      $('file-viewer-overlay').classList.remove('open');
+      document.getElementById('file-viewer-overlay').classList.remove('open');
       // Stop any media
-      var body = $('viewer-body');
+      var body = document.getElementById('viewer-body');
       body.querySelectorAll('video,audio').forEach(function(el) { el.pause(); });
     }
 
     // Close viewer on overlay click
-    $('file-viewer-overlay').addEventListener('click', function(e) {
+    document.getElementById('file-viewer-overlay').addEventListener('click', function(e) {
       if (e.target === this) closeViewer();
     });
 
@@ -3108,13 +2543,13 @@
     });
 
     // File input change
-    $('file-input').addEventListener('change', function() {
+    document.getElementById('file-input').addEventListener('change', function() {
       addFiles(this.files);
       this.value = ''; // allow re-picking same file
     });
 
     // Drag & drop
-    var dz = $('drop-zone');
+    var dz = document.getElementById('drop-zone');
 
     dz.addEventListener('dragover', function(e) {
       e.preventDefault();
@@ -3132,921 +2567,25 @@
     });
 
     // Also allow dropping anywhere on the files page
-    $('page-files').addEventListener('dragover', function(e) { e.preventDefault(); });
-    $('page-files').addEventListener('drop', function(e) {
+    document.getElementById('page-files').addEventListener('dragover', function(e) { e.preventDefault(); });
+    document.getElementById('page-files').addEventListener('drop', function(e) {
       e.preventDefault();
       addFiles(e.dataTransfer.files);
     });
 
     // Search
-    $('file-search').addEventListener('input', function() {
+    document.getElementById('file-search').addEventListener('input', function() {
       renderFiles(this.value);
     });
 
     // Clear all
-    $('files-clear-btn').addEventListener('click', function() {
+    document.getElementById('files-clear-btn').addEventListener('click', function() {
       openedFiles.forEach(function(f) { URL.revokeObjectURL(f.objectUrl); });
       openedFiles = [];
       renderFiles();
       showToast('All files cleared');
     });
 
-  </script>
-
-  <!-- =============================================
-       DRAWING PAGE
-  ============================================= -->
-  <script>
-  (function() {
-    /* ── State ─────────────────────────────────────────────── */
-    var CANVAS_W = 1200, CANVAS_H = 750;
-    var _rafPending = false;
-    function scheduleRender() {
-      if (!_rafPending) { _rafPending = true; requestAnimationFrame(function() { _rafPending = false; renderAll(); }); }
-    }
-    var currentTool = 'pen';
-    var drawing = false;
-    var lastX = 0, lastY = 0;
-    var startX = 0, startY = 0;
-    var textInputActive = false;
-
-    // Warp circle state
-    var wc = {
-      active: false,   // warpcirc tool is live
-      placed: false,   // circle has been placed on canvas
-      points: [],      // [{x,y}] control points
-      draggingIdx: -1, // index of point being dragged, -1 = none
-      HIT_RADIUS: 14,  // px on canvas for hit detection
-    };
-
-    // Undo / redo stacks per layer
-    var undoStacks = {};
-    var redoStacks = {};
-
-    // Layers: [{id, name, visible, canvas, ctx}]
-    var layers = [];
-    var activeLayerId = null;
-    var layerCounter = 0;
-
-    // Selection drag
-    var selectStart = null, selectRect = null;
-
-    /* ── DOM refs ──────────────────────────────────────────── */
-    var previewCanvas, previewCtx;
-    var wrap;
-
-    function getActiveLayer() {
-      return layers.find(function(l) { return l.id === activeLayerId; });
-    }
-
-    function getCtx() {
-      var l = getActiveLayer();
-      return l ? l.ctx : null;
-    }
-
-    function getStrokeColor() { return $('draw-stroke-color').value; }
-    function getFillColor()   { return $('draw-fill-color').value; }
-    function getStrokeWidth() { return parseInt($('draw-stroke-width').value) || 4; }
-    function getFillEnabled() { return $('draw-fill-enable').checked; }
-    function getOpacity()     { return parseInt($('draw-opacity').value) / 100; }
-
-    /* ── Init ──────────────────────────────────────────────── */
-    function initDraw() {
-      wrap = $('draw-canvas-wrap');
-      previewCanvas = $('draw-preview-canvas');
-      previewCtx = previewCanvas.getContext('2d');
-      previewCanvas.width  = CANVAS_W;
-      previewCanvas.height = CANVAS_H;
-
-      // Merge canvas (flattened view) - we use a real display canvas
-      var mainCanvas = $('draw-canvas');
-      mainCanvas.width  = CANVAS_W;
-      mainCanvas.height = CANVAS_H;
-      // We won't draw directly on mainCanvas; layers use off-screen canvases,
-      // and we composite them into mainCanvas on every render.
-      // But for simplicity of the tool interaction we use the mainCanvas for event listening.
-
-      addLayer('Layer 1');
-
-      // Events on previewCanvas (top)
-      previewCanvas.addEventListener('mousedown', onMouseDown);
-      previewCanvas.addEventListener('mousemove', onMouseMove);
-      previewCanvas.addEventListener('mouseup',   onMouseUp);
-      previewCanvas.addEventListener('mouseleave', onMouseLeave);
-      previewCanvas.addEventListener('dblclick',  onDblClick);
-      previewCanvas.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-      // Touch support
-      previewCanvas.addEventListener('touchstart',  onTouchStart,  { passive: false });
-      previewCanvas.addEventListener('touchmove',   onTouchMove,   { passive: false });
-      previewCanvas.addEventListener('touchend',    onTouchEnd,    { passive: false });
-
-      // Scroll-to-resize warp circle
-      previewCanvas.addEventListener('wheel', function(e) {
-        if (currentTool === 'warpcirc' && wc.placed) {
-          e.preventDefault();
-          var delta = e.deltaY > 0 ? -10 : 10;
-          scaleWarpCircle(delta);
-        }
-      }, { passive: false });
-
-      // Coord display
-      previewCanvas.addEventListener('mousemove', function(e) {
-        var pos = getPos(e);
-        $('draw-coords').textContent = 'x:' + Math.round(pos.x) + '  y:' + Math.round(pos.y);
-      });
-
-      // Tool buttons
-      document.querySelectorAll('.draw-tool-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          selectTool(this.dataset.tool);
-        });
-      });
-
-      // Slider labels
-      $('draw-stroke-width').addEventListener('input', function() {
-        $('draw-stroke-val').textContent = this.value + 'px';
-      });
-      $('draw-opacity').addEventListener('input', function() {
-        $('draw-opacity-val').textContent = this.value + '%';
-      });
-
-      // Actions
-      $('draw-undo-btn').addEventListener('click', undo);
-      $('draw-redo-btn').addEventListener('click', redo);
-      $('draw-clear-btn').addEventListener('click', clearActiveLayer);
-      $('draw-export-btn').addEventListener('click', exportPng);
-      $('draw-add-layer-btn').addEventListener('click', function() {
-        addLayer('Layer ' + (layers.length + 1));
-      });
-
-      // Warp bar buttons
-      $('warp-add-pt').addEventListener('click', addWarpPoint);
-      $('warp-remove-pt').addEventListener('click', removeWarpPoint);
-      $('warp-commit').addEventListener('click', commitWarpCircle);
-      $('warp-cancel').addEventListener('click', cancelWarpCircle);
-      $('warp-export-svg').addEventListener('click', exportWarpSVG);
-
-      // Keyboard shortcuts
-      document.addEventListener('keydown', function(e) {
-        if ($('page-draw').classList.contains('active')) {
-          if (e.ctrlKey && e.key === 'z') { e.preventDefault(); undo(); }
-          if (e.ctrlKey && (e.key === 'y' || (e.shiftKey && e.key === 'z'))) { e.preventDefault(); redo(); }
-          if (e.key === 'Escape') { cancelWarpCircle(); }
-          if (e.key === 'Enter' && currentTool === 'warpcirc' && wc.placed) { commitWarpCircle(); }
-        }
-      });
-
-      renderAll();
-      updateLayersUI();
-    }
-
-    /* ── Layer management ──────────────────────────────────── */
-    function addLayer(name) {
-      var id = ++layerCounter;
-      var offscreen = document.createElement('canvas');
-      offscreen.width  = CANVAS_W;
-      offscreen.height = CANVAS_H;
-      var ctx = offscreen.getContext('2d');
-      var layer = { id: id, name: name, visible: true, canvas: offscreen, ctx: ctx };
-      layers.unshift(layer); // newest on top
-      undoStacks[id] = [];
-      redoStacks[id] = [];
-      setActiveLayer(id);
-      updateLayersUI();
-      return layer;
-    }
-
-    function setActiveLayer(id) {
-      activeLayerId = id;
-      updateLayersUI();
-    }
-
-    function deleteLayer(id) {
-      if (layers.length <= 1) { showToast('Need at least one layer'); return; }
-      layers = layers.filter(function(l) { return l.id !== id; });
-      delete undoStacks[id];
-      delete redoStacks[id];
-      if (activeLayerId === id) {
-        activeLayerId = layers[0].id;
-      }
-      renderAll();
-      updateLayersUI();
-    }
-
-    function moveLayer(id, dir) {
-      var idx = layers.findIndex(function(l) { return l.id === id; });
-      var target = idx + dir;
-      if (target < 0 || target >= layers.length) return;
-      var tmp = layers[idx];
-      layers[idx] = layers[target];
-      layers[target] = tmp;
-      renderAll();
-      updateLayersUI();
-    }
-
-    function toggleLayerVisibility(id) {
-      var layer = layers.find(function(l) { return l.id === id; });
-      if (layer) { layer.visible = !layer.visible; }
-      renderAll();
-      updateLayersUI();
-    }
-
-    function renameLayer(id, name) {
-      var layer = layers.find(function(l) { return l.id === id; });
-      if (layer) layer.name = name;
-      updateLayersUI();
-    }
-
-    function updateLayersUI() {
-      var list = $('draw-layers-list');
-      list.innerHTML = '';
-      layers.forEach(function(layer) {
-        var item = document.createElement('div');
-        item.className = 'draw-layer-item' + (layer.id === activeLayerId ? ' active' : '');
-        item.dataset.id = layer.id;
-
-        // Visibility toggle
-        var vis = document.createElement('span');
-        vis.className = 'draw-layer-vis';
-        vis.textContent = layer.visible ? '👁' : '🙈';
-        vis.title = layer.visible ? 'Hide layer' : 'Show layer';
-        vis.addEventListener('click', function(e) {
-          e.stopPropagation();
-          toggleLayerVisibility(layer.id);
-        });
-
-        // Name
-        var nameEl = document.createElement('span');
-        nameEl.className = 'draw-layer-name';
-        nameEl.textContent = layer.name;
-        nameEl.title = 'Double-click to rename';
-        nameEl.addEventListener('dblclick', function(e) {
-          e.stopPropagation();
-          var inp = document.createElement('input');
-          inp.className = 'draw-layer-name-input';
-          inp.value = layer.name;
-          item.replaceChild(inp, nameEl);
-          inp.focus();
-          inp.select();
-          inp.addEventListener('blur', function() { renameLayer(layer.id, inp.value || layer.name); updateLayersUI(); });
-          inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') inp.blur(); });
-        });
-
-        // Buttons (up/down/delete)
-        var btns = document.createElement('div');
-        btns.className = 'draw-layer-btns';
-
-        var upBtn = document.createElement('button');
-        upBtn.className = 'draw-layer-btn';
-        upBtn.textContent = '↑';
-        upBtn.title = 'Move up';
-        upBtn.addEventListener('click', function(e) { e.stopPropagation(); moveLayer(layer.id, -1); });
-
-        var downBtn = document.createElement('button');
-        downBtn.className = 'draw-layer-btn';
-        downBtn.textContent = '↓';
-        downBtn.title = 'Move down';
-        downBtn.addEventListener('click', function(e) { e.stopPropagation(); moveLayer(layer.id, 1); });
-
-        var delBtn = document.createElement('button');
-        delBtn.className = 'draw-layer-btn danger';
-        delBtn.textContent = '✕';
-        delBtn.title = 'Delete layer';
-        delBtn.addEventListener('click', function(e) { e.stopPropagation(); deleteLayer(layer.id); });
-
-        btns.appendChild(upBtn);
-        btns.appendChild(downBtn);
-        btns.appendChild(delBtn);
-
-        item.appendChild(vis);
-        item.appendChild(nameEl);
-        item.appendChild(btns);
-
-        item.addEventListener('click', function() { setActiveLayer(layer.id); });
-        list.appendChild(item);
-      });
-    }
-
-    /* ── Render all layers into main canvas ────────────────── */
-    function renderAll() {
-      var mainCanvas = $('draw-canvas');
-      var mainCtx = mainCanvas.getContext('2d');
-      mainCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-      // Draw from bottom to top (layers array is top-to-bottom order, so draw reversed)
-      for (var i = layers.length - 1; i >= 0; i--) {
-        if (layers[i].visible) {
-          mainCtx.drawImage(layers[i].canvas, 0, 0);
-        }
-      }
-    }
-
-    /* ── Undo / Redo ───────────────────────────────────────── */
-    function saveSnapshot() {
-      var layer = getActiveLayer();
-      if (!layer) return;
-      var snap = layer.ctx.getImageData(0, 0, CANVAS_W, CANVAS_H);
-      undoStacks[layer.id].push(snap);
-      if (undoStacks[layer.id].length > 50) undoStacks[layer.id].shift();
-      redoStacks[layer.id] = [];
-    }
-
-    function undo() {
-      var layer = getActiveLayer();
-      if (!layer || undoStacks[layer.id].length === 0) { showToast('Nothing to undo'); return; }
-      var snap = layer.ctx.getImageData(0, 0, CANVAS_W, CANVAS_H);
-      redoStacks[layer.id].push(snap);
-      var prev = undoStacks[layer.id].pop();
-      layer.ctx.putImageData(prev, 0, 0);
-      renderAll();
-    }
-
-    function redo() {
-      var layer = getActiveLayer();
-      if (!layer || redoStacks[layer.id].length === 0) { showToast('Nothing to redo'); return; }
-      var snap = layer.ctx.getImageData(0, 0, CANVAS_W, CANVAS_H);
-      undoStacks[layer.id].push(snap);
-      var next = redoStacks[layer.id].pop();
-      layer.ctx.putImageData(next, 0, 0);
-      renderAll();
-    }
-
-    /* ── Tools ─────────────────────────────────────────────── */
-    function selectTool(tool) {
-      if (currentTool === 'warpcirc') cancelWarpCircle();
-      currentTool = tool;
-      document.querySelectorAll('.draw-tool-btn').forEach(function(b) { b.classList.remove('active'); });
-      var btn = $('dtool-' + tool);
-      if (btn) btn.classList.add('active');
-
-      var warpBar = $('warp-bar');
-      var canvasWrap = $('draw-canvas-wrap');
-
-      if (tool === 'warpcirc') {
-        warpBar.style.display = 'flex';
-        canvasWrap.style.cursor = 'crosshair';
-        $('draw-status').textContent = 'Warp Circle · Click canvas to place';
-        wc.active = true;
-      } else {
-        warpBar.style.display = 'none';
-        wc.active = false;
-        wc.placed = false;
-        if (tool === 'eraser') {
-          canvasWrap.style.cursor = 'cell';
-          $('draw-status').textContent = 'Eraser';
-        } else if (tool === 'select') {
-          canvasWrap.style.cursor = 'default';
-          $('draw-status').textContent = 'Select tool · Drag to select area';
-        } else if (tool === 'text') {
-          canvasWrap.style.cursor = 'text';
-          $('draw-status').textContent = 'Text · Click on canvas to place text';
-        } else {
-          canvasWrap.style.cursor = 'crosshair';
-          $('draw-status').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' tool';
-        }
-      }
-    }
-
-    function applyStyle(ctx, forStroke) {
-      ctx.globalAlpha  = getOpacity();
-      ctx.strokeStyle  = getStrokeColor();
-      ctx.fillStyle    = getFillColor();
-      ctx.lineWidth    = getStrokeWidth();
-      ctx.lineCap      = 'round';
-      ctx.lineJoin     = 'round';
-    }
-
-    /* ── Position helper ───────────────────────────────────── */
-    function getPos(e) {
-      var rect = previewCanvas.getBoundingClientRect();
-      var scaleX = CANVAS_W / rect.width;
-      var scaleY = CANVAS_H / rect.height;
-      return {
-        x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top)  * scaleY
-      };
-    }
-
-    function getTouchPos(e) {
-      return getPos(e.touches[0]);
-    }
-
-    /* ── Draw helpers ──────────────────────────────────────── */
-    function drawShapePreview(x1, y1, x2, y2) {
-      previewCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-      applyStyle(previewCtx);
-      var w = x2 - x1, h = y2 - y1;
-      previewCtx.beginPath();
-
-      if (currentTool === 'line') {
-        previewCtx.moveTo(x1, y1);
-        previewCtx.lineTo(x2, y2);
-        previewCtx.stroke();
-
-      } else if (currentTool === 'rect') {
-        previewCtx.rect(x1, y1, w, h);
-        if (getFillEnabled()) previewCtx.fill();
-        previewCtx.stroke();
-
-      } else if (currentTool === 'ellipse') {
-        previewCtx.ellipse(x1 + w/2, y1 + h/2, Math.abs(w/2), Math.abs(h/2), 0, 0, Math.PI*2);
-        if (getFillEnabled()) previewCtx.fill();
-        previewCtx.stroke();
-
-      } else if (currentTool === 'triangle') {
-        previewCtx.moveTo(x1 + w/2, y1);
-        previewCtx.lineTo(x2, y2);
-        previewCtx.lineTo(x1, y2);
-        previewCtx.closePath();
-        if (getFillEnabled()) previewCtx.fill();
-        previewCtx.stroke();
-
-      } else if (currentTool === 'star') {
-        drawStar(previewCtx, x1 + w/2, y1 + h/2, 5, Math.max(Math.abs(w), Math.abs(h))/2, Math.max(Math.abs(w), Math.abs(h))/4);
-        if (getFillEnabled()) previewCtx.fill();
-        previewCtx.stroke();
-      }
-    }
-
-    function commitShape(x1, y1, x2, y2) {
-      var ctx = getCtx();
-      if (!ctx) return;
-      saveSnapshot();
-      applyStyle(ctx);
-      var w = x2 - x1, h = y2 - y1;
-      ctx.beginPath();
-
-      if (currentTool === 'line') {
-        ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-      } else if (currentTool === 'rect') {
-        ctx.rect(x1, y1, w, h);
-        if (getFillEnabled()) ctx.fill();
-        ctx.stroke();
-      } else if (currentTool === 'ellipse') {
-        ctx.ellipse(x1 + w/2, y1 + h/2, Math.abs(w/2), Math.abs(h/2), 0, 0, Math.PI*2);
-        if (getFillEnabled()) ctx.fill();
-        ctx.stroke();
-      } else if (currentTool === 'triangle') {
-        ctx.moveTo(x1 + w/2, y1);
-        ctx.lineTo(x2, y2);
-        ctx.lineTo(x1, y2);
-        ctx.closePath();
-        if (getFillEnabled()) ctx.fill();
-        ctx.stroke();
-      } else if (currentTool === 'star') {
-        drawStar(ctx, x1 + w/2, y1 + h/2, 5, Math.max(Math.abs(w), Math.abs(h))/2, Math.max(Math.abs(w), Math.abs(h))/4);
-        if (getFillEnabled()) ctx.fill();
-        ctx.stroke();
-      }
-      previewCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-      renderAll();
-    }
-
-    function drawStar(ctx, cx, cy, points, outerR, innerR) {
-      var step = Math.PI / points;
-      ctx.beginPath();
-      for (var i = 0; i < points * 2; i++) {
-        var r = i % 2 === 0 ? outerR : innerR;
-        var angle = i * step - Math.PI / 2;
-        if (i === 0) ctx.moveTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
-        else         ctx.lineTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
-      }
-      ctx.closePath();
-    }
-
-    /* ── Warp Circle ───────────────────────────────────────── */
-    function placeWarpCircle(cx, cy) {
-      var numPts = 8;
-      var radius = 120;
-      wc.points = [];
-      for (var i = 0; i < numPts; i++) {
-        var angle = (i / numPts) * Math.PI * 2 - Math.PI / 2;
-        wc.points.push({ x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) });
-      }
-      wc.placed = true;
-      wc.draggingIdx = -1;
-      $('draw-status').textContent = 'Warp Circle · Drag points to sculpt · Scroll to resize · Enter to commit';
-      drawWarpPreview();
-    }
-
-    function scaleWarpCircle(delta) {
-      if (!wc.placed || wc.points.length === 0) return;
-      // find centroid
-      var cx = 0, cy = 0;
-      wc.points.forEach(function(p) { cx += p.x; cy += p.y; });
-      cx /= wc.points.length; cy /= wc.points.length;
-      // scale each point outward from centroid
-      wc.points = wc.points.map(function(p) {
-        var dx = p.x - cx, dy = p.y - cy;
-        var len = Math.sqrt(dx*dx + dy*dy) || 1;
-        var newLen = Math.max(10, len + delta);
-        return { x: cx + dx/len*newLen, y: cy + dy/len*newLen };
-      });
-      drawWarpPreview();
-    }
-
-    function addWarpPoint() {
-      if (!wc.placed || wc.points.length >= 32) return;
-      // Insert a new point between every adjacent pair (just between 0 and 1 for simplicity, or split the longest edge)
-      var best = 0, bestDist = 0;
-      for (var i = 0; i < wc.points.length; i++) {
-        var a = wc.points[i], b = wc.points[(i+1) % wc.points.length];
-        var d = Math.hypot(b.x-a.x, b.y-a.y);
-        if (d > bestDist) { bestDist = d; best = i; }
-      }
-      var a = wc.points[best], b = wc.points[(best+1) % wc.points.length];
-      wc.points.splice(best+1, 0, { x: (a.x+b.x)/2, y: (a.y+b.y)/2 });
-      drawWarpPreview();
-      showToast('Point added');
-    }
-
-    function removeWarpPoint() {
-      if (!wc.placed || wc.points.length <= 3) { showToast('Need at least 3 points'); return; }
-      wc.points.pop();
-      drawWarpPreview();
-      showToast('Point removed');
-    }
-
-    function getWarpHitIdx(pos) {
-      for (var i = 0; i < wc.points.length; i++) {
-        var p = wc.points[i];
-        if (Math.hypot(pos.x - p.x, pos.y - p.y) < wc.HIT_RADIUS) return i;
-      }
-      return -1;
-    }
-
-    function drawWarpPreview() {
-      previewCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-      if (!wc.placed || wc.points.length < 2) return;
-
-      applyStyle(previewCtx);
-
-      // Draw smooth closed curve
-      previewCtx.beginPath();
-      drawCatmullRomPath(previewCtx, wc.points, true);
-      if (getFillEnabled()) previewCtx.fill();
-      previewCtx.stroke();
-
-      // Draw control point handles
-      wc.points.forEach(function(p, i) {
-        // Line from centroid hint
-        previewCtx.beginPath();
-        previewCtx.arc(p.x, p.y, 7, 0, Math.PI * 2);
-        previewCtx.fillStyle = i === wc.draggingIdx ? '#ff6b6b' : '#f5c518';
-        previewCtx.globalAlpha = 1;
-        previewCtx.fill();
-        previewCtx.strokeStyle = '#fff';
-        previewCtx.lineWidth = 1.5;
-        previewCtx.stroke();
-      });
-    }
-
-    // Catmull-Rom spline through points (closed if close=true)
-    function drawCatmullRomPath(ctx, pts, close) {
-      var n = pts.length;
-      if (n < 2) return;
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (var i = 0; i < n; i++) {
-        var p0 = pts[(i - 1 + n) % n];
-        var p1 = pts[i];
-        var p2 = pts[(i + 1) % n];
-        var p3 = pts[(i + 2) % n];
-        var cp1x = p1.x + (p2.x - p0.x) / 6;
-        var cp1y = p1.y + (p2.y - p0.y) / 6;
-        var cp2x = p2.x - (p3.x - p1.x) / 6;
-        var cp2y = p2.y - (p3.y - p1.y) / 6;
-        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
-      }
-      if (close) ctx.closePath();
-    }
-
-    // Build SVG path data string from warp circle points
-    function buildWarpSVGPath(pts) {
-      var n = pts.length;
-      if (n < 2) return '';
-      var d = 'M ' + pts[0].x.toFixed(2) + ' ' + pts[0].y.toFixed(2) + ' ';
-      for (var i = 0; i < n; i++) {
-        var p0 = pts[(i - 1 + n) % n];
-        var p1 = pts[i];
-        var p2 = pts[(i + 1) % n];
-        var p3 = pts[(i + 2) % n];
-        var cp1x = (p1.x + (p2.x - p0.x) / 6).toFixed(2);
-        var cp1y = (p1.y + (p2.y - p0.y) / 6).toFixed(2);
-        var cp2x = (p2.x - (p3.x - p1.x) / 6).toFixed(2);
-        var cp2y = (p2.y - (p3.y - p1.y) / 6).toFixed(2);
-        d += 'C ' + cp1x + ' ' + cp1y + ' ' + cp2x + ' ' + cp2y + ' ' + p2.x.toFixed(2) + ' ' + p2.y.toFixed(2) + ' ';
-      }
-      d += 'Z';
-      return d;
-    }
-
-    function commitWarpCircle() {
-      if (!wc.placed || wc.points.length < 2) return;
-      var ctx = getCtx();
-      if (!ctx) return;
-      saveSnapshot();
-      applyStyle(ctx);
-      ctx.beginPath();
-      drawCatmullRomPath(ctx, wc.points, true);
-      if (getFillEnabled()) ctx.fill();
-      ctx.stroke();
-      previewCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-      renderAll();
-      wc.placed = false;
-      wc.points = [];
-      $('draw-status').textContent = 'Warp Circle · Click canvas to place another';
-      showToast('Shape committed to layer ✓');
-    }
-
-    function cancelWarpCircle() {
-      wc.placed = false;
-      wc.points = [];
-      wc.draggingIdx = -1;
-      previewCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-    }
-
-    function exportWarpSVG() {
-      if (!wc.placed || wc.points.length < 2) {
-        showToast('Place and shape a warp circle first!');
-        return;
-      }
-      var pathD = buildWarpSVGPath(wc.points);
-      var stroke = getStrokeColor();
-      var fill   = getFillEnabled() ? getFillColor() : 'none';
-      var sw     = getStrokeWidth();
-      var opacity = getOpacity();
-
-      var svg = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        '<svg xmlns="http://www.w3.org/2000/svg" width="' + CANVAS_W + '" height="' + CANVAS_H + '" viewBox="0 0 ' + CANVAS_W + ' ' + CANVAS_H + '">',
-        '  <path d="' + pathD + '"',
-        '    fill="' + fill + '"',
-        '    stroke="' + stroke + '"',
-        '    stroke-width="' + sw + '"',
-        '    opacity="' + opacity + '"',
-        '  />',
-        '</svg>'
-      ].join('\n');
-
-      var blob = new Blob([svg], { type: 'image/svg+xml' });
-      var url  = URL.createObjectURL(blob);
-      var a    = document.createElement('a');
-      a.href     = url;
-      a.download = 'warp-shape.svg';
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('SVG exported! Import into Canva via Uploads ✓');
-    }
-
-    /* ── Text tool ─────────────────────────────────────────── */
-    function placeTextInput(x, y) {
-      if (textInputActive) return;
-      textInputActive = true;
-
-      var inp = document.createElement('input');
-      inp.type = 'text';
-      inp.placeholder = 'Type here…';
-      inp.style.cssText = [
-        'position:absolute',
-        'left:' + (x / CANVAS_W * previewCanvas.getBoundingClientRect().width + previewCanvas.getBoundingClientRect().left - wrap.getBoundingClientRect().left - wrap.scrollLeft) + 'px',
-        'top:'  + (y / CANVAS_H * previewCanvas.getBoundingClientRect().height + previewCanvas.getBoundingClientRect().top - wrap.getBoundingClientRect().top - wrap.scrollTop) + 'px',
-        'min-width:120px',
-        'background:rgba(0,0,0,0.5)',
-        'color:' + getStrokeColor(),
-        'border:1px dashed ' + getStrokeColor(),
-        'border-radius:4px',
-        'padding:4px 8px',
-        'font-size:' + (getStrokeWidth() * 4 + 10) + 'px',
-        'font-family:Fredoka,sans-serif',
-        'outline:none',
-        'z-index:50'
-      ].join(';');
-
-      wrap.style.position = 'relative';
-      wrap.appendChild(inp);
-      inp.focus();
-
-      function commit() {
-        var text = inp.value.trim();
-        if (text) {
-          var ctx = getCtx();
-          if (ctx) {
-            saveSnapshot();
-            ctx.globalAlpha = getOpacity();
-            ctx.fillStyle = getStrokeColor();
-            ctx.font = (getStrokeWidth() * 4 + 10) + 'px Fredoka, sans-serif';
-            ctx.fillText(text, x, y);
-            renderAll();
-          }
-        }
-        wrap.removeChild(inp);
-        textInputActive = false;
-      }
-
-      inp.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') commit();
-        if (e.key === 'Escape') { wrap.removeChild(inp); textInputActive = false; }
-      });
-      inp.addEventListener('blur', commit);
-    }
-
-    /* ── Clear ─────────────────────────────────────────────── */
-    function clearActiveLayer() {
-      var layer = getActiveLayer();
-      if (!layer) return;
-      saveSnapshot();
-      layer.ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-      renderAll();
-      showToast('Layer cleared');
-    }
-
-    /* ── Export ────────────────────────────────────────────── */
-    function exportPng() {
-      var exp = document.createElement('canvas');
-      exp.width  = CANVAS_W;
-      exp.height = CANVAS_H;
-      var ectx = exp.getContext('2d');
-      // White background
-      ectx.fillStyle = '#ffffff';
-      ectx.fillRect(0, 0, CANVAS_W, CANVAS_H);
-      for (var i = layers.length - 1; i >= 0; i--) {
-        if (layers[i].visible) ectx.drawImage(layers[i].canvas, 0, 0);
-      }
-      var link = document.createElement('a');
-      link.download = 'drawing.png';
-      link.href = exp.toDataURL('image/png');
-      link.click();
-      showToast('Exported as drawing.png');
-    }
-
-    /* ── Mouse events ──────────────────────────────────────── */
-    function onMouseDown(e) {
-      if (e.button !== 0) return;
-      var pos = getPos(e);
-
-      if (currentTool === 'text') {
-        placeTextInput(pos.x, pos.y);
-        return;
-      }
-
-      if (currentTool === 'warpcirc') {
-        if (!wc.placed) {
-          // First click: place circle at click position
-          placeWarpCircle(pos.x, pos.y);
-        } else {
-          // Check if clicking a control point
-          var idx = getWarpHitIdx(pos);
-          if (idx >= 0) {
-            wc.draggingIdx = idx;
-            $('draw-canvas-wrap').style.cursor = 'grabbing';
-          }
-        }
-        return;
-      }
-
-      if (currentTool === 'select') {
-        selectStart = pos;
-        return;
-      }
-
-      drawing = true;
-      startX = pos.x; startY = pos.y;
-      lastX  = pos.x; lastY  = pos.y;
-
-      if (currentTool === 'pen' || currentTool === 'eraser') {
-        saveSnapshot();
-        var ctx = getCtx();
-        if (!ctx) return;
-        applyStyle(ctx);
-        if (currentTool === 'eraser') {
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.globalAlpha = 1;
-        } else {
-          ctx.globalCompositeOperation = 'source-over';
-        }
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
-      }
-    }
-
-    function onMouseMove(e) {
-      var pos = getPos(e);
-
-      if (currentTool === 'warpcirc') {
-        if (wc.draggingIdx >= 0) {
-          wc.points[wc.draggingIdx] = { x: pos.x, y: pos.y };
-          drawWarpPreview();
-        } else if (wc.placed) {
-          // Highlight hovered point
-          var idx = getWarpHitIdx(pos);
-          $('draw-canvas-wrap').style.cursor = idx >= 0 ? 'grab' : 'crosshair';
-        }
-        return;
-      }
-
-      if (!drawing) return;
-
-      if (currentTool === 'pen' || currentTool === 'eraser') {
-        var ctx = getCtx();
-        if (!ctx) return;
-        ctx.lineTo(pos.x, pos.y);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(pos.x, pos.y);
-        lastX = pos.x; lastY = pos.y;
-        scheduleRender();
-      } else {
-        // Shape preview
-        drawShapePreview(startX, startY, pos.x, pos.y);
-      }
-    }
-
-    function onMouseUp(e) {
-      var pos = getPos(e);
-
-      if (currentTool === 'warpcirc') {
-        if (wc.draggingIdx >= 0) {
-          wc.draggingIdx = -1;
-          $('draw-canvas-wrap').style.cursor = 'crosshair';
-          drawWarpPreview();
-        }
-        return;
-      }
-
-      if (currentTool === 'select' && selectStart) {
-        selectRect = {
-          x: Math.min(selectStart.x, pos.x),
-          y: Math.min(selectStart.y, pos.y),
-          w: Math.abs(pos.x - selectStart.x),
-          h: Math.abs(pos.y - selectStart.y)
-        };
-        selectStart = null;
-        previewCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
-        previewCtx.strokeStyle = '#7eb8f7';
-        previewCtx.lineWidth = 1;
-        previewCtx.setLineDash([6, 3]);
-        previewCtx.strokeRect(selectRect.x, selectRect.y, selectRect.w, selectRect.h);
-        previewCtx.setLineDash([]);
-        return;
-      }
-
-      if (!drawing) return;
-      drawing = false;
-
-      if (currentTool !== 'pen' && currentTool !== 'eraser') {
-        commitShape(startX, startY, pos.x, pos.y);
-      } else {
-        var ctx = getCtx();
-        if (ctx) ctx.globalCompositeOperation = 'source-over';
-      }
-    }
-
-    function onMouseLeave() {
-      if (wc.draggingIdx >= 0) {
-        wc.draggingIdx = -1;
-      }
-      if (drawing && (currentTool === 'pen' || currentTool === 'eraser')) {
-        var ctx = getCtx();
-        if (ctx) ctx.globalCompositeOperation = 'source-over';
-        drawing = false;
-        renderAll();
-      }
-    }
-
-    function onDblClick(e) {
-      // double-click on warp circle commits it
-      if (currentTool === 'warpcirc' && wc.placed) {
-        commitWarpCircle();
-      }
-    }
-
-    /* ── Touch events ──────────────────────────────────────── */
-    function onTouchStart(e) {
-      e.preventDefault();
-      onMouseDown({ button: 0, clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
-    }
-    function onTouchMove(e) {
-      e.preventDefault();
-      onMouseMove({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
-    }
-    function onTouchEnd(e) {
-      e.preventDefault();
-      var last = e.changedTouches[0];
-      onMouseUp({ clientX: last.clientX, clientY: last.clientY });
-    }
-
-    /* ── Wait for draw page to be ready ───────────────────── */
-    // Init when user first visits the draw page (lazy)
-    var drawInited = false;
-    var origSwitchPage = window.switchPage;
-
-    // Monkey-patch switchPage to init draw on first visit
-    $('tab-draw').addEventListener('click', function() {
-      if (!drawInited) { drawInited = true; initDraw(); }
-    });
-
-  })();
   </script>
 
   <!-- =============================================
@@ -4066,7 +2605,7 @@
       align-items: center;
       gap: 0.6rem;
       padding: 0.5rem 1rem 0.5rem 0.6rem;
-    
+      font-family: 'Fredoka', sans-serif;
       transition: background 0.3s;
       user-select: none;
     }
@@ -4190,9 +2729,9 @@
       });
     };
 
-    $('music-toggle-btn').addEventListener('click', function() {
+    document.getElementById('music-toggle-btn').addEventListener('click', function() {
       if (!ytPlayer) return;
-      var player = $('music-player');
+      var player = document.getElementById('music-player');
       if (musicPlaying) {
         ytPlayer.pauseVideo();
         this.textContent = '▶';
@@ -4206,14 +2745,14 @@
       }
     });
 
-    $('music-volume').addEventListener('input', function() {
+    document.getElementById('music-volume').addEventListener('input', function() {
       if (ytPlayer) ytPlayer.setVolume(parseInt(this.value));
     });
 
     // Hide / show music player
     var musicHidden = false;
-    $('music-hide-btn').addEventListener('click', function() {
-      var player = $('music-player');
+    document.getElementById('music-hide-btn').addEventListener('click', function() {
+      var player = document.getElementById('music-player');
       musicHidden = !musicHidden;
       if (musicHidden) {
         player.classList.add('hidden-player');
