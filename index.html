@@ -1219,8 +1219,8 @@
       transform: translate(-50%,-50%);
       border-radius: 4px; box-shadow: 0 4px 24px rgba(0,0,0,0.5);
     }
-    #draw-canvas { background: #ffffff; }
-    #draw-preview-canvas { pointer-events: none; }
+    #draw-canvas { background: #ffffff; z-index: 1; }
+    #draw-preview-canvas { z-index: 2; background: transparent; }
 
     .draw-layers-panel {
       width: 200px; flex-shrink: 0;
@@ -2837,6 +2837,7 @@
 
     var previewCanvas, previewCtx, wrap;
     var _rafPending = false;
+    var _$ = function(id) { return document.getElementById(id); };
 
     function scheduleRender() {
       if (!_rafPending) { _rafPending = true; requestAnimationFrame(function() { _rafPending = false; renderAll(); }); }
@@ -2844,58 +2845,59 @@
 
     function getActiveLayer() { return layers.find(function(l) { return l.id === activeLayerId; }); }
     function getCtx() { var l = getActiveLayer(); return l ? l.ctx : null; }
-    function $ (id) { return document.getElementById(id); }
-    function getStrokeColor() { return $('draw-stroke-color').value; }
-    function getFillColor()   { return $('draw-fill-color').value; }
-    function getStrokeWidth() { return parseInt($('draw-stroke-width').value) || 4; }
-    function getFillEnabled() { return $('draw-fill-enable').checked; }
-    function getOpacity()     { return parseInt($('draw-opacity').value) / 100; }
+    function getStrokeColor() { return _$('draw-stroke-color').value; }
+    function getFillColor()   { return _$('draw-fill-color').value; }
+    function getStrokeWidth() { return parseInt(_$('draw-stroke-width').value) || 4; }
+    function getFillEnabled() { return _$('draw-fill-enable').checked; }
+    function getOpacity()     { return parseInt(_$('draw-opacity').value) / 100; }
+    function toast(msg)       { if (typeof showToast === 'function') showToast(msg); }
 
     function initDraw() {
-      wrap = $('draw-canvas-wrap');
-      previewCanvas = $('draw-preview-canvas');
+      wrap = _$('draw-canvas-wrap');
+      previewCanvas = _$('draw-preview-canvas');
       previewCtx = previewCanvas.getContext('2d');
       previewCanvas.width = CANVAS_W; previewCanvas.height = CANVAS_H;
-      var mc = $('draw-canvas');
+      var mc = _$('draw-canvas');
       mc.width = CANVAS_W; mc.height = CANVAS_H;
 
       addLayer('Layer 1');
 
-      previewCanvas.addEventListener('mousedown', onMouseDown);
-      previewCanvas.addEventListener('mousemove', onMouseMove);
-      previewCanvas.addEventListener('mouseup',   onMouseUp);
-      previewCanvas.addEventListener('mouseleave', onMouseLeave);
-      previewCanvas.addEventListener('dblclick',  onDblClick);
-      previewCanvas.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-      previewCanvas.addEventListener('touchstart', onTouchStart, { passive:false });
-      previewCanvas.addEventListener('touchmove',  onTouchMove,  { passive:false });
-      previewCanvas.addEventListener('touchend',   onTouchEnd,   { passive:false });
-      previewCanvas.addEventListener('mousemove', function(e) {
+      // Attach all pointer events to the wrap so pointer-events:none on previewCanvas doesn't block them
+      wrap.addEventListener('mousedown', onMouseDown);
+      wrap.addEventListener('mousemove', onMouseMove);
+      wrap.addEventListener('mouseup',   onMouseUp);
+      wrap.addEventListener('mouseleave', onMouseLeave);
+      wrap.addEventListener('dblclick',  onDblClick);
+      wrap.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      wrap.addEventListener('touchstart', onTouchStart, { passive:false });
+      wrap.addEventListener('touchmove',  onTouchMove,  { passive:false });
+      wrap.addEventListener('touchend',   onTouchEnd,   { passive:false });
+      wrap.addEventListener('mousemove', function(e) {
         var p = getPos(e);
-        $('draw-coords').textContent = 'x:' + Math.round(p.x) + '  y:' + Math.round(p.y);
+        _$('draw-coords').textContent = 'x:' + Math.round(p.x) + '  y:' + Math.round(p.y);
       });
-      previewCanvas.addEventListener('wheel', function(e) {
+      wrap.addEventListener('wheel', function(e) {
         if (currentTool === 'warpcirc' && wc.placed) { e.preventDefault(); scaleWarpCircle(e.deltaY > 0 ? -10 : 10); }
       }, { passive:false });
 
       document.querySelectorAll('.draw-tool-btn').forEach(function(btn) {
         btn.addEventListener('click', function() { selectTool(this.dataset.tool); });
       });
-      $('draw-stroke-width').addEventListener('input', function() { $('draw-stroke-val').textContent = this.value + 'px'; });
-      $('draw-opacity').addEventListener('input', function() { $('draw-opacity-val').textContent = this.value + '%'; });
-      $('draw-undo-btn').addEventListener('click', undo);
-      $('draw-redo-btn').addEventListener('click', redo);
-      $('draw-clear-btn').addEventListener('click', clearActiveLayer);
-      $('draw-export-btn').addEventListener('click', exportPng);
-      $('draw-add-layer-btn').addEventListener('click', function() { addLayer('Layer ' + (layers.length + 1)); });
-      $('warp-add-pt').addEventListener('click', addWarpPoint);
-      $('warp-remove-pt').addEventListener('click', removeWarpPoint);
-      $('warp-commit').addEventListener('click', commitWarpCircle);
-      $('warp-cancel').addEventListener('click', cancelWarpCircle);
-      $('warp-export-svg').addEventListener('click', exportWarpSVG);
+      _$('draw-stroke-width').addEventListener('input', function() { _$('draw-stroke-val').textContent = this.value + 'px'; });
+      _$('draw-opacity').addEventListener('input', function() { _$('draw-opacity-val').textContent = this.value + '%'; });
+      _$('draw-undo-btn').addEventListener('click', undo);
+      _$('draw-redo-btn').addEventListener('click', redo);
+      _$('draw-clear-btn').addEventListener('click', clearActiveLayer);
+      _$('draw-export-btn').addEventListener('click', exportPng);
+      _$('draw-add-layer-btn').addEventListener('click', function() { addLayer('Layer ' + (layers.length + 1)); });
+      _$('warp-add-pt').addEventListener('click', addWarpPoint);
+      _$('warp-remove-pt').addEventListener('click', removeWarpPoint);
+      _$('warp-commit').addEventListener('click', commitWarpCircle);
+      _$('warp-cancel').addEventListener('click', cancelWarpCircle);
+      _$('warp-export-svg').addEventListener('click', exportWarpSVG);
 
       document.addEventListener('keydown', function(e) {
-        if (!$('page-draw').classList.contains('active')) return;
+        if (!_$('page-draw').classList.contains('active')) return;
         if (e.ctrlKey && e.key === 'z') { e.preventDefault(); undo(); }
         if (e.ctrlKey && (e.key === 'y' || (e.shiftKey && e.key === 'z'))) { e.preventDefault(); redo(); }
         if (e.key === 'Escape') cancelWarpCircle();
@@ -2915,7 +2917,7 @@
     }
     function setActiveLayer(id) { activeLayerId = id; updateLayersUI(); }
     function deleteLayer(id) {
-      if (layers.length <= 1) { showToast('Need at least one layer'); return; }
+      if (layers.length <= 1) { toast('Need at least one layer'); return; }
       layers = layers.filter(function(l) { return l.id !== id; });
       delete undoStacks[id]; delete redoStacks[id];
       if (activeLayerId === id) activeLayerId = layers[0].id;
@@ -2933,7 +2935,7 @@
       if (l) l.visible = !l.visible; renderAll(); updateLayersUI();
     }
     function updateLayersUI() {
-      var list = $('draw-layers-list'); list.innerHTML = '';
+      var list = _$('draw-layers-list'); list.innerHTML = '';
       layers.forEach(function(layer) {
         var item = document.createElement('div');
         item.className = 'draw-layer-item' + (layer.id === activeLayerId ? ' active' : '');
@@ -2971,7 +2973,7 @@
     }
 
     function renderAll() {
-      var mc = $('draw-canvas'), ctx = mc.getContext('2d');
+      var mc = _$('draw-canvas'), ctx = mc.getContext('2d');
       ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
       for (var i = layers.length - 1; i >= 0; i--) {
         if (layers[i].visible) ctx.drawImage(layers[i].canvas, 0, 0);
@@ -2986,12 +2988,12 @@
       redoStacks[l.id] = [];
     }
     function undo() {
-      var l = getActiveLayer(); if (!l || !undoStacks[l.id].length) { showToast('Nothing to undo'); return; }
+      var l = getActiveLayer(); if (!l || !undoStacks[l.id].length) { toast('Nothing to undo'); return; }
       redoStacks[l.id].push(l.ctx.getImageData(0,0,CANVAS_W,CANVAS_H));
       l.ctx.putImageData(undoStacks[l.id].pop(), 0, 0); renderAll();
     }
     function redo() {
-      var l = getActiveLayer(); if (!l || !redoStacks[l.id].length) { showToast('Nothing to redo'); return; }
+      var l = getActiveLayer(); if (!l || !redoStacks[l.id].length) { toast('Nothing to redo'); return; }
       undoStacks[l.id].push(l.ctx.getImageData(0,0,CANVAS_W,CANVAS_H));
       l.ctx.putImageData(redoStacks[l.id].pop(), 0, 0); renderAll();
     }
@@ -3001,15 +3003,15 @@
       if (currentTool === 'warpcirc') cancelWarpCircle();
       currentTool = tool;
       document.querySelectorAll('.draw-tool-btn').forEach(function(b) { b.classList.remove('active'); });
-      var btn = $('dtool-' + tool); if (btn) btn.classList.add('active');
-      var wb = $('warp-bar');
+      var btn = _$('dtool-' + tool); if (btn) btn.classList.add('active');
+      var wb = _$('warp-bar');
       if (tool === 'warpcirc') {
         wb.style.display = 'flex'; wc.active = true; wrap.style.cursor = 'crosshair';
-        $('draw-status').textContent = 'Warp Circle · Click to place';
+        _$('draw-status').textContent = 'Warp Circle · Click to place';
       } else {
         wb.style.display = 'none'; wc.active = false; wc.placed = false;
         wrap.style.cursor = tool === 'eraser' ? 'cell' : tool === 'text' ? 'text' : tool === 'select' ? 'default' : 'crosshair';
-        $('draw-status').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' tool';
+        _$('draw-status').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' tool';
       }
     }
 
@@ -3020,8 +3022,12 @@
     }
 
     function getPos(e) {
-      var r = previewCanvas.getBoundingClientRect();
-      return { x: (e.clientX - r.left) * CANVAS_W / r.width, y: (e.clientY - r.top) * CANVAS_H / r.height };
+      var mc = _$('draw-canvas');
+      var r  = mc.getBoundingClientRect();
+      return {
+        x: Math.max(0, Math.min(CANVAS_W, (e.clientX - r.left) * CANVAS_W / r.width)),
+        y: Math.max(0, Math.min(CANVAS_H, (e.clientY - r.top)  * CANVAS_H / r.height))
+      };
     }
     function onTouchStart(e) { e.preventDefault(); onMouseDown({ button:0, clientX:e.touches[0].clientX, clientY:e.touches[0].clientY }); }
     function onTouchMove(e)  { e.preventDefault(); onMouseMove({ clientX:e.touches[0].clientX, clientY:e.touches[0].clientY }); }
@@ -3050,7 +3056,7 @@
       var n=8, r=120; wc.points=[];
       for(var i=0;i<n;i++){var a=(i/n)*Math.PI*2-Math.PI/2; wc.points.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});}
       wc.placed=true; wc.draggingIdx=-1;
-      $('draw-status').textContent='Warp Circle · Drag handles · Scroll to resize · Enter to commit';
+      _$('draw-status').textContent='Warp Circle · Drag handles · Scroll to resize · Enter to commit';
       drawWarpPreview();
     }
     function scaleWarpCircle(delta) {
@@ -3064,11 +3070,11 @@
       var best=0,bd=0;
       for(var i=0;i<wc.points.length;i++){var a=wc.points[i],b=wc.points[(i+1)%wc.points.length],d=Math.hypot(b.x-a.x,b.y-a.y);if(d>bd){bd=d;best=i;}}
       var a=wc.points[best],b=wc.points[(best+1)%wc.points.length];
-      wc.points.splice(best+1,0,{x:(a.x+b.x)/2,y:(a.y+b.y)/2}); drawWarpPreview(); showToast('Point added');
+      wc.points.splice(best+1,0,{x:(a.x+b.x)/2,y:(a.y+b.y)/2}); drawWarpPreview(); toast('Point added');
     }
     function removeWarpPoint() {
-      if (!wc.placed||wc.points.length<=3){showToast('Need at least 3 points');return;}
-      wc.points.pop(); drawWarpPreview(); showToast('Point removed');
+      if (!wc.placed||wc.points.length<=3){toast('Need at least 3 points');return;}
+      wc.points.pop(); drawWarpPreview(); toast('Point removed');
     }
     function getWarpHit(pos) {
       for(var i=0;i<wc.points.length;i++) if(Math.hypot(pos.x-wc.points[i].x,pos.y-wc.points[i].y)<wc.HIT_RADIUS) return i; return -1;
@@ -3091,16 +3097,16 @@
       if(getFillEnabled())ctx.fill(); ctx.stroke();
       previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); renderAll();
       wc.placed=false; wc.points=[];
-      $('draw-status').textContent='Warp Circle · Click to place another'; showToast('Shape committed ✓');
+      _$('draw-status').textContent='Warp Circle · Click to place another'; toast('Shape committed ✓');
     }
     function cancelWarpCircle() { wc.placed=false; wc.points=[]; wc.draggingIdx=-1; previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); }
     function exportWarpSVG() {
-      if (!wc.placed||wc.points.length<2){showToast('Place a warp circle first!');return;}
+      if (!wc.placed||wc.points.length<2){toast('Place a warp circle first!');return;}
       var pts=wc.points,n=pts.length,d='M '+pts[0].x.toFixed(2)+' '+pts[0].y.toFixed(2)+' ';
       for(var i=0;i<n;i++){var p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];d+='C '+(p1.x+(p2.x-p0.x)/6).toFixed(2)+' '+(p1.y+(p2.y-p0.y)/6).toFixed(2)+' '+(p2.x-(p3.x-p1.x)/6).toFixed(2)+' '+(p2.y-(p3.y-p1.y)/6).toFixed(2)+' '+p2.x.toFixed(2)+' '+p2.y.toFixed(2)+' ';} d+='Z';
       var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+CANVAS_W+'" height="'+CANVAS_H+'" viewBox="0 0 '+CANVAS_W+' '+CANVAS_H+'"><path d="'+d+'" fill="'+(getFillEnabled()?getFillColor():'none')+'" stroke="'+getStrokeColor()+'" stroke-width="'+getStrokeWidth()+'" opacity="'+getOpacity()+'"/></svg>';
       var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'})); a.download='warp-shape.svg'; a.click();
-      showToast('SVG exported! Import into Canva via Uploads ✓');
+      toast('SVG exported! Import into Canva via Uploads ✓');
     }
 
     // ── Text tool ──
@@ -3115,14 +3121,14 @@
       inp.addEventListener('blur',commit);
     }
 
-    function clearActiveLayer() { var l=getActiveLayer(); if(!l)return; saveSnapshot(); l.ctx.clearRect(0,0,CANVAS_W,CANVAS_H); renderAll(); showToast('Layer cleared'); }
+    function clearActiveLayer() { var l=getActiveLayer(); if(!l)return; saveSnapshot(); l.ctx.clearRect(0,0,CANVAS_W,CANVAS_H); renderAll(); toast('Layer cleared'); }
 
     function exportPng() {
       var exp=document.createElement('canvas'); exp.width=CANVAS_W; exp.height=CANVAS_H;
       var ctx=exp.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,CANVAS_W,CANVAS_H);
       for(var i=layers.length-1;i>=0;i--) if(layers[i].visible) ctx.drawImage(layers[i].canvas,0,0);
       var a=document.createElement('a'); a.download='drawing.png'; a.href=exp.toDataURL(); a.click();
-      showToast('Exported as drawing.png');
+      toast('Exported as drawing.png');
     }
 
     // ── Mouse events ──
