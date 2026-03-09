@@ -1122,6 +1122,160 @@
       .clock-display { font-size: 4rem; }
       .progress-ring-wrap { width: 220px; height: 220px; }
     }
+
+    /* =============================================
+       DRAW PAGE
+    ============================================= */
+    .draw-page {
+      flex: 1; display: flex; flex-direction: column;
+      height: calc(100vh - 112px); overflow: hidden; user-select: none;
+    }
+
+    .draw-toolbar {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 0.4rem 1rem; padding: 0.6rem 1rem;
+      background: var(--bg-surface); border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+
+    .draw-tool-group {
+      display: flex; align-items: center; gap: 0.3rem;
+      padding-right: 0.8rem; border-right: 1px solid var(--border);
+    }
+    .draw-tool-group:last-child { border-right: none; }
+
+    .draw-group-label {
+      font-size: 0.72rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; margin-right: 0.2rem;
+    }
+
+    .draw-tool-btn {
+      width: 34px; height: 34px; background: var(--bg-btn);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text-primary); font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+    .draw-tool-btn:hover { background: var(--bg-btn-hover); transform: translateY(-1px); }
+    .draw-tool-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .draw-color-pick {
+      width: 34px; height: 34px; border: 2px solid var(--border);
+      border-radius: 8px; cursor: pointer; background: none; padding: 2px;
+    }
+    .draw-slider { width: 80px; accent-color: var(--accent); cursor: pointer; }
+    .draw-val-label { font-size: 0.78rem; color: var(--text-muted); min-width: 32px; }
+
+    .draw-toggle-label {
+      font-size: 0.85rem; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 0.3rem; cursor: pointer;
+    }
+
+    .draw-action-btn {
+      padding: 0.35rem 0.8rem; font-size: 0.85rem;
+      background: var(--bg-btn); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text-secondary); cursor: pointer;
+      transition: background 0.15s, color 0.15s; white-space: nowrap;
+    }
+    .draw-action-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
+    .draw-action-btn.danger { color: #e74c3c; border-color: rgba(231,76,60,0.3); }
+    .draw-action-btn.danger:hover { background: rgba(231,76,60,0.15); }
+    .draw-action-btn.accent { color: var(--accent); border-color: var(--accent-dim); }
+    .draw-action-btn.accent:hover { background: var(--accent-dim); }
+
+    /* Warp bar */
+    .warp-bar {
+      display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(90deg,rgba(126,184,247,0.08),rgba(167,139,250,0.08));
+      border-bottom: 1px solid var(--accent); flex-shrink: 0;
+    }
+    .warp-bar-hint { font-size: 0.82rem; color: var(--text-muted); flex: 1; }
+    .warp-bar-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .warp-bar-btn {
+      padding: 0.3rem 0.75rem; font-size: 0.85rem;
+      background: var(--bg-btn); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text-secondary); cursor: pointer;
+      transition: background 0.15s, color 0.15s, transform 0.1s; white-space: nowrap;
+    }
+    .warp-bar-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); transform: translateY(-1px); }
+    .warp-bar-btn.accent  { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .warp-bar-btn.accent:hover  { opacity: 0.88; }
+    .warp-bar-btn.canva   { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+    .warp-bar-btn.canva:hover   { background: #6d28d9; }
+    .warp-bar-btn.danger  { color: #e74c3c; border-color: rgba(231,76,60,0.3); }
+    .warp-bar-btn.danger:hover  { background: rgba(231,76,60,0.15); }
+
+    .draw-main { flex: 1; display: flex; overflow: hidden; }
+
+    .draw-canvas-wrap {
+      flex: 1; position: relative; overflow: auto; cursor: crosshair;
+      background: linear-gradient(var(--border) 1px,transparent 1px),
+                  linear-gradient(90deg,var(--border) 1px,transparent 1px);
+      background-size: 24px 24px; background-color: var(--bg-base);
+    }
+
+    #draw-canvas, #draw-preview-canvas {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 4px; box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+    #draw-canvas { background: #ffffff; }
+    #draw-preview-canvas { pointer-events: none; }
+
+    .draw-layers-panel {
+      width: 200px; flex-shrink: 0;
+      background: var(--bg-surface); border-left: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .draw-layers-header {
+      padding: 0.65rem 0.9rem; font-size: 0.9rem; font-weight: 600;
+      color: var(--text-secondary); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .draw-layers-add-btn {
+      background: var(--accent); border: none; border-radius: 6px; color: #fff;
+      font-size: 1.1rem; width: 26px; height: 26px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: opacity 0.2s;
+    }
+    .draw-layers-add-btn:hover { opacity: 0.82; }
+
+    .draw-layers-list {
+      flex: 1; overflow-y: auto; padding: 0.4rem;
+      display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .draw-layer-item {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.45rem 0.65rem; display: flex; align-items: center; gap: 0.5rem;
+      cursor: pointer; transition: border-color 0.15s, background 0.15s; font-size: 0.85rem;
+    }
+    .draw-layer-item:hover { background: var(--bg-input); }
+    .draw-layer-item.active { border-color: var(--accent); background: var(--accent-dim); }
+    .draw-layer-vis { cursor: pointer; font-size: 1rem; flex-shrink: 0; opacity: 0.7; }
+    .draw-layer-vis:hover { opacity: 1; }
+    .draw-layer-name {
+      flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      color: var(--text-secondary);
+    }
+    .draw-layer-item.active .draw-layer-name { color: var(--accent); font-weight: 600; }
+    .draw-layer-name-input {
+      flex: 1; background: var(--bg-input); border: 1px solid var(--accent);
+      border-radius: 4px; color: var(--text-primary); font-size: 0.82rem;
+      padding: 0.1rem 0.4rem; outline: none;
+    }
+    .draw-layer-btns { display: flex; gap: 0.2rem; flex-shrink: 0; }
+    .draw-layer-btn {
+      background: none; border: none; color: var(--text-muted); cursor: pointer;
+      font-size: 0.78rem; padding: 0.1rem 0.25rem; border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .draw-layer-btn:hover { color: var(--text-primary); background: var(--bg-btn); }
+    .draw-layer-btn.danger:hover { color: #e74c3c; }
+
+    .draw-statusbar {
+      display: flex; align-items: center; padding: 0.3rem 1rem;
+      font-size: 0.8rem; color: var(--text-muted);
+      background: var(--bg-surface); border-top: 1px solid var(--border); flex-shrink: 0;
+    }
   </style>
 </head>
 
@@ -1142,6 +1296,7 @@
     <button class="nav-tab"        id="tab-links"  onclick="switchPage('links')">🔗 Links</button>
     <button class="nav-tab"        id="tab-calc"   onclick="switchPage('calc')">🧮 Calculator</button>
     <button class="nav-tab"        id="tab-files"  onclick="switchPage('files')">📂 Files</button>
+    <button class="nav-tab"        id="tab-draw"   onclick="switchPage('draw')">🎨 Draw</button>
     <button class="nav-tab" id="tab-panic" onclick="panicOut()" style="display:none; background:#c0392b; color:#fff;">🚨 Panic</button>
   </nav>
 
@@ -1378,6 +1533,80 @@
     </div>
   </div>
 
+
+  <!-- ══ DRAW PAGE ══ -->
+  <div class="page" id="page-draw">
+    <div class="draw-page">
+      <div class="draw-toolbar">
+        <div class="draw-tool-group">
+          <span class="draw-group-label">Tools</span>
+          <button class="draw-tool-btn active" id="dtool-pen"      data-tool="pen"      title="Pen">✏️</button>
+          <button class="draw-tool-btn"        id="dtool-eraser"   data-tool="eraser"   title="Eraser">🧹</button>
+          <button class="draw-tool-btn"        id="dtool-line"     data-tool="line"     title="Line">╱</button>
+          <button class="draw-tool-btn"        id="dtool-rect"     data-tool="rect"     title="Rectangle">▭</button>
+          <button class="draw-tool-btn"        id="dtool-ellipse"  data-tool="ellipse"  title="Ellipse">◯</button>
+          <button class="draw-tool-btn"        id="dtool-triangle" data-tool="triangle" title="Triangle">△</button>
+          <button class="draw-tool-btn"        id="dtool-star"     data-tool="star"     title="Star">★</button>
+          <button class="draw-tool-btn"        id="dtool-warpcirc" data-tool="warpcirc" title="Warp Circle — click to place, drag handles to sculpt">⊙</button>
+          <button class="draw-tool-btn"        id="dtool-text"     data-tool="text"     title="Text">T</button>
+          <button class="draw-tool-btn"        id="dtool-select"   data-tool="select"   title="Select">↖</button>
+        </div>
+        <div class="draw-tool-group">
+          <span class="draw-group-label">Stroke</span>
+          <input type="color" id="draw-stroke-color" value="#7eb8f7" class="draw-color-pick">
+          <input type="range" id="draw-stroke-width" min="1" max="40" value="4" class="draw-slider">
+          <span id="draw-stroke-val" class="draw-val-label">4px</span>
+        </div>
+        <div class="draw-tool-group">
+          <span class="draw-group-label">Fill</span>
+          <input type="color" id="draw-fill-color" value="#2a2a2a" class="draw-color-pick">
+          <label class="draw-toggle-label"><input type="checkbox" id="draw-fill-enable"> Fill</label>
+        </div>
+        <div class="draw-tool-group">
+          <span class="draw-group-label">Opacity</span>
+          <input type="range" id="draw-opacity" min="5" max="100" value="100" class="draw-slider">
+          <span id="draw-opacity-val" class="draw-val-label">100%</span>
+        </div>
+        <div class="draw-tool-group">
+          <span class="draw-group-label">Actions</span>
+          <button class="draw-action-btn" id="draw-undo-btn">↩ Undo</button>
+          <button class="draw-action-btn" id="draw-redo-btn">↪ Redo</button>
+          <button class="draw-action-btn danger" id="draw-clear-btn">🗑 Clear</button>
+          <button class="draw-action-btn accent" id="draw-export-btn">⬇ Export</button>
+        </div>
+      </div>
+
+      <div class="warp-bar" id="warp-bar" style="display:none">
+        <span class="warp-bar-hint">⊙ Click canvas to place · Drag <span style="color:#f5c518">●</span> handles to warp · Scroll to resize · Enter to commit</span>
+        <div class="warp-bar-btns">
+          <button class="warp-bar-btn" id="warp-add-pt">+ Point</button>
+          <button class="warp-bar-btn" id="warp-remove-pt">− Point</button>
+          <button class="warp-bar-btn accent" id="warp-commit">✔ Commit</button>
+          <button class="warp-bar-btn canva" id="warp-export-svg">📐 Export SVG for Canva</button>
+          <button class="warp-bar-btn danger" id="warp-cancel">✕ Cancel</button>
+        </div>
+      </div>
+
+      <div class="draw-main">
+        <div class="draw-canvas-wrap" id="draw-canvas-wrap">
+          <canvas id="draw-canvas"></canvas>
+          <canvas id="draw-preview-canvas"></canvas>
+        </div>
+        <div class="draw-layers-panel">
+          <div class="draw-layers-header">
+            <span>Layers</span>
+            <button class="draw-layers-add-btn" id="draw-add-layer-btn">＋</button>
+          </div>
+          <div class="draw-layers-list" id="draw-layers-list"></div>
+        </div>
+      </div>
+
+      <div class="draw-statusbar">
+        <span id="draw-status">Ready · Click to draw</span>
+        <span id="draw-coords" style="margin-left:auto;font-size:0.8rem;color:var(--text-muted)"></span>
+      </div>
+    </div>
+  </div>
 
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal">
@@ -2586,6 +2815,370 @@
       showToast('All files cleared');
     });
 
+  </script>
+
+  <!-- =============================================
+       DRAWING
+  ============================================= -->
+  <script>
+  (function() {
+    var CANVAS_W = 1200, CANVAS_H = 750;
+    var currentTool = 'pen';
+    var drawing = false, startX = 0, startY = 0;
+    var textInputActive = false;
+    var selectStart = null;
+
+    // Warp circle state
+    var wc = { active:false, placed:false, points:[], draggingIdx:-1, HIT_RADIUS:14 };
+
+    // Layers
+    var layers = [], activeLayerId = null, layerCounter = 0;
+    var undoStacks = {}, redoStacks = {};
+
+    var previewCanvas, previewCtx, wrap;
+    var _rafPending = false;
+
+    function scheduleRender() {
+      if (!_rafPending) { _rafPending = true; requestAnimationFrame(function() { _rafPending = false; renderAll(); }); }
+    }
+
+    function getActiveLayer() { return layers.find(function(l) { return l.id === activeLayerId; }); }
+    function getCtx() { var l = getActiveLayer(); return l ? l.ctx : null; }
+    function $ (id) { return document.getElementById(id); }
+    function getStrokeColor() { return $('draw-stroke-color').value; }
+    function getFillColor()   { return $('draw-fill-color').value; }
+    function getStrokeWidth() { return parseInt($('draw-stroke-width').value) || 4; }
+    function getFillEnabled() { return $('draw-fill-enable').checked; }
+    function getOpacity()     { return parseInt($('draw-opacity').value) / 100; }
+
+    function initDraw() {
+      wrap = $('draw-canvas-wrap');
+      previewCanvas = $('draw-preview-canvas');
+      previewCtx = previewCanvas.getContext('2d');
+      previewCanvas.width = CANVAS_W; previewCanvas.height = CANVAS_H;
+      var mc = $('draw-canvas');
+      mc.width = CANVAS_W; mc.height = CANVAS_H;
+
+      addLayer('Layer 1');
+
+      previewCanvas.addEventListener('mousedown', onMouseDown);
+      previewCanvas.addEventListener('mousemove', onMouseMove);
+      previewCanvas.addEventListener('mouseup',   onMouseUp);
+      previewCanvas.addEventListener('mouseleave', onMouseLeave);
+      previewCanvas.addEventListener('dblclick',  onDblClick);
+      previewCanvas.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      previewCanvas.addEventListener('touchstart', onTouchStart, { passive:false });
+      previewCanvas.addEventListener('touchmove',  onTouchMove,  { passive:false });
+      previewCanvas.addEventListener('touchend',   onTouchEnd,   { passive:false });
+      previewCanvas.addEventListener('mousemove', function(e) {
+        var p = getPos(e);
+        $('draw-coords').textContent = 'x:' + Math.round(p.x) + '  y:' + Math.round(p.y);
+      });
+      previewCanvas.addEventListener('wheel', function(e) {
+        if (currentTool === 'warpcirc' && wc.placed) { e.preventDefault(); scaleWarpCircle(e.deltaY > 0 ? -10 : 10); }
+      }, { passive:false });
+
+      document.querySelectorAll('.draw-tool-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() { selectTool(this.dataset.tool); });
+      });
+      $('draw-stroke-width').addEventListener('input', function() { $('draw-stroke-val').textContent = this.value + 'px'; });
+      $('draw-opacity').addEventListener('input', function() { $('draw-opacity-val').textContent = this.value + '%'; });
+      $('draw-undo-btn').addEventListener('click', undo);
+      $('draw-redo-btn').addEventListener('click', redo);
+      $('draw-clear-btn').addEventListener('click', clearActiveLayer);
+      $('draw-export-btn').addEventListener('click', exportPng);
+      $('draw-add-layer-btn').addEventListener('click', function() { addLayer('Layer ' + (layers.length + 1)); });
+      $('warp-add-pt').addEventListener('click', addWarpPoint);
+      $('warp-remove-pt').addEventListener('click', removeWarpPoint);
+      $('warp-commit').addEventListener('click', commitWarpCircle);
+      $('warp-cancel').addEventListener('click', cancelWarpCircle);
+      $('warp-export-svg').addEventListener('click', exportWarpSVG);
+
+      document.addEventListener('keydown', function(e) {
+        if (!$('page-draw').classList.contains('active')) return;
+        if (e.ctrlKey && e.key === 'z') { e.preventDefault(); undo(); }
+        if (e.ctrlKey && (e.key === 'y' || (e.shiftKey && e.key === 'z'))) { e.preventDefault(); redo(); }
+        if (e.key === 'Escape') cancelWarpCircle();
+        if (e.key === 'Enter' && currentTool === 'warpcirc' && wc.placed) commitWarpCircle();
+      });
+
+      renderAll(); updateLayersUI();
+    }
+
+    // ── Layers ──
+    function addLayer(name) {
+      var id = ++layerCounter;
+      var c = document.createElement('canvas'); c.width = CANVAS_W; c.height = CANVAS_H;
+      layers.unshift({ id:id, name:name, visible:true, canvas:c, ctx:c.getContext('2d') });
+      undoStacks[id] = []; redoStacks[id] = [];
+      setActiveLayer(id); updateLayersUI();
+    }
+    function setActiveLayer(id) { activeLayerId = id; updateLayersUI(); }
+    function deleteLayer(id) {
+      if (layers.length <= 1) { showToast('Need at least one layer'); return; }
+      layers = layers.filter(function(l) { return l.id !== id; });
+      delete undoStacks[id]; delete redoStacks[id];
+      if (activeLayerId === id) activeLayerId = layers[0].id;
+      renderAll(); updateLayersUI();
+    }
+    function moveLayer(id, dir) {
+      var i = layers.findIndex(function(l) { return l.id === id; });
+      var t = i + dir;
+      if (t < 0 || t >= layers.length) return;
+      var tmp = layers[i]; layers[i] = layers[t]; layers[t] = tmp;
+      renderAll(); updateLayersUI();
+    }
+    function toggleLayerVisibility(id) {
+      var l = layers.find(function(l) { return l.id === id; });
+      if (l) l.visible = !l.visible; renderAll(); updateLayersUI();
+    }
+    function updateLayersUI() {
+      var list = $('draw-layers-list'); list.innerHTML = '';
+      layers.forEach(function(layer) {
+        var item = document.createElement('div');
+        item.className = 'draw-layer-item' + (layer.id === activeLayerId ? ' active' : '');
+
+        var vis = document.createElement('span');
+        vis.className = 'draw-layer-vis'; vis.textContent = layer.visible ? '👁' : '🙈';
+        vis.addEventListener('click', function(e) { e.stopPropagation(); toggleLayerVisibility(layer.id); });
+
+        var nameEl = document.createElement('span');
+        nameEl.className = 'draw-layer-name'; nameEl.textContent = layer.name;
+        nameEl.addEventListener('dblclick', function(e) {
+          e.stopPropagation();
+          var inp = document.createElement('input'); inp.className = 'draw-layer-name-input'; inp.value = layer.name;
+          item.replaceChild(inp, nameEl); inp.focus(); inp.select();
+          function done() { layer.name = inp.value || layer.name; updateLayersUI(); }
+          inp.addEventListener('blur', done);
+          inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') inp.blur(); });
+        });
+
+        var btns = document.createElement('div'); btns.className = 'draw-layer-btns';
+        [['↑','Move up',-1],['↓','Move down',1]].forEach(function(cfg) {
+          var b = document.createElement('button'); b.className = 'draw-layer-btn';
+          b.textContent = cfg[0]; b.title = cfg[1];
+          b.addEventListener('click', function(e) { e.stopPropagation(); moveLayer(layer.id, cfg[2]); });
+          btns.appendChild(b);
+        });
+        var del = document.createElement('button'); del.className = 'draw-layer-btn danger'; del.textContent = '✕'; del.title = 'Delete';
+        del.addEventListener('click', function(e) { e.stopPropagation(); deleteLayer(layer.id); });
+        btns.appendChild(del);
+
+        item.appendChild(vis); item.appendChild(nameEl); item.appendChild(btns);
+        item.addEventListener('click', function() { setActiveLayer(layer.id); });
+        list.appendChild(item);
+      });
+    }
+
+    function renderAll() {
+      var mc = $('draw-canvas'), ctx = mc.getContext('2d');
+      ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+      for (var i = layers.length - 1; i >= 0; i--) {
+        if (layers[i].visible) ctx.drawImage(layers[i].canvas, 0, 0);
+      }
+    }
+
+    // ── Undo/Redo ──
+    function saveSnapshot() {
+      var l = getActiveLayer(); if (!l) return;
+      undoStacks[l.id].push(l.ctx.getImageData(0,0,CANVAS_W,CANVAS_H));
+      if (undoStacks[l.id].length > 50) undoStacks[l.id].shift();
+      redoStacks[l.id] = [];
+    }
+    function undo() {
+      var l = getActiveLayer(); if (!l || !undoStacks[l.id].length) { showToast('Nothing to undo'); return; }
+      redoStacks[l.id].push(l.ctx.getImageData(0,0,CANVAS_W,CANVAS_H));
+      l.ctx.putImageData(undoStacks[l.id].pop(), 0, 0); renderAll();
+    }
+    function redo() {
+      var l = getActiveLayer(); if (!l || !redoStacks[l.id].length) { showToast('Nothing to redo'); return; }
+      undoStacks[l.id].push(l.ctx.getImageData(0,0,CANVAS_W,CANVAS_H));
+      l.ctx.putImageData(redoStacks[l.id].pop(), 0, 0); renderAll();
+    }
+
+    // ── Tool select ──
+    function selectTool(tool) {
+      if (currentTool === 'warpcirc') cancelWarpCircle();
+      currentTool = tool;
+      document.querySelectorAll('.draw-tool-btn').forEach(function(b) { b.classList.remove('active'); });
+      var btn = $('dtool-' + tool); if (btn) btn.classList.add('active');
+      var wb = $('warp-bar');
+      if (tool === 'warpcirc') {
+        wb.style.display = 'flex'; wc.active = true; wrap.style.cursor = 'crosshair';
+        $('draw-status').textContent = 'Warp Circle · Click to place';
+      } else {
+        wb.style.display = 'none'; wc.active = false; wc.placed = false;
+        wrap.style.cursor = tool === 'eraser' ? 'cell' : tool === 'text' ? 'text' : tool === 'select' ? 'default' : 'crosshair';
+        $('draw-status').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' tool';
+      }
+    }
+
+    function applyStyle(ctx) {
+      ctx.globalAlpha = getOpacity(); ctx.strokeStyle = getStrokeColor();
+      ctx.fillStyle = getFillColor(); ctx.lineWidth = getStrokeWidth();
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    }
+
+    function getPos(e) {
+      var r = previewCanvas.getBoundingClientRect();
+      return { x: (e.clientX - r.left) * CANVAS_W / r.width, y: (e.clientY - r.top) * CANVAS_H / r.height };
+    }
+    function onTouchStart(e) { e.preventDefault(); onMouseDown({ button:0, clientX:e.touches[0].clientX, clientY:e.touches[0].clientY }); }
+    function onTouchMove(e)  { e.preventDefault(); onMouseMove({ clientX:e.touches[0].clientX, clientY:e.touches[0].clientY }); }
+    function onTouchEnd(e)   { e.preventDefault(); var t=e.changedTouches[0]; onMouseUp({ clientX:t.clientX, clientY:t.clientY }); }
+
+    // ── Shape drawing ──
+    function drawShape(ctx, x1, y1, x2, y2, commit) {
+      var w = x2-x1, h = y2-y1;
+      if (commit) { saveSnapshot(); applyStyle(ctx); } else { previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); applyStyle(previewCtx); ctx = previewCtx; }
+      ctx.beginPath();
+      if (currentTool==='line')     { ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); }
+      else if (currentTool==='rect'){ ctx.rect(x1,y1,w,h); if(getFillEnabled())ctx.fill(); ctx.stroke(); }
+      else if (currentTool==='ellipse'){ ctx.ellipse(x1+w/2,y1+h/2,Math.abs(w/2),Math.abs(h/2),0,0,Math.PI*2); if(getFillEnabled())ctx.fill(); ctx.stroke(); }
+      else if (currentTool==='triangle'){ ctx.moveTo(x1+w/2,y1); ctx.lineTo(x2,y2); ctx.lineTo(x1,y2); ctx.closePath(); if(getFillEnabled())ctx.fill(); ctx.stroke(); }
+      else if (currentTool==='star'){ drawStar(ctx,x1+w/2,y1+h/2,5,Math.max(Math.abs(w),Math.abs(h))/2,Math.max(Math.abs(w),Math.abs(h))/4); if(getFillEnabled())ctx.fill(); ctx.stroke(); }
+      if (commit) { previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); renderAll(); }
+    }
+    function drawStar(ctx,cx,cy,pts,outer,inner) {
+      var step=Math.PI/pts; ctx.beginPath();
+      for(var i=0;i<pts*2;i++){var r=i%2===0?outer:inner,a=i*step-Math.PI/2;i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));}
+      ctx.closePath();
+    }
+
+    // ── Warp circle ──
+    function placeWarpCircle(cx, cy) {
+      var n=8, r=120; wc.points=[];
+      for(var i=0;i<n;i++){var a=(i/n)*Math.PI*2-Math.PI/2; wc.points.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});}
+      wc.placed=true; wc.draggingIdx=-1;
+      $('draw-status').textContent='Warp Circle · Drag handles · Scroll to resize · Enter to commit';
+      drawWarpPreview();
+    }
+    function scaleWarpCircle(delta) {
+      if (!wc.placed) return;
+      var cx=0,cy=0; wc.points.forEach(function(p){cx+=p.x;cy+=p.y;});cx/=wc.points.length;cy/=wc.points.length;
+      wc.points=wc.points.map(function(p){var dx=p.x-cx,dy=p.y-cy,len=Math.sqrt(dx*dx+dy*dy)||1,nl=Math.max(10,len+delta);return{x:cx+dx/len*nl,y:cy+dy/len*nl};});
+      drawWarpPreview();
+    }
+    function addWarpPoint() {
+      if (!wc.placed||wc.points.length>=32) return;
+      var best=0,bd=0;
+      for(var i=0;i<wc.points.length;i++){var a=wc.points[i],b=wc.points[(i+1)%wc.points.length],d=Math.hypot(b.x-a.x,b.y-a.y);if(d>bd){bd=d;best=i;}}
+      var a=wc.points[best],b=wc.points[(best+1)%wc.points.length];
+      wc.points.splice(best+1,0,{x:(a.x+b.x)/2,y:(a.y+b.y)/2}); drawWarpPreview(); showToast('Point added');
+    }
+    function removeWarpPoint() {
+      if (!wc.placed||wc.points.length<=3){showToast('Need at least 3 points');return;}
+      wc.points.pop(); drawWarpPreview(); showToast('Point removed');
+    }
+    function getWarpHit(pos) {
+      for(var i=0;i<wc.points.length;i++) if(Math.hypot(pos.x-wc.points[i].x,pos.y-wc.points[i].y)<wc.HIT_RADIUS) return i; return -1;
+    }
+    function catmullPath(ctx, pts, close) {
+      var n=pts.length; if(n<2)return; ctx.moveTo(pts[0].x,pts[0].y);
+      for(var i=0;i<n;i++){var p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];
+        ctx.bezierCurveTo(p1.x+(p2.x-p0.x)/6,p1.y+(p2.y-p0.y)/6,p2.x-(p3.x-p1.x)/6,p2.y-(p3.y-p1.y)/6,p2.x,p2.y);}
+      if(close)ctx.closePath();
+    }
+    function drawWarpPreview() {
+      previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); if(!wc.placed||wc.points.length<2)return;
+      applyStyle(previewCtx); previewCtx.beginPath(); catmullPath(previewCtx,wc.points,true);
+      if(getFillEnabled())previewCtx.fill(); previewCtx.stroke();
+      wc.points.forEach(function(p,i){previewCtx.beginPath();previewCtx.arc(p.x,p.y,7,0,Math.PI*2);previewCtx.fillStyle=i===wc.draggingIdx?'#ff6b6b':'#f5c518';previewCtx.globalAlpha=1;previewCtx.fill();previewCtx.strokeStyle='#fff';previewCtx.lineWidth=1.5;previewCtx.stroke();});
+    }
+    function commitWarpCircle() {
+      if (!wc.placed||wc.points.length<2)return; var ctx=getCtx(); if(!ctx)return;
+      saveSnapshot(); applyStyle(ctx); ctx.beginPath(); catmullPath(ctx,wc.points,true);
+      if(getFillEnabled())ctx.fill(); ctx.stroke();
+      previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); renderAll();
+      wc.placed=false; wc.points=[];
+      $('draw-status').textContent='Warp Circle · Click to place another'; showToast('Shape committed ✓');
+    }
+    function cancelWarpCircle() { wc.placed=false; wc.points=[]; wc.draggingIdx=-1; previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); }
+    function exportWarpSVG() {
+      if (!wc.placed||wc.points.length<2){showToast('Place a warp circle first!');return;}
+      var pts=wc.points,n=pts.length,d='M '+pts[0].x.toFixed(2)+' '+pts[0].y.toFixed(2)+' ';
+      for(var i=0;i<n;i++){var p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];d+='C '+(p1.x+(p2.x-p0.x)/6).toFixed(2)+' '+(p1.y+(p2.y-p0.y)/6).toFixed(2)+' '+(p2.x-(p3.x-p1.x)/6).toFixed(2)+' '+(p2.y-(p3.y-p1.y)/6).toFixed(2)+' '+p2.x.toFixed(2)+' '+p2.y.toFixed(2)+' ';} d+='Z';
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+CANVAS_W+'" height="'+CANVAS_H+'" viewBox="0 0 '+CANVAS_W+' '+CANVAS_H+'"><path d="'+d+'" fill="'+(getFillEnabled()?getFillColor():'none')+'" stroke="'+getStrokeColor()+'" stroke-width="'+getStrokeWidth()+'" opacity="'+getOpacity()+'"/></svg>';
+      var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'})); a.download='warp-shape.svg'; a.click();
+      showToast('SVG exported! Import into Canva via Uploads ✓');
+    }
+
+    // ── Text tool ──
+    function placeText(x, y) {
+      if (textInputActive) return; textInputActive=true;
+      var r=previewCanvas.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
+      var inp=document.createElement('input'); inp.type='text'; inp.placeholder='Type here…';
+      inp.style.cssText='position:absolute;left:'+(x/CANVAS_W*r.width+r.left-wr.left-wrap.scrollLeft)+'px;top:'+(y/CANVAS_H*r.height+r.top-wr.top-wrap.scrollTop)+'px;min-width:120px;background:rgba(0,0,0,0.5);color:'+getStrokeColor()+';border:1px dashed '+getStrokeColor()+';border-radius:4px;padding:4px 8px;font-size:'+(getStrokeWidth()*4+10)+'px;outline:none;z-index:50';
+      wrap.style.position='relative'; wrap.appendChild(inp); inp.focus();
+      function commit(){var t=inp.value.trim();if(t){var ctx=getCtx();if(ctx){saveSnapshot();ctx.globalAlpha=getOpacity();ctx.fillStyle=getStrokeColor();ctx.font=(getStrokeWidth()*4+10)+'px Fredoka,sans-serif';ctx.fillText(t,x,y);renderAll();}}try{wrap.removeChild(inp);}catch(e){} textInputActive=false;}
+      inp.addEventListener('keydown',function(e){if(e.key==='Enter')commit();if(e.key==='Escape'){try{wrap.removeChild(inp);}catch(e){}textInputActive=false;}});
+      inp.addEventListener('blur',commit);
+    }
+
+    function clearActiveLayer() { var l=getActiveLayer(); if(!l)return; saveSnapshot(); l.ctx.clearRect(0,0,CANVAS_W,CANVAS_H); renderAll(); showToast('Layer cleared'); }
+
+    function exportPng() {
+      var exp=document.createElement('canvas'); exp.width=CANVAS_W; exp.height=CANVAS_H;
+      var ctx=exp.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,CANVAS_W,CANVAS_H);
+      for(var i=layers.length-1;i>=0;i--) if(layers[i].visible) ctx.drawImage(layers[i].canvas,0,0);
+      var a=document.createElement('a'); a.download='drawing.png'; a.href=exp.toDataURL(); a.click();
+      showToast('Exported as drawing.png');
+    }
+
+    // ── Mouse events ──
+    function onMouseDown(e) {
+      if (e.button!==0) return; var pos=getPos(e);
+      if (currentTool==='text') { placeText(pos.x,pos.y); return; }
+      if (currentTool==='warpcirc') {
+        if (!wc.placed) { placeWarpCircle(pos.x,pos.y); }
+        else { var idx=getWarpHit(pos); if(idx>=0){wc.draggingIdx=idx; wrap.style.cursor='grabbing';} }
+        return;
+      }
+      if (currentTool==='select') { selectStart=pos; return; }
+      drawing=true; startX=pos.x; startY=pos.y;
+      if (currentTool==='pen'||currentTool==='eraser') {
+        saveSnapshot(); var ctx=getCtx(); if(!ctx)return; applyStyle(ctx);
+        ctx.globalCompositeOperation=currentTool==='eraser'?'destination-out':'source-over';
+        if(currentTool==='eraser')ctx.globalAlpha=1;
+        ctx.beginPath(); ctx.moveTo(pos.x,pos.y);
+      }
+    }
+    function onMouseMove(e) {
+      var pos=getPos(e);
+      if (currentTool==='warpcirc') {
+        if(wc.draggingIdx>=0){wc.points[wc.draggingIdx]={x:pos.x,y:pos.y};drawWarpPreview();}
+        else if(wc.placed) wrap.style.cursor=getWarpHit(pos)>=0?'grab':'crosshair';
+        return;
+      }
+      if (!drawing) return;
+      if (currentTool==='pen'||currentTool==='eraser') {
+        var ctx=getCtx(); if(!ctx)return; ctx.lineTo(pos.x,pos.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(pos.x,pos.y); scheduleRender();
+      } else { drawShape(getCtx(),startX,startY,pos.x,pos.y,false); }
+    }
+    function onMouseUp(e) {
+      var pos=getPos(e);
+      if (currentTool==='warpcirc') { if(wc.draggingIdx>=0){wc.draggingIdx=-1;wrap.style.cursor='crosshair';drawWarpPreview();} return; }
+      if (currentTool==='select'&&selectStart) {
+        previewCtx.clearRect(0,0,CANVAS_W,CANVAS_H); previewCtx.strokeStyle='#7eb8f7'; previewCtx.lineWidth=1; previewCtx.setLineDash([6,3]);
+        previewCtx.strokeRect(Math.min(selectStart.x,pos.x),Math.min(selectStart.y,pos.y),Math.abs(pos.x-selectStart.x),Math.abs(pos.y-selectStart.y));
+        previewCtx.setLineDash([]); selectStart=null; return;
+      }
+      if (!drawing) return; drawing=false;
+      if (currentTool!=='pen'&&currentTool!=='eraser') { drawShape(getCtx(),startX,startY,pos.x,pos.y,true); }
+      else { var ctx=getCtx(); if(ctx)ctx.globalCompositeOperation='source-over'; }
+    }
+    function onMouseLeave() {
+      if (wc.draggingIdx>=0) wc.draggingIdx=-1;
+      if (drawing&&(currentTool==='pen'||currentTool==='eraser')) { var ctx=getCtx(); if(ctx)ctx.globalCompositeOperation='source-over'; drawing=false; renderAll(); }
+    }
+    function onDblClick() { if(currentTool==='warpcirc'&&wc.placed) commitWarpCircle(); }
+
+    // ── Init on first visit ──
+    var drawInited = false;
+    document.getElementById('tab-draw').addEventListener('click', function() {
+      if (!drawInited) { drawInited=true; initDraw(); }
+    });
+  })();
   </script>
 
   <!-- =============================================
