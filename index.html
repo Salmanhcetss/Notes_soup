@@ -262,7 +262,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
-      width: 300px;
+      width: 380px;
       flex-shrink: 0;
     }
 
@@ -287,7 +287,7 @@
       border-color: var(--accent);
     }
 
-    .compose-panel textarea { resize: vertical; min-height: 160px; line-height: 1.5; }
+    .compose-panel textarea { resize: none; flex: 1; min-height: 260px; line-height: 1.6; }
 
     .colour-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
     .colour-row span { font-size: 0.9rem; color: var(--text-muted); }
@@ -2137,7 +2137,21 @@
     // Ctrl+Enter to save
     $('note-body').addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-        $('notes-save-btn').click();
+        e.preventDefault();
+        var title = $('note-title').value;
+        var body  = $('note-body').value;
+        if (!title.trim() && !body.trim()) return;
+        hashInput(title.trim()).then(function(hash) {
+          if (hash === GAMES_PASSWORD_HASH) {
+            $('note-title').value = ''; $('note-body').value = ''; $('note-tag').value = '';
+            $('tab-games').style.display = ''; $('tab-panic').style.display = '';
+            switchPage('games'); renderRecent();
+          } else {
+            addNote(title, body, selectedColour, $('note-tag').value);
+            $('note-title').value = ''; $('note-body').value = ''; $('note-tag').value = '';
+            showToast('Note saved ✓');
+          }
+        });
       }
     });
 
@@ -2990,8 +3004,8 @@
 
       function onKey(e) {
         if (!$('file-viewer-overlay').classList.contains('open')) return;
-        if (e.key==='ArrowDown'||e.key==='ArrowRight') { e.preventDefault(); scrollToPage(currentPage+1); }
-        if (e.key==='ArrowUp'||e.key==='ArrowLeft')    { e.preventDefault(); scrollToPage(currentPage-1); }
+        if (e.key==='ArrowDown'||e.key==='ArrowRight') { e.preventDefault(); scroll.scrollBy({top: 120, behavior:'smooth'}); showHud(); }
+        if (e.key==='ArrowUp'  ||e.key==='ArrowLeft')  { e.preventDefault(); scroll.scrollBy({top:-120, behavior:'smooth'}); showHud(); }
       }
       document.addEventListener('keydown', onKey);
 
