@@ -986,6 +986,39 @@
       max-width: 100%; border-radius: 8px;
     }
 
+    .file-viewer-focus {
+      background: var(--bg-btn); border: none; border-radius: 8px;
+      color: var(--text-muted); cursor: pointer;
+      padding: 0.45rem 0.8rem; font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .file-viewer-focus:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
+
+    .file-viewer-overlay.fullscreen { padding: 0; }
+    .file-viewer-overlay.fullscreen .file-viewer {
+      width: 100vw; max-width: 100vw;
+      height: 100vh; max-height: 100vh;
+      border-radius: 0;
+    }
+
+    .pdf-scroll-container {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; gap: 1.2rem; padding: 1rem 0;
+    }
+    .pdf-page-canvas {
+      max-width: 100%; border-radius: 4px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4); display: block;
+    }
+
+    .file-viewer-overlay.fullscreen {
+      padding: 0;
+    }
+    .file-viewer-overlay.fullscreen .file-viewer {
+      width: 100vw; max-width: 100vw;
+      height: 100vh; max-height: 100vh;
+      border-radius: 0;
+    }
+
     .file-viewer-body .unsupported {
       display: flex; flex-direction: column;
       align-items: center; gap: 1rem;
@@ -1526,6 +1559,7 @@
       <div class="file-viewer-header">
         <div class="file-viewer-title" id="viewer-title">filename.txt</div>
         <a class="file-viewer-dl" id="viewer-dl" download>⬇ Download</a>
+        <button class="file-viewer-focus" id="viewer-focus" title="Focus mode">⛶</button>
         <button class="file-viewer-close" onclick="closeViewer()">✕</button>
       </div>
       <div class="file-viewer-body" id="viewer-body"></div>
@@ -2756,9 +2790,7 @@
         body.appendChild(aud);
 
       } else if (type === 'application/pdf') {
-        var iframe = document.createElement('iframe');
-        iframe.src = f.objectUrl;
-        body.appendChild(iframe);
+        renderPDF(f.objectUrl, body);
 
       } else if (
         type.startsWith('text/') ||
@@ -2781,6 +2813,111 @@
       }
 
       $('file-viewer-overlay').classList.add('open');
+    }
+
+    // Focus/fullscreen toggle for file viewer
+    $('viewer-focus').addEventListener('click', function() {
+      var overlay = $('file-viewer-overlay');
+      var isFs = overlay.classList.toggle('fullscreen');
+      this.textContent = isFs ? '⊡' : '⛶';
+      this.title = isFs ? 'Exit focus' : 'Focus mode';
+    });
+
+    function renderPDF(url, body) {
+      var container = document.createElement('div');
+      container.className = 'pdf-scroll-container';
+
+      var nav = document.createElement('div');
+      nav.style.cssText = 'position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:0.8rem;background:var(--bg-card);padding:0.5rem 1rem;border-radius:8px;border:1px solid var(--border);margin-bottom:0.5rem;';
+      nav.innerHTML =
+        '<button id="pdf-prev" style="padding:0.3rem 0.9rem;background:var(--bg-btn);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);cursor:pointer;" disabled>&#9664; Prev</button>'
+        + '<span id="pdf-page-info" style="font-size:0.9rem;color:var(--text-muted);min-width:100px;text-align:center;">Loading…</span>'
+        + '<button id="pdf-next" style="padding:0.3rem 0.9rem;background:var(--bg-btn);border:1px solid var(--border);border-radius:6px;color:var(--text-primary);cursor:pointer;" disabled>Next &#9654;</button>';
+      container.appendChild(nav);
+      body.appendChild(container);
+
+      var pageCanvases = [];
+      var currentPage = 1;
+
+      function updateNav() {
+        var info = container.querySelector('#pdf-page-info');
+        var prev = container.querySelector('#pdf-prev');
+        var next = container.querySelector('#pdf-next');
+        if (info) info.textContent = 'Page ' + currentPage + ' of ' + pageCanvases.length;
+        if (prev) prev.disabled = currentPage <= 1;
+        if (next) next.disabled = currentPage >= pageCanvases.length;
+      }
+
+      function scrollToPage(n) {
+        currentPage = Math.max(1, Math.min(n, pageCanvases.length));
+        var el = pageCanvases[currentPage - 1];
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        updateNav();
+      }
+
+      container.querySelector('#pdf-prev').addEventListener('click', function() { scrollToPage(currentPage - 1); });
+      container.querySelector('#pdf-next').addEventListener('click', function() { scrollToPage(currentPage + 1); });
+
+      // Arrow keys — only while viewer is open
+      function onKey(e) {
+        if (!$('file-viewer-overlay').classList.contains('open')) return;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); scrollToPage(currentPage + 1); }
+        if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { e.preventDefault(); scrollToPage(currentPage - 1); }
+      }
+      document.addEventListener('keydown', onKey);
+
+      // Intersection observer updates page counter as you scroll
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var idx = pageCanvases.indexOf(entry.target) + 1;
+            if (idx > 0) { currentPage = idx; updateNav(); }
+          }
+        });
+      }, { root: body, threshold: 0.4 });
+
+      function startRender() {
+        pdfjsLib.getDocument(url).promise.then(function(doc) {
+          var total = doc.numPages;
+          var info = container.querySelector('#pdf-page-info');
+          if (info) info.textContent = 'Page 1 of ' + total;
+          var next = container.querySelector('#pdf-next');
+          if (next) next.disabled = total <= 1;
+
+          function renderPage(n) {
+            if (n > total) return;
+            doc.getPage(n).then(function(page) {
+              var scale = Math.min((body.clientWidth - 60) / page.getViewport({scale:1}).width, 2);
+              var vp = page.getViewport({scale: scale || 1.2});
+              var c = document.createElement('canvas');
+              c.className = 'pdf-page-canvas';
+              c.width = vp.width; c.height = vp.height;
+              container.appendChild(c);
+              pageCanvases.push(c);
+              observer.observe(c);
+              page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise.then(function() {
+                renderPage(n + 1);
+              });
+            });
+          }
+          renderPage(1);
+        }).catch(function() {
+          var info = container.querySelector('#pdf-page-info');
+          if (info) info.textContent = 'Failed to load PDF';
+        });
+      }
+
+      if (window.pdfjsLib) {
+        startRender();
+      } else {
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        s.onload = function() {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          startRender();
+        };
+        document.head.appendChild(s);
+      }
     }
 
     function closeViewer() {
