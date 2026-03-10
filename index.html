@@ -1729,7 +1729,7 @@
     }
 
     /* Storage + DOM helpers */
-    function $(id){return $(id);}
+    function $(id){return document.getElementById(id);}
     function lsGet(k,d){try{return JSON.parse(localStorage.getItem(k))||d;}catch(e){return d;}}
     function lsSet(k,v){localStorage.setItem(k,JSON.stringify(v));}
 
