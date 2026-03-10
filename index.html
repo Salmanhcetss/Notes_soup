@@ -1789,7 +1789,7 @@
     }
 
     $('submit-btn').addEventListener('click', checkPassword);
-    $('password-input').addEventListener('keypress', function(e) {
+    $('password-input').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') checkPassword();
     });
 
