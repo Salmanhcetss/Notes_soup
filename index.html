@@ -275,8 +275,8 @@
     .notes-page {
       flex: 1;
       display: flex;
-      gap: 2rem;
-      padding: 1.5rem;
+      gap: 1.5rem;
+      padding: 1.2rem 1.5rem;
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
@@ -285,259 +285,341 @@
     .compose-panel {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
-      width: 380px;
+      gap: 0.5rem;
+      width: 340px;
       flex-shrink: 0;
     }
 
-    .compose-panel h2, .notes-panel h2 { margin: 0; font-size: 1.4rem; color: var(--text-secondary); }
+    .compose-panel h2, .notes-panel h2 { margin: 0 0 0.2rem; font-size: 1.1rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
 
     .compose-panel input[type="text"],
     .compose-panel textarea,
     .compose-panel select {
-      padding: 0.75rem 1rem;
-      font-size: 0.95rem;
+      padding: 0.55rem 0.85rem;
+      font-size: 0.92rem;
       font-family: 'Fredoka', sans-serif;
-      border: 2px solid transparent;
+      border: 1.5px solid var(--border);
       border-radius: 8px;
       background-color: var(--bg-input);
       color: var(--text-primary);
       outline: none;
       width: 100%;
-      transition: background 0.2s, border-color 0.2s;
+      transition: border-color 0.2s;
     }
 
     .compose-panel input:focus,
     .compose-panel textarea:focus,
     .compose-panel select:focus {
-      background-color: var(--bg-input-focus);
       border-color: var(--accent);
     }
 
-    .compose-panel textarea { resize: none; flex: 1; min-height: 260px; line-height: 1.5; }
+    .compose-panel textarea { resize: none; min-height: 120px; line-height: 1.5; }
 
-    .colour-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-    .colour-row span { font-size: 0.9rem; color: var(--text-muted); }
-
-    .colour-dot {
-      width: 24px; height: 24px; border-radius: 50%;
-      cursor: pointer; border: 3px solid transparent;
-      transition: border-color 0.2s, transform 0.15s;
+    /* Notes grid & cards */
+    .notes-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-width: 0;
     }
-    .colour-dot:hover { transform: scale(1.2); }
-    .colour-dot.selected { border-color: var(--text-primary); }
-
-    .notes-save-btn {
-      padding: 0.8rem;
-      font-size: 1.1rem;
-      font-family: 'Fredoka', sans-serif;
-      background-color: var(--accent);
-      border: none; border-radius: 8px;
-      color: #fff; cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    .notes-save-btn:hover { opacity: 0.85; transform: translateY(-2px); }
-
-    .notes-panel { flex: 1; display: flex; flex-direction: column; gap: 0.8rem; }
-
     .notes-header-row {
-      display: flex; align-items: center;
-      justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
     }
-
-    .notes-controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-
+    .notes-header-row h2 { flex-shrink: 0; }
+    .notes-controls { display: flex; gap: 0.5rem; flex: 1; flex-wrap: wrap; }
     .search-input, .filter-select {
-      padding: 0.55rem 0.9rem;
-      font-size: 0.9rem;
+      padding: 0.45rem 0.75rem; font-size: 0.88rem;
       font-family: 'Fredoka', sans-serif;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      background-color: var(--bg-input);
-      color: var(--text-primary);
-      outline: none;
-      transition: background 0.2s, border-color 0.2s;
+      background: var(--bg-input); color: var(--text-primary);
+      border: 1px solid var(--border); border-radius: 8px; outline: none;
     }
-    .search-input { width: 160px; }
-    .search-input:focus, .filter-select:focus { background-color: var(--bg-input-focus); border-color: var(--accent); }
+    .search-input { flex: 1; min-width: 100px; }
+    .search-input:focus, .filter-select:focus { border-color: var(--accent); }
 
     .notes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+      align-content: start;
     }
 
     .note-card {
       border-radius: 12px;
-      padding: 1rem 1rem 0.7rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      display: flex; flex-direction: column; gap: 0.4rem;
-      position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 0.85rem;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-height: 110px;
+      position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border: 1px solid rgba(0,0,0,0.08);
     }
-    .note-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
-    .note-card.pinned { outline: 2px solid #f5c518; }
+    .note-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+    .note-card.pinned { box-shadow: 0 0 0 2px var(--accent), 0 4px 14px rgba(0,0,0,0.2); }
 
-    .note-card .card-pin {
-      position: absolute; top: 0.45rem; left: 0.6rem;
-      font-size: 0.9rem; opacity: 0.8;
+    .card-actions {
+      position: absolute; top: 0.5rem; right: 0.5rem;
+      display: flex; gap: 0.2rem; opacity: 0; transition: opacity 0.15s;
+    }
+    .note-card:hover .card-actions { opacity: 1; }
+    .card-actions button {
+      background: rgba(0,0,0,0.18); border: none; border-radius: 6px;
+      color: #222; font-size: 0.75rem; cursor: pointer; padding: 0.2rem 0.35rem;
+      line-height: 1;
+    }
+    .card-actions button:hover { background: rgba(0,0,0,0.32); }
+
+    .card-title {
+      font-size: 0.9rem; font-weight: 700;
+      color: rgba(0,0,0,0.75);
+      overflow: hidden; text-overflow: ellipsis;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+    .card-body {
+      font-size: 0.8rem; color: rgba(0,0,0,0.6); line-height: 1.45;
+      overflow: hidden; text-overflow: ellipsis;
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;
+      flex: 1;
+    }
+    .card-date {
+      font-size: 0.7rem; color: rgba(0,0,0,0.45); margin-top: auto;
+    }
+    .card-tag {
+      display: inline-block; font-size: 0.7rem;
+      background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.55);
+      border-radius: 20px; padding: 0.1rem 0.5rem;
+      align-self: flex-start;
     }
 
-    .note-card .card-title { font-size: 1rem; font-weight: 700; color: rgba(0,0,0,0.75); word-break: break-word; padding-left: 1rem; }
-    .note-card .card-body  { font-size: 0.85rem; color: rgba(0,0,0,0.6); white-space: pre-wrap; word-break: break-word; flex: 1; }
-    .note-card .card-tag   { font-size: 0.75rem; background: rgba(0,0,0,0.15); color: rgba(0,0,0,0.6); border-radius: 20px; padding: 0.1rem 0.6rem; display: inline-block; width: fit-content; }
-    .note-card .card-date  { font-size: 0.72rem; color: rgba(0,0,0,0.4); margin-top: 0.2rem; }
+    /* Colour dots */
+    .colour-row {
+      display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+    }
+    .colour-row span { font-size: 0.82rem; color: var(--text-muted); }
+    .colour-dot {
+      width: 20px; height: 20px; border-radius: 50%; cursor: pointer;
+      border: 2px solid transparent; transition: transform 0.15s, border-color 0.15s;
+    }
+    .colour-dot:hover { transform: scale(1.2); }
+    .colour-dot.selected { border-color: var(--text-primary); transform: scale(1.2); }
 
-    .note-card .card-actions {
-      position: absolute; top: 0.4rem; right: 0.5rem;
-      display: flex; gap: 0.25rem;
+    /* Notes save btn */
+    .notes-save-btn {
+      padding: 0.6rem 1.2rem; font-size: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 10px; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .notes-save-btn:hover { opacity: 0.85; }
+
+    /* Note edit modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55); z-index: 200;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--bg-card); border-radius: 16px;
+      padding: 1.5rem; width: 480px; max-width: 94vw;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .modal-box h3 { margin: 0; font-size: 1.1rem; color: var(--text-secondary); }
+    .modal-box input, .modal-box textarea, .modal-box select {
+      padding: 0.6rem 0.85rem; font-size: 0.95rem;
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg-input); color: var(--text-primary);
+      border: 1px solid var(--border); border-radius: 8px; outline: none; width: 100%;
+      box-sizing: border-box;
+    }
+    .modal-box input:focus, .modal-box textarea:focus, .modal-box select:focus { border-color: var(--accent); }
+    .modal-box textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 0.5rem; justify-content: flex-end; }
+    .modal-save-btn {
+      padding: 0.5rem 1.2rem; font-size: 0.95rem;
+      font-family: 'Fredoka', sans-serif;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+    }
+    .modal-cancel-btn {
+      padding: 0.5rem 1rem; font-size: 0.95rem;
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg-btn); color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
     }
 
-    .note-card .card-actions button {
-      background: rgba(0,0,0,0.15); border: none; border-radius: 6px;
-      color: rgba(0,0,0,0.55); font-size: 0.85rem; cursor: pointer;
-      padding: 0.1rem 0.4rem; font-family: 'Fredoka', sans-serif;
-      transition: background 0.2s;
+    /* Translator */
+    .gtranslate-wrap {
+      display: flex; flex-direction: column; gap: 0.4rem; flex-shrink: 0;
     }
-    .note-card .card-actions button:hover { background: rgba(0,0,0,0.3); }
+    .gtranslate-label {
+      font-size: 0.85rem; color: var(--text-muted);
+    }
+    .translate-input {
+      width: 100%; resize: none; padding: 0.65rem 0.85rem;
+      font-size: 0.95rem; font-family: 'Fredoka', sans-serif;
+      background: var(--bg-input); color: var(--text-primary);
+      border: 1px solid var(--border); border-radius: 10px; outline: none;
+      line-height: 1.5; box-sizing: border-box;
+    }
+    .translate-input:focus { border-color: var(--accent); }
+    .translate-open-btn {
+      align-self: flex-start; padding: 0.45rem 1rem;
+      font-size: 0.88rem; font-family: 'Fredoka', sans-serif;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .translate-open-btn:hover { opacity: 0.85; }
 
-    .empty-state { color: var(--text-muted); font-size: 1rem; margin-top: 2rem; text-align: center; }
 
     /* =============================================
        TO-DO PAGE
     ============================================= */
     .todo-page {
       flex: 1;
-      max-width: 700px;
+      max-width: 620px;
       width: 100%;
-      margin: 1.5rem auto;
+      margin: 2rem auto;
       padding: 0 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
     .todo-add-row {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      align-items: center;
     }
 
     .todo-add-row input {
       flex: 1;
-      padding: 0.8rem 1rem;
+      padding: 0.5rem 0;
       font-size: 1rem;
       font-family: 'Fredoka', sans-serif;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      background: var(--bg-input);
+      border: none;
+      background: transparent;
       color: var(--text-primary);
       outline: none;
-      transition: background 0.2s, border-color 0.2s;
     }
-    .todo-add-row input:focus { background: var(--bg-input-focus); border-color: var(--accent); }
+    .todo-add-row input::placeholder { color: var(--text-muted); }
 
     .todo-add-row select {
-      padding: 0.8rem 0.8rem;
-      font-size: 0.9rem;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.82rem;
       font-family: 'Fredoka', sans-serif;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      background: var(--bg-input);
-      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-surface);
+      color: var(--text-secondary);
       outline: none;
       cursor: pointer;
     }
 
     .todo-add-btn {
-      padding: 0.8rem 1.4rem;
-      font-size: 1.1rem;
+      padding: 0.5rem 1.1rem;
+      font-size: 1rem;
       font-family: 'Fredoka', sans-serif;
       background: var(--accent);
       border: none; border-radius: 10px;
       color: #fff; cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
+      transition: opacity 0.2s;
       white-space: nowrap;
+      flex-shrink: 0;
     }
-    .todo-add-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .todo-add-btn:hover { opacity: 0.85; }
 
     .todo-filters {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      display: flex; gap: 0.35rem; flex-wrap: wrap;
     }
 
     .todo-filter-btn {
-      padding: 0.4rem 1rem;
-      font-size: 0.9rem;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.82rem;
       font-family: 'Fredoka', sans-serif;
-      background: var(--bg-btn);
-      border: none; border-radius: 20px;
-      color: var(--text-secondary); cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted); cursor: pointer;
+      transition: all 0.15s;
     }
-    .todo-filter-btn:hover { background: var(--bg-btn-hover); }
-    .todo-filter-btn.active { background: var(--accent); color: #fff; }
+    .todo-filter-btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+    .todo-filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .todo-list {
-      display: flex; flex-direction: column; gap: 0.6rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
     }
 
     .todo-item {
-      display: flex; align-items: center; gap: 0.8rem;
+      display: flex; align-items: center; gap: 0.75rem;
       background: var(--bg-card);
       border-radius: 10px;
-      padding: 0.8rem 1rem;
-      box-shadow: 0 2px 8px var(--shadow);
+      padding: 0.7rem 0.9rem;
       border: 1px solid var(--border);
-      transition: opacity 0.2s, transform 0.15s;
-      animation: slideIn 0.2s ease;
+      transition: opacity 0.2s;
+      animation: slideIn 0.18s ease;
     }
+    .todo-item:hover { border-color: var(--accent); }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-8px); }
+      from { opacity: 0; transform: translateY(-6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .todo-item.done { opacity: 0.5; }
+    .todo-item.done { opacity: 0.4; }
     .todo-item.done .todo-text { text-decoration: line-through; color: var(--text-muted); }
 
     .todo-checkbox {
-      width: 20px; height: 20px;
-      border-radius: 6px; border: 2px solid var(--text-muted);
+      width: 18px; height: 18px;
+      border-radius: 50%; border: 2px solid var(--border);
       background: transparent; cursor: pointer; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; transition: background 0.2s, border-color 0.2s;
+      font-size: 0.7rem; transition: all 0.15s;
     }
     .todo-checkbox.checked { background: var(--accent); border-color: var(--accent); }
 
-    .todo-text { flex: 1; font-size: 1rem; }
+    .todo-text { flex: 1; font-size: 0.95rem; color: var(--text-primary); }
 
     .todo-priority {
-      font-size: 0.75rem; padding: 0.2rem 0.6rem;
-      border-radius: 20px; font-weight: 600;
-      flex-shrink: 0;
+      font-size: 0.7rem; padding: 0.15rem 0.5rem;
+      border-radius: 20px; font-weight: 600; flex-shrink: 0;
+      letter-spacing: 0.03em;
     }
-    .todo-priority.high   { background: rgba(231,76,60,0.2);  color: #e74c3c; }
-    .todo-priority.medium { background: rgba(241,196,15,0.2); color: #f1c40f; }
-    .todo-priority.low    { background: rgba(46,204,113,0.2); color: #2ecc71; }
+    .todo-priority.high   { background: rgba(231,76,60,0.15);  color: #e74c3c; }
+    .todo-priority.medium { background: rgba(241,196,15,0.15); color: #d4a800; }
+    .todo-priority.low    { background: rgba(46,204,113,0.15); color: #27ae60; }
 
     .todo-del {
       background: none; border: none; cursor: pointer;
-      color: var(--text-muted); font-size: 1rem;
-      transition: color 0.2s, transform 0.15s;
-      flex-shrink: 0;
+      color: var(--text-muted); font-size: 0.9rem;
+      transition: color 0.15s; flex-shrink: 0; opacity: 0;
     }
-    .todo-del:hover { color: #e74c3c; transform: scale(1.2); }
+    .todo-item:hover .todo-del { opacity: 1; }
+    .todo-del:hover { color: #e74c3c; }
 
     .todo-clear-btn {
-      align-self: flex-end;
-      padding: 0.5rem 1.2rem;
-      font-size: 0.9rem;
+      align-self: flex-start;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.82rem;
       font-family: 'Fredoka', sans-serif;
-      background: var(--bg-btn); border: none; border-radius: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       color: var(--text-muted); cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      transition: all 0.15s;
     }
-    .todo-clear-btn:hover { background: rgba(231,76,60,0.2); color: #e74c3c; }
+    .todo-clear-btn:hover { border-color: #e74c3c; color: #e74c3c; }
 
     /* =============================================
        TIMER PAGE
@@ -1113,158 +1195,56 @@
     .game-card { position: relative; }
 
 
+    /* AI Page */
 
-
-    @media (max-width: 700px) {
-      .notes-page { flex-direction: column; }
-      .compose-panel { width: 100%; }
-      header { font-size: 1.8rem; padding: 1rem; }
-      .clock-display { font-size: 4rem; }
-      .progress-ring-wrap { width: 220px; height: 220px; }
-    }
-
-    /* ── AI Page ── */
-    .ai-page {
-      flex: 1; display: flex; flex-direction: column;
-      height: calc(100vh - 112px); max-width: 820px;
-      width: 100%; margin: 0 auto; padding: 1rem 1.5rem 0;
-    }
-    .ai-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 0 0.75rem; flex-shrink: 0; border-bottom: 1px solid var(--border);
-    }
-    .ai-topbar h2 { margin: 0; font-size: 1.3rem; color: var(--text-secondary); }
-    .ai-messages {
-      flex: 1; overflow-y: auto; display: flex; flex-direction: column;
-      gap: 1rem; padding: 0.5rem 0 1rem;
-    }
-    .ai-msg { display: flex; gap: 0.75rem; align-items: flex-start; max-width: 100%; }
-    .ai-msg.user { flex-direction: row-reverse; }
-    .ai-msg-avatar {
-      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; background: var(--bg-surface); border: 1px solid var(--border);
-    }
-    .ai-msg.user .ai-msg-avatar { background: var(--accent); border-color: var(--accent); }
-    .ai-msg-bubble {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 0.75rem 1rem;
-      font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);
-      max-width: 82%; white-space: pre-wrap; word-break: break-word;
-    }
-    .ai-msg.user .ai-msg-bubble {
-      background: var(--accent); border-color: var(--accent); color: #fff;
-      border-top-right-radius: 4px;
-    }
-    .ai-msg.assistant .ai-msg-bubble { border-top-left-radius: 4px; }
-    .ai-msg-bubble.thinking { color: var(--text-muted); font-style: italic; }
-    .ai-msg-bubble.thinking::after {
-      content: ''; display: inline-block; width: 6px; height: 6px;
-      background: var(--text-muted); border-radius: 50%;
-      margin-left: 4px; animation: ai-blink 1s infinite;
-    }
-    @keyframes ai-blink { 0%,100%{opacity:0.2} 50%{opacity:1} }
-    .ai-input-row {
-      display: flex; gap: 0.6rem; padding: 0.8rem 0 1rem;
-      border-top: 1px solid var(--border); flex-shrink: 0;
-    }
-    .ai-input-row textarea {
-      flex: 1; background: var(--bg-input); border: 1px solid var(--border);
-      border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.95rem;
-      color: var(--text-primary); resize: none; line-height: 1.5;
-      max-height: 140px; transition: border-color 0.2s;
-    }
-    .ai-input-row textarea:focus { border-color: var(--accent); }
-    .ai-send-btn {
-      width: 44px; height: 44px; background: var(--accent); border: none;
-      border-radius: 12px; color: #fff; font-size: 1.2rem; cursor: pointer;
-      flex-shrink: 0; align-self: flex-end; transition: opacity 0.2s;
-    }
-    .ai-send-btn:hover { opacity: 0.88; }
-    .ai-send-btn:disabled { opacity: 0.4; cursor: default; }
-    .ai-clear-btn {
-      background: none; border: 1px solid var(--border); border-radius: 10px;
-      color: var(--text-muted); padding: 0 0.8rem; cursor: pointer;
-      font-size: 0.82rem; align-self: flex-end; height: 44px;
-    }
-    .ai-clear-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
-    .ai-empty {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 1rem; padding: 2rem; text-align: center; color: var(--text-muted);
-    }
-    .ai-empty span { font-size: 3rem; }
-    .ai-empty p { font-size: 1rem; line-height: 1.6; margin: 0; }
-    .ai-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.5rem; }
-    .ai-suggestion-btn {
-      padding: 0.5rem 1rem; font-size: 0.88rem;
-      background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 20px; color: var(--text-secondary); cursor: pointer;
-    }
-    .ai-suggestion-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
-
-    /* PDF viewer enhancements */
-    .pdf-scroll-container {
-      width: 100%; display: flex; flex-direction: column;
-      align-items: center; gap: 1.2rem; padding: 1.2rem 0 3rem;
-    }
-    .pdf-page-wrap { position: relative; display: inline-block; }
-    .pdf-page-canvas {
-      max-width: 100%; border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5); display: block;
-    }
-    .pdf-bookmark-btn {
-      position: absolute; top: 0; right: 4px;
-      background: none; border: none; cursor: pointer;
-      font-size: 1.6rem; line-height: 1; padding: 0.1rem;
-      opacity: 0; transition: opacity 0.2s, transform 0.15s;
-    }
-    .pdf-page-wrap:hover .pdf-bookmark-btn { opacity: 0.7; }
-    .pdf-bookmark-btn.bookmarked { opacity: 1 !important; transform: scale(1.1); }
-    .pdf-hud {
-      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
-      z-index: 20; display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(15,15,20,0.92); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.45rem 0.9rem; border-radius: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      transition: opacity 0.4s; pointer-events: all;
-    }
-    .pdf-hud.hidden { opacity: 0; pointer-events: none; }
-    .pdf-hud-btn {
-      background: none; border: none; color: rgba(255,255,255,0.85);
-      cursor: pointer; font-size: 0.9rem; padding: 0.2rem 0.5rem;
-      border-radius: 20px; transition: background 0.15s;
-    }
-    .pdf-hud-btn:hover { background: rgba(255,255,255,0.15); }
-    .pdf-hud-btn:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-    .pdf-hud-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.2); }
-    .pdf-hud-info { font-size: 0.82rem; color: rgba(255,255,255,0.7); min-width: 80px; text-align: center; }
-    .pdf-bm-panel {
-      position: absolute; right: 0; top: 0; bottom: 0; width: 220px;
-      background: var(--bg-card); border-left: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      transform: translateX(100%); transition: transform 0.25s;
-      z-index: 15; overflow: hidden;
-    }
-    .pdf-bm-panel.open { transform: translateX(0); }
-    .pdf-bm-header {
-      padding: 0.7rem 1rem; font-size: 0.9rem; font-weight: 600;
-      color: var(--text-secondary); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-    }
-    .pdf-bm-list { flex: 1; overflow-y: auto; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    .pdf-bm-item {
-      display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.5rem 0.7rem; background: var(--bg-input);
-      border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
-    }
-    .pdf-bm-item:hover { background: var(--bg-btn-hover); }
-    .pdf-bm-item span { flex: 1; font-size: 0.85rem; color: var(--text-secondary); }
-    .pdf-bm-del { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; padding: 0.1rem 0.3rem; border-radius: 4px; }
-    .pdf-bm-del:hover { color: #e74c3c; }
-    .pdf-bm-empty { font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1.5rem; }
-    .file-viewer-body { position: relative; overflow: hidden; }
+    .ai-topbar{display:flex;align-items:center;justify-content:space-between;padding:0 0 0.75rem;flex-shrink:0;border-bottom:1px solid var(--border);}
+    .ai-topbar h2{margin:0;font-size:1.3rem;color:var(--text-secondary);}
+    .ai-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1rem;padding:0.5rem 0 1rem;}
+    .ai-msg{display:flex;gap:0.75rem;align-items:flex-start;}
+    .ai-msg.user{flex-direction:row-reverse;}
+    .ai-msg-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:var(--bg-surface);border:1px solid var(--border);}
+    .ai-msg.user .ai-msg-avatar{background:var(--accent);border-color:var(--accent);}
+    .ai-msg-bubble{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:0.75rem 1rem;font-size:0.95rem;line-height:1.6;color:var(--text-primary);max-width:82%;white-space:pre-wrap;word-break:break-word;}
+    .ai-msg.user .ai-msg-bubble{background:var(--accent);border-color:var(--accent);color:#fff;border-top-right-radius:4px;}
+    .ai-msg.assistant .ai-msg-bubble{border-top-left-radius:4px;}
+    .ai-msg-bubble.thinking{color:var(--text-muted);font-style:italic;}
+    .ai-msg-bubble.thinking::after{content:'';display:inline-block;width:6px;height:6px;background:var(--text-muted);border-radius:50%;margin-left:4px;animation:ai-blink 1s infinite;}
+    @keyframes ai-blink{0%,100%{opacity:0.2}50%{opacity:1}}
+    .ai-input-row{display:flex;gap:0.6rem;padding:0.8rem 0 1rem;border-top:1px solid var(--border);flex-shrink:0;}
+    .ai-input-row textarea{flex:1;background:var(--bg-input);border:1px solid var(--border);border-radius:12px;padding:0.75rem 1rem;font-size:0.95rem;color:var(--text-primary);resize:none;line-height:1.5;max-height:140px;}
+    .ai-input-row textarea:focus{border-color:var(--accent);}
+    .ai-send-btn{width:44px;height:44px;background:var(--accent);border:none;border-radius:12px;color:#fff;font-size:1.2rem;cursor:pointer;flex-shrink:0;align-self:flex-end;}
+    .ai-send-btn:hover{opacity:0.88;} .ai-send-btn:disabled{opacity:0.4;cursor:default;}
+    .ai-clear-btn{background:none;border:1px solid var(--border);border-radius:10px;color:var(--text-muted);padding:0 0.8rem;cursor:pointer;font-size:0.82rem;align-self:flex-end;height:44px;}
+    .ai-clear-btn:hover{background:var(--bg-btn-hover);color:var(--text-primary);}
+    .ai-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center;color:var(--text-muted);}
+    .ai-empty span{font-size:3rem;} .ai-empty p{font-size:1rem;line-height:1.6;margin:0;}
+    .ai-suggestions{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:0.5rem;}
+    .ai-suggestion-btn{padding:0.5rem 1rem;font-size:0.88rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);cursor:pointer;}
+    .ai-suggestion-btn:hover{background:var(--bg-btn-hover);color:var(--text-primary);}
+    /* PDF */
+    .file-viewer-body{position:relative;overflow:hidden;}
+    .pdf-scroll-container{width:100%;display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:1.2rem 0 3rem;}
+    .pdf-page-wrap{position:relative;display:inline-block;}
+    .pdf-page-canvas{max-width:100%;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,0.5);display:block;}
+    .pdf-bookmark-btn{position:absolute;top:0;right:4px;background:none;border:none;cursor:pointer;font-size:1.6rem;opacity:0;transition:opacity 0.2s;}
+    .pdf-page-wrap:hover .pdf-bookmark-btn{opacity:0.7;} .pdf-bookmark-btn.bookmarked{opacity:1!important;}
+    .pdf-hud{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:0.5rem;background:rgba(15,15,20,0.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);padding:0.45rem 0.9rem;border-radius:40px;transition:opacity 0.4s;pointer-events:all;}
+    .pdf-hud.hidden{opacity:0;pointer-events:none;}
+    .pdf-hud-btn{background:none;border:none;color:rgba(255,255,255,0.85);cursor:pointer;font-size:0.9rem;padding:0.2rem 0.5rem;border-radius:20px;}
+    .pdf-hud-btn:hover{background:rgba(255,255,255,0.15);} .pdf-hud-btn:disabled{opacity:0.3;cursor:default;pointer-events:none;}
+    .pdf-hud-sep{width:1px;height:18px;background:rgba(255,255,255,0.2);}
+    .pdf-hud-info{font-size:0.82rem;color:rgba(255,255,255,0.7);min-width:80px;text-align:center;}
+    .pdf-bm-panel{position:absolute;right:0;top:0;bottom:0;width:220px;background:var(--bg-card);border-left:1px solid var(--border);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.25s;z-index:15;overflow:hidden;}
+    .pdf-bm-panel.open{transform:translateX(0);}
+    .pdf-bm-header{padding:0.7rem 1rem;font-size:0.9rem;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+    .pdf-bm-list{flex:1;overflow-y:auto;padding:0.5rem;display:flex;flex-direction:column;gap:0.4rem;}
+    .pdf-bm-item{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.7rem;background:var(--bg-input);border-radius:8px;cursor:pointer;border:1px solid var(--border);}
+    .pdf-bm-item:hover{background:var(--bg-btn-hover);}
+    .pdf-bm-item span{flex:1;font-size:0.85rem;color:var(--text-secondary);}
+    .pdf-bm-del{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem;padding:0.1rem 0.3rem;border-radius:4px;}
+    .pdf-bm-del:hover{color:#e74c3c;}
+    .pdf-bm-empty{font-size:0.85rem;color:var(--text-muted);text-align:center;padding:1.5rem;}
 /* =============================================
        DRAW PAGE
     ============================================= */
@@ -1501,7 +1481,7 @@
 
   <!-- Nav tabs -->
   <nav class="nav-tabs" id="nav-tabs">
-    <button class="nav-tab active" id="tab-games"  onclick="switchPage('games')">🎮 Games</button>
+    <button class="nav-tab active" id="tab-games"  onclick="switchPage('games')" style="display:none;">🎮 Games</button>
     <button class="nav-tab"        id="tab-notes"  onclick="switchPage('notes')">📝 Notes</button>
     <button class="nav-tab"        id="tab-todo"   onclick="switchPage('todo')">✅ To-Do</button>
     <button class="nav-tab"        id="tab-timer"  onclick="switchPage('timer')">⏱ Timer</button>
@@ -1509,7 +1489,6 @@
     <button class="nav-tab"        id="tab-calc"   onclick="switchPage('calc')">🧮 Calculator</button>
     <button class="nav-tab"        id="tab-files"  onclick="switchPage('files')">📂 Files</button>
     <button class="nav-tab"        id="tab-draw"   onclick="switchPage('draw')">🎨 Draw</button>
-    <button class="nav-tab"        id="tab-ai"     onclick="switchPage('ai')">✨ AI</button>
     <button class="nav-tab" id="tab-panic" onclick="panicOut()" style="display:none; background:#c0392b; color:#fff;">🚨 Panic</button>
   </nav>
 
@@ -1564,6 +1543,14 @@
         </select>
         <div class="colour-row" id="colour-row"><span>Colour:</span></div>
         <button class="notes-save-btn" id="notes-save-btn">＋ Save Note</button>
+
+        <!-- Translator -->
+        <div class="gtranslate-wrap">
+          <div class="gtranslate-label">🌐 Translate</div>
+          <textarea id="translate-input" class="translate-input" placeholder="Type text to translate…" rows="3"></textarea>
+          <button class="translate-open-btn" id="translate-open-btn">Open in Google Translate ↗</button>
+        </div>
+      </div>
       </div>
       <div class="notes-panel">
         <div class="notes-header-row">
@@ -1588,7 +1575,6 @@
   <!-- ══ TO-DO PAGE ══ -->
   <div class="page" id="page-todo">
     <div class="todo-page">
-      <h2 style="margin:0;font-size:1.5rem;color:var(--text-secondary)">To-Do List</h2>
       <div class="todo-add-row">
         <input type="text" id="todo-input" placeholder="Add a task… (Enter to add)">
         <select id="todo-priority">
@@ -1808,6 +1794,7 @@
         });
     }
 
+
     /* ============================================================
        TOAST
     ============================================================ */
@@ -1843,8 +1830,10 @@
     function switchPage(name) {
       document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
       document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
-      document.getElementById('page-' + name).classList.add('active');
-      document.getElementById('tab-' + name).classList.add('active');
+      var page = document.getElementById('page-' + name);
+      var tab  = document.getElementById('tab-' + name);
+      if (page) page.classList.add('active');
+      if (tab)  tab.classList.add('active');
     }
 
     /* ============================================================
@@ -1852,24 +1841,20 @@
     ============================================================ */
     function checkPassword() {
       var input = document.getElementById('password-input');
-      var err   = document.getElementById('error-message');
       var val   = input.value;
-
+      var err   = document.getElementById('error-message');
       hashInput(val).then(function(hash) {
-        if (hash === GAMES_PASSWORD_HASH) {
-          // Secret code — show everything including Games
+        if (hash === PASSWORD_HASH || hash === GAMES_PASSWORD_HASH) {
           document.getElementById('password-section').style.display = 'none';
           document.getElementById('nav-tabs').classList.add('visible');
-          document.getElementById('tab-games').style.display = '';
-          document.getElementById('tab-panic').style.display = '';
-          switchPage('games');
-          renderRecent();
-        } else if (hash === PASSWORD_HASH) {
-          // Normal password — hide Games tab
-          document.getElementById('password-section').style.display = 'none';
-          document.getElementById('nav-tabs').classList.add('visible');
-          document.getElementById('tab-games').style.display = 'none';
-          switchPage('notes');
+          if (hash === GAMES_PASSWORD_HASH) {
+            document.getElementById('tab-games').style.display = '';
+            document.getElementById('tab-panic').style.display = '';
+            switchPage('games');
+            buildCards();
+          } else {
+            switchPage('notes');
+          }
         } else {
           err.style.display = 'block';
           input.value = '';
@@ -1879,9 +1864,10 @@
     }
 
     document.getElementById('submit-btn').addEventListener('click', checkPassword);
-    document.getElementById('password-input').addEventListener('keypress', function(e) {
+    document.getElementById('password-input').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') checkPassword();
     });
+
 
     function panicOut() {
       document.getElementById('tab-games').style.display = 'none';
@@ -2136,6 +2122,14 @@
       renderNotes();
     }
 
+    // Translator — open Google Translate in new tab with prefilled text
+    document.getElementById('translate-open-btn').addEventListener('click', function() {
+      var text = document.getElementById('translate-input').value.trim();
+      if (!text) { showToast('Type something to translate first!'); return; }
+      var url = 'https://translate.google.com/?sl=auto&tl=en&text=' + encodeURIComponent(text) + '&op=translate';
+      window.open(url, '_blank');
+    });
+
     document.getElementById('notes-save-btn').addEventListener('click', function() {
       var title = document.getElementById('note-title').value;
       var body  = document.getElementById('note-body').value;
@@ -2150,6 +2144,7 @@
           document.getElementById('note-tag').value   = '';
           document.getElementById('tab-games').style.display = '';
           document.getElementById('tab-panic').style.display = '';
+          buildCards();
           switchPage('games');
           renderRecent();
         } else {
@@ -2177,7 +2172,9 @@
             document.getElementById('note-tag').value = '';
             document.getElementById('tab-games').style.display = '';
             document.getElementById('tab-panic').style.display = '';
+            buildCards();
             switchPage('games');
+            renderRecent();
           } else {
             addNote(title, body, selectedColour, document.getElementById('note-tag').value);
             document.getElementById('note-title').value = '';
@@ -2192,6 +2189,7 @@
     document.getElementById('search-input').addEventListener('input', renderNotes);
     document.getElementById('filter-tag').addEventListener('change', renderNotes);
     renderNotes();
+
 
     /* ============================================================
        NOTES — EDIT MODAL
@@ -2911,179 +2909,39 @@
     }
 
     function renderPDF(url, body, fileName) {
-      var bookmarkKey = 'pdf_bm_' + (fileName || url).replace(/[^a-z0-9]/gi, '_');
-      var bookmarks   = lsGet(bookmarkKey, []);
+      var BM = '\uD83D\uDD16', TAG = '\uD83C\uDFF7\uFE0F', BOOK = '\uD83D\uDCD1';
+      var bookmarkKey = 'pdf_bm_' + (fileName||url).replace(/[^a-z0-9]/gi,'_');
+      var bookmarks = lsGet(bookmarkKey, []);
       var pageCanvases = [], currentPage = 1, totalPages = 0;
-
       body.style.cssText = 'padding:0;background:#111;position:relative;overflow:hidden;';
       var scroll = document.createElement('div');
       scroll.style.cssText = 'position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;';
-      var container = document.createElement('div');
-      container.className = 'pdf-scroll-container';
+      var container = document.createElement('div'); container.className = 'pdf-scroll-container';
       scroll.appendChild(container);
-
-      var bmPanel = document.createElement('div');
-      bmPanel.className = 'pdf-bm-panel';
-      bmPanel.innerHTML = '<div class="pdf-bm-header"><span>\uD83D\uDD16 Bookmarks</span>'
-        + '<button class="pdf-hud-btn" id="pdf-bm-close">\u2715</button></div>'
-        + '<div class="pdf-bm-list" id="pdf-bm-list"></div>';
-
-      var hud = document.createElement('div');
-      hud.className = 'pdf-hud';
-      hud.innerHTML =
-        '<button class="pdf-hud-btn" id="pdf-prev" disabled>&#9664;</button>'
-        + '<span class="pdf-hud-info" id="pdf-page-info">Loading\u2026</span>'
-        + '<button class="pdf-hud-btn" id="pdf-next" disabled>&#9654;</button>'
-        + '<div class="pdf-hud-sep"></div>'
-        + '<button class="pdf-hud-btn" id="pdf-bm-add">\uD83D\uDD16</button>'
-        + '<button class="pdf-hud-btn" id="pdf-bm-toggle">\uD83D\uDCD1</button>';
-
-      body.appendChild(scroll);
-      body.appendChild(hud);
-      body.appendChild(bmPanel);
-
-      function q(id) { return hud.querySelector('#'+id) || document.getElementById(id); }
-
+      var bmPanel = document.createElement('div'); bmPanel.className = 'pdf-bm-panel';
+      bmPanel.innerHTML = '<div class="pdf-bm-header"><span>' + BM + ' Bookmarks</span><button class="pdf-hud-btn" id="pdf-bm-close">&times;</button></div><div class="pdf-bm-list" id="pdf-bm-list"></div>';
+      var hud = document.createElement('div'); hud.className = 'pdf-hud';
+      hud.innerHTML = '<button class="pdf-hud-btn" id="pdf-prev" disabled>&#9664;</button><span class="pdf-hud-info" id="pdf-page-info">Loading&hellip;</span><button class="pdf-hud-btn" id="pdf-next" disabled>&#9654;</button><div class="pdf-hud-sep"></div><button class="pdf-hud-btn" id="pdf-bm-add">' + BM + '</button><button class="pdf-hud-btn" id="pdf-bm-toggle">' + BOOK + '</button>';
+      body.appendChild(scroll); body.appendChild(hud); body.appendChild(bmPanel);
+      function q(id){return document.getElementById(id);}
       var hudTimer;
-      function showHud() {
-        hud.classList.remove('hidden'); clearTimeout(hudTimer);
-        hudTimer = setTimeout(function() { hud.classList.add('hidden'); }, 2500);
-      }
-      scroll.addEventListener('mousemove', showHud);
-      scroll.addEventListener('scroll', showHud);
-      showHud();
-
-      function saveBookmarks() { lsSet(bookmarkKey, bookmarks); }
-
-      function refreshRibbon(p) {
-        var wrap = pageCanvases[p-1] && pageCanvases[p-1].parentElement;
-        if (!wrap) return;
-        var btn = wrap.querySelector('.pdf-bookmark-btn');
-        if (!btn) return;
-        var on = bookmarks.indexOf(p) >= 0;
-        btn.textContent = on ? '\uD83D\uDD16' : '\uD83C\uDFF7\uFE0F';
-        btn.classList.toggle('bookmarked', on);
-      }
-
-      function renderBmList() {
-        var list = document.getElementById('pdf-bm-list');
-        if (!list) return;
-        list.innerHTML = '';
-        if (!bookmarks.length) {
-          list.innerHTML = '<div class="pdf-bm-empty">No bookmarks yet.<br>Click \uD83D\uDD16 on any page.</div>';
-          return;
-        }
-        bookmarks.slice().sort(function(a,b){return a-b;}).forEach(function(p) {
-          var item = document.createElement('div');
-          item.className = 'pdf-bm-item';
-          item.innerHTML = '<span>\uD83D\uDD16 Page ' + p + '</span><button class="pdf-bm-del">\u2715</button>';
-          item.querySelector('span').addEventListener('click', function() { scrollToPage(p); });
-          item.querySelector('.pdf-bm-del').addEventListener('click', function(e) {
-            e.stopPropagation();
-            bookmarks = bookmarks.filter(function(x){return x!==p;});
-            saveBookmarks(); renderBmList(); refreshRibbon(p); updateHud();
-          });
-          list.appendChild(item);
-        });
-      }
-
-      function updateHud() {
-        q('pdf-page-info').textContent = 'Page ' + currentPage + ' of ' + totalPages;
-        q('pdf-prev').disabled = currentPage <= 1;
-        q('pdf-next').disabled = currentPage >= totalPages;
-        var on = bookmarks.indexOf(currentPage) >= 0;
-        q('pdf-bm-add').style.color = on ? '#f5c518' : '';
-      }
-
-      function scrollToPage(n) {
-        currentPage = Math.max(1, Math.min(n, pageCanvases.length));
-        var el = pageCanvases[currentPage-1];
-        if (el && el.parentElement) el.parentElement.scrollIntoView({behavior:'smooth', block:'start'});
-        updateHud(); showHud();
-      }
-
-      q('pdf-prev').addEventListener('click', function() { scrollToPage(currentPage-1); });
-      q('pdf-next').addEventListener('click', function() { scrollToPage(currentPage+1); });
-
-      q('pdf-bm-add').addEventListener('click', function() {
-        var i = bookmarks.indexOf(currentPage);
-        if (i >= 0) bookmarks.splice(i,1); else bookmarks.push(currentPage);
-        saveBookmarks(); renderBmList(); updateHud(); refreshRibbon(currentPage);
-        showToast(i >= 0 ? 'Bookmark removed' : 'Page ' + currentPage + ' bookmarked \uD83D\uDD16');
-      });
-
-      q('pdf-bm-toggle').addEventListener('click', function() {
-        bmPanel.classList.toggle('open'); renderBmList();
-        scroll.style.right = bmPanel.classList.contains('open') ? '220px' : '0';
-      });
-
-      document.getElementById('pdf-bm-close').addEventListener('click', function() {
-        bmPanel.classList.remove('open'); scroll.style.right = '0';
-      });
-
-      function onKey(e) {
-        if (!document.getElementById('file-viewer-overlay').classList.contains('open')) return;
-        if (e.key==='ArrowDown'||e.key==='ArrowRight') { e.preventDefault(); scroll.scrollBy({top:120,behavior:'smooth'}); showHud(); }
-        if (e.key==='ArrowUp'  ||e.key==='ArrowLeft')  { e.preventDefault(); scroll.scrollBy({top:-120,behavior:'smooth'}); showHud(); }
-      }
-      document.addEventListener('keydown', onKey);
-
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            var c = entry.target.querySelector('canvas');
-            var idx = pageCanvases.indexOf(c) + 1;
-            if (idx > 0) { currentPage = idx; updateHud(); }
-          }
-        });
-      }, {root: scroll, threshold: 0.35});
-
-      function startRender() {
-        pdfjsLib.getDocument(url).promise.then(function(doc) {
-          totalPages = doc.numPages; updateHud();
-          q('pdf-next').disabled = totalPages <= 1;
-          function renderPage(n) {
-            if (n > totalPages) return;
-            doc.getPage(n).then(function(page) {
-              var avail = scroll.clientWidth - 40 || 600;
-              var scale = Math.min(avail / page.getViewport({scale:1}).width, 2.5);
-              var vp = page.getViewport({scale: scale});
-              var wrap = document.createElement('div'); wrap.className = 'pdf-page-wrap';
-              var c = document.createElement('canvas'); c.className = 'pdf-page-canvas';
-              c.width = vp.width; c.height = vp.height; wrap.appendChild(c);
-              var bmBtn = document.createElement('button');
-              bmBtn.className = 'pdf-bookmark-btn' + (bookmarks.indexOf(n)>=0?' bookmarked':'');
-              bmBtn.textContent = bookmarks.indexOf(n)>=0 ? '\uD83D\uDD16' : '\uD83C\uDFF7\uFE0F';
-              (function(pn) {
-                bmBtn.addEventListener('click', function() {
-                  var i = bookmarks.indexOf(pn);
-                  if (i>=0) bookmarks.splice(i,1); else bookmarks.push(pn);
-                  saveBookmarks(); renderBmList(); updateHud(); refreshRibbon(pn);
-                  showToast(i>=0 ? 'Bookmark removed' : 'Page '+pn+' bookmarked \uD83D\uDD16');
-                });
-              })(n);
-              wrap.appendChild(bmBtn);
-              container.appendChild(wrap);
-              pageCanvases.push(c); observer.observe(wrap);
-              page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise.then(function() { renderPage(n+1); });
-            });
-          }
-          renderPage(1); renderBmList();
-        }).catch(function() { q('pdf-page-info').textContent = 'Failed to load PDF'; });
-      }
-
-      if (window.pdfjsLib) { startRender(); }
-      else {
-        var s = document.createElement('script');
-        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-        s.onload = function() {
-          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-          startRender();
-        };
-        document.head.appendChild(s);
-      }
+      function showHud(){hud.classList.remove('hidden');clearTimeout(hudTimer);hudTimer=setTimeout(function(){hud.classList.add('hidden');},2500);}
+      scroll.addEventListener('mousemove',showHud);scroll.addEventListener('scroll',showHud);showHud();
+      function saveBookmarks(){lsSet(bookmarkKey,bookmarks);}
+      function refreshRibbon(p){var w=pageCanvases[p-1]&&pageCanvases[p-1].parentElement;if(!w)return;var b=w.querySelector('.pdf-bookmark-btn');if(!b)return;b.textContent=bookmarks.indexOf(p)>=0?BM:TAG;b.classList.toggle('bookmarked',bookmarks.indexOf(p)>=0);}
+      function renderBmList(){var list=q('pdf-bm-list');if(!list)return;list.innerHTML='';if(!bookmarks.length){list.innerHTML='<div class="pdf-bm-empty">No bookmarks yet.</div>';return;}bookmarks.slice().sort(function(a,b){return a-b;}).forEach(function(p){var item=document.createElement('div');item.className='pdf-bm-item';item.innerHTML='<span>'+BM+' Page '+p+'</span><button class="pdf-bm-del">&times;</button>';item.querySelector('span').addEventListener('click',function(){scrollToPage(p);});item.querySelector('.pdf-bm-del').addEventListener('click',function(e){e.stopPropagation();bookmarks=bookmarks.filter(function(x){return x!==p;});saveBookmarks();renderBmList();refreshRibbon(p);updateHud();});list.appendChild(item);});}
+      function updateHud(){q('pdf-page-info').textContent='Page '+currentPage+' of '+totalPages;q('pdf-prev').disabled=currentPage<=1;q('pdf-next').disabled=currentPage>=totalPages;q('pdf-bm-add').style.color=bookmarks.indexOf(currentPage)>=0?'#f5c518':'';}
+      function scrollToPage(n){currentPage=Math.max(1,Math.min(n,pageCanvases.length));var el=pageCanvases[currentPage-1];if(el&&el.parentElement)el.parentElement.scrollIntoView({behavior:'smooth',block:'start'});updateHud();showHud();}
+      q('pdf-prev').addEventListener('click',function(){scrollToPage(currentPage-1);});
+      q('pdf-next').addEventListener('click',function(){scrollToPage(currentPage+1);});
+      q('pdf-bm-add').addEventListener('click',function(){var i=bookmarks.indexOf(currentPage);if(i>=0)bookmarks.splice(i,1);else bookmarks.push(currentPage);saveBookmarks();renderBmList();updateHud();refreshRibbon(currentPage);showToast(i>=0?'Bookmark removed':'Page '+currentPage+' bookmarked '+BM);});
+      q('pdf-bm-toggle').addEventListener('click',function(){bmPanel.classList.toggle('open');renderBmList();scroll.style.right=bmPanel.classList.contains('open')?'220px':'0';});
+      q('pdf-bm-close').addEventListener('click',function(){bmPanel.classList.remove('open');scroll.style.right='0';});
+      document.addEventListener('keydown',function(e){if(!document.getElementById('file-viewer-overlay').classList.contains('open'))return;if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();scroll.scrollBy({top:120,behavior:'smooth'});showHud();}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();scroll.scrollBy({top:-120,behavior:'smooth'});showHud();}});
+      var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){var c=entry.target.querySelector('canvas');var idx=pageCanvases.indexOf(c)+1;if(idx>0){currentPage=idx;updateHud();}}});},{root:scroll,threshold:0.35});
+      function startRender(){pdfjsLib.getDocument(url).promise.then(function(doc){totalPages=doc.numPages;updateHud();q('pdf-next').disabled=totalPages<=1;function renderPage(n){if(n>totalPages)return;doc.getPage(n).then(function(page){var avail=scroll.clientWidth-40||600;var scale=Math.min(avail/page.getViewport({scale:1}).width,2.5);var vp=page.getViewport({scale:scale});var wrap=document.createElement('div');wrap.className='pdf-page-wrap';var c=document.createElement('canvas');c.className='pdf-page-canvas';c.width=vp.width;c.height=vp.height;wrap.appendChild(c);var bmBtn=document.createElement('button');bmBtn.className='pdf-bookmark-btn'+(bookmarks.indexOf(n)>=0?' bookmarked':'');bmBtn.textContent=bookmarks.indexOf(n)>=0?BM:TAG;(function(pn){bmBtn.addEventListener('click',function(){var i=bookmarks.indexOf(pn);if(i>=0)bookmarks.splice(i,1);else bookmarks.push(pn);saveBookmarks();renderBmList();updateHud();refreshRibbon(pn);showToast(i>=0?'Bookmark removed':'Page '+pn+' bookmarked '+BM);});})(n);wrap.appendChild(bmBtn);container.appendChild(wrap);pageCanvases.push(c);obs.observe(wrap);page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise.then(function(){renderPage(n+1);});});} renderPage(1);renderBmList();}).catch(function(){q('pdf-page-info').textContent='Failed to load PDF';});}
+      if(window.pdfjsLib){startRender();}else{var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';s.onload=function(){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';startRender();};document.head.appendChild(s);}
     }
-    
     function closeViewer() {
       document.getElementById('file-viewer-overlay').classList.remove('open');
       // Stop any media
@@ -3248,148 +3106,56 @@
       pointer-events: none;
     }
 
-    /* ── AI Page ── */
-    .ai-page {
-      flex: 1; display: flex; flex-direction: column;
-      height: calc(100vh - 112px); max-width: 820px;
-      width: 100%; margin: 0 auto; padding: 1rem 1.5rem 0;
-    }
-    .ai-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 0 0.75rem; flex-shrink: 0; border-bottom: 1px solid var(--border);
-    }
-    .ai-topbar h2 { margin: 0; font-size: 1.3rem; color: var(--text-secondary); }
-    .ai-messages {
-      flex: 1; overflow-y: auto; display: flex; flex-direction: column;
-      gap: 1rem; padding: 0.5rem 0 1rem;
-    }
-    .ai-msg { display: flex; gap: 0.75rem; align-items: flex-start; max-width: 100%; }
-    .ai-msg.user { flex-direction: row-reverse; }
-    .ai-msg-avatar {
-      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; background: var(--bg-surface); border: 1px solid var(--border);
-    }
-    .ai-msg.user .ai-msg-avatar { background: var(--accent); border-color: var(--accent); }
-    .ai-msg-bubble {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 0.75rem 1rem;
-      font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);
-      max-width: 82%; white-space: pre-wrap; word-break: break-word;
-    }
-    .ai-msg.user .ai-msg-bubble {
-      background: var(--accent); border-color: var(--accent); color: #fff;
-      border-top-right-radius: 4px;
-    }
-    .ai-msg.assistant .ai-msg-bubble { border-top-left-radius: 4px; }
-    .ai-msg-bubble.thinking { color: var(--text-muted); font-style: italic; }
-    .ai-msg-bubble.thinking::after {
-      content: ''; display: inline-block; width: 6px; height: 6px;
-      background: var(--text-muted); border-radius: 50%;
-      margin-left: 4px; animation: ai-blink 1s infinite;
-    }
-    @keyframes ai-blink { 0%,100%{opacity:0.2} 50%{opacity:1} }
-    .ai-input-row {
-      display: flex; gap: 0.6rem; padding: 0.8rem 0 1rem;
-      border-top: 1px solid var(--border); flex-shrink: 0;
-    }
-    .ai-input-row textarea {
-      flex: 1; background: var(--bg-input); border: 1px solid var(--border);
-      border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.95rem;
-      color: var(--text-primary); resize: none; line-height: 1.5;
-      max-height: 140px; transition: border-color 0.2s;
-    }
-    .ai-input-row textarea:focus { border-color: var(--accent); }
-    .ai-send-btn {
-      width: 44px; height: 44px; background: var(--accent); border: none;
-      border-radius: 12px; color: #fff; font-size: 1.2rem; cursor: pointer;
-      flex-shrink: 0; align-self: flex-end; transition: opacity 0.2s;
-    }
-    .ai-send-btn:hover { opacity: 0.88; }
-    .ai-send-btn:disabled { opacity: 0.4; cursor: default; }
-    .ai-clear-btn {
-      background: none; border: 1px solid var(--border); border-radius: 10px;
-      color: var(--text-muted); padding: 0 0.8rem; cursor: pointer;
-      font-size: 0.82rem; align-self: flex-end; height: 44px;
-    }
-    .ai-clear-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
-    .ai-empty {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 1rem; padding: 2rem; text-align: center; color: var(--text-muted);
-    }
-    .ai-empty span { font-size: 3rem; }
-    .ai-empty p { font-size: 1rem; line-height: 1.6; margin: 0; }
-    .ai-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.5rem; }
-    .ai-suggestion-btn {
-      padding: 0.5rem 1rem; font-size: 0.88rem;
-      background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 20px; color: var(--text-secondary); cursor: pointer;
-    }
-    .ai-suggestion-btn:hover { background: var(--bg-btn-hover); color: var(--text-primary); }
+    /* AI Page */
 
-    /* PDF viewer enhancements */
-    .pdf-scroll-container {
-      width: 100%; display: flex; flex-direction: column;
-      align-items: center; gap: 1.2rem; padding: 1.2rem 0 3rem;
-    }
-    .pdf-page-wrap { position: relative; display: inline-block; }
-    .pdf-page-canvas {
-      max-width: 100%; border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5); display: block;
-    }
-    .pdf-bookmark-btn {
-      position: absolute; top: 0; right: 4px;
-      background: none; border: none; cursor: pointer;
-      font-size: 1.6rem; line-height: 1; padding: 0.1rem;
-      opacity: 0; transition: opacity 0.2s, transform 0.15s;
-    }
-    .pdf-page-wrap:hover .pdf-bookmark-btn { opacity: 0.7; }
-    .pdf-bookmark-btn.bookmarked { opacity: 1 !important; transform: scale(1.1); }
-    .pdf-hud {
-      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
-      z-index: 20; display: flex; align-items: center; gap: 0.5rem;
-      background: rgba(15,15,20,0.92); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.45rem 0.9rem; border-radius: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      transition: opacity 0.4s; pointer-events: all;
-    }
-    .pdf-hud.hidden { opacity: 0; pointer-events: none; }
-    .pdf-hud-btn {
-      background: none; border: none; color: rgba(255,255,255,0.85);
-      cursor: pointer; font-size: 0.9rem; padding: 0.2rem 0.5rem;
-      border-radius: 20px; transition: background 0.15s;
-    }
-    .pdf-hud-btn:hover { background: rgba(255,255,255,0.15); }
-    .pdf-hud-btn:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-    .pdf-hud-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.2); }
-    .pdf-hud-info { font-size: 0.82rem; color: rgba(255,255,255,0.7); min-width: 80px; text-align: center; }
-    .pdf-bm-panel {
-      position: absolute; right: 0; top: 0; bottom: 0; width: 220px;
-      background: var(--bg-card); border-left: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      transform: translateX(100%); transition: transform 0.25s;
-      z-index: 15; overflow: hidden;
-    }
-    .pdf-bm-panel.open { transform: translateX(0); }
-    .pdf-bm-header {
-      padding: 0.7rem 1rem; font-size: 0.9rem; font-weight: 600;
-      color: var(--text-secondary); border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-    }
-    .pdf-bm-list { flex: 1; overflow-y: auto; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    .pdf-bm-item {
-      display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.5rem 0.7rem; background: var(--bg-input);
-      border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
-    }
-    .pdf-bm-item:hover { background: var(--bg-btn-hover); }
-    .pdf-bm-item span { flex: 1; font-size: 0.85rem; color: var(--text-secondary); }
-    .pdf-bm-del { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; padding: 0.1rem 0.3rem; border-radius: 4px; }
-    .pdf-bm-del:hover { color: #e74c3c; }
-    .pdf-bm-empty { font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1.5rem; }
-    .file-viewer-body { position: relative; overflow: hidden; }
+    .ai-topbar{display:flex;align-items:center;justify-content:space-between;padding:0 0 0.75rem;flex-shrink:0;border-bottom:1px solid var(--border);}
+    .ai-topbar h2{margin:0;font-size:1.3rem;color:var(--text-secondary);}
+    .ai-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1rem;padding:0.5rem 0 1rem;}
+    .ai-msg{display:flex;gap:0.75rem;align-items:flex-start;}
+    .ai-msg.user{flex-direction:row-reverse;}
+    .ai-msg-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:var(--bg-surface);border:1px solid var(--border);}
+    .ai-msg.user .ai-msg-avatar{background:var(--accent);border-color:var(--accent);}
+    .ai-msg-bubble{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:0.75rem 1rem;font-size:0.95rem;line-height:1.6;color:var(--text-primary);max-width:82%;white-space:pre-wrap;word-break:break-word;}
+    .ai-msg.user .ai-msg-bubble{background:var(--accent);border-color:var(--accent);color:#fff;border-top-right-radius:4px;}
+    .ai-msg.assistant .ai-msg-bubble{border-top-left-radius:4px;}
+    .ai-msg-bubble.thinking{color:var(--text-muted);font-style:italic;}
+    .ai-msg-bubble.thinking::after{content:'';display:inline-block;width:6px;height:6px;background:var(--text-muted);border-radius:50%;margin-left:4px;animation:ai-blink 1s infinite;}
+    @keyframes ai-blink{0%,100%{opacity:0.2}50%{opacity:1}}
+    .ai-input-row{display:flex;gap:0.6rem;padding:0.8rem 0 1rem;border-top:1px solid var(--border);flex-shrink:0;}
+    .ai-input-row textarea{flex:1;background:var(--bg-input);border:1px solid var(--border);border-radius:12px;padding:0.75rem 1rem;font-size:0.95rem;color:var(--text-primary);resize:none;line-height:1.5;max-height:140px;}
+    .ai-input-row textarea:focus{border-color:var(--accent);}
+    .ai-send-btn{width:44px;height:44px;background:var(--accent);border:none;border-radius:12px;color:#fff;font-size:1.2rem;cursor:pointer;flex-shrink:0;align-self:flex-end;}
+    .ai-send-btn:hover{opacity:0.88;} .ai-send-btn:disabled{opacity:0.4;cursor:default;}
+    .ai-clear-btn{background:none;border:1px solid var(--border);border-radius:10px;color:var(--text-muted);padding:0 0.8rem;cursor:pointer;font-size:0.82rem;align-self:flex-end;height:44px;}
+    .ai-clear-btn:hover{background:var(--bg-btn-hover);color:var(--text-primary);}
+    .ai-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center;color:var(--text-muted);}
+    .ai-empty span{font-size:3rem;} .ai-empty p{font-size:1rem;line-height:1.6;margin:0;}
+    .ai-suggestions{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:0.5rem;}
+    .ai-suggestion-btn{padding:0.5rem 1rem;font-size:0.88rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:20px;color:var(--text-secondary);cursor:pointer;}
+    .ai-suggestion-btn:hover{background:var(--bg-btn-hover);color:var(--text-primary);}
+    /* PDF */
+    .file-viewer-body{position:relative;overflow:hidden;}
+    .pdf-scroll-container{width:100%;display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:1.2rem 0 3rem;}
+    .pdf-page-wrap{position:relative;display:inline-block;}
+    .pdf-page-canvas{max-width:100%;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,0.5);display:block;}
+    .pdf-bookmark-btn{position:absolute;top:0;right:4px;background:none;border:none;cursor:pointer;font-size:1.6rem;opacity:0;transition:opacity 0.2s;}
+    .pdf-page-wrap:hover .pdf-bookmark-btn{opacity:0.7;} .pdf-bookmark-btn.bookmarked{opacity:1!important;}
+    .pdf-hud{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:0.5rem;background:rgba(15,15,20,0.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);padding:0.45rem 0.9rem;border-radius:40px;transition:opacity 0.4s;pointer-events:all;}
+    .pdf-hud.hidden{opacity:0;pointer-events:none;}
+    .pdf-hud-btn{background:none;border:none;color:rgba(255,255,255,0.85);cursor:pointer;font-size:0.9rem;padding:0.2rem 0.5rem;border-radius:20px;}
+    .pdf-hud-btn:hover{background:rgba(255,255,255,0.15);} .pdf-hud-btn:disabled{opacity:0.3;cursor:default;pointer-events:none;}
+    .pdf-hud-sep{width:1px;height:18px;background:rgba(255,255,255,0.2);}
+    .pdf-hud-info{font-size:0.82rem;color:rgba(255,255,255,0.7);min-width:80px;text-align:center;}
+    .pdf-bm-panel{position:absolute;right:0;top:0;bottom:0;width:220px;background:var(--bg-card);border-left:1px solid var(--border);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.25s;z-index:15;overflow:hidden;}
+    .pdf-bm-panel.open{transform:translateX(0);}
+    .pdf-bm-header{padding:0.7rem 1rem;font-size:0.9rem;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+    .pdf-bm-list{flex:1;overflow-y:auto;padding:0.5rem;display:flex;flex-direction:column;gap:0.4rem;}
+    .pdf-bm-item{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.7rem;background:var(--bg-input);border-radius:8px;cursor:pointer;border:1px solid var(--border);}
+    .pdf-bm-item:hover{background:var(--bg-btn-hover);}
+    .pdf-bm-item span{flex:1;font-size:0.85rem;color:var(--text-secondary);}
+    .pdf-bm-del{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem;padding:0.1rem 0.3rem;border-radius:4px;}
+    .pdf-bm-del:hover{color:#e74c3c;}
+    .pdf-bm-empty{font-size:0.85rem;color:var(--text-muted);text-align:center;padding:1.5rem;}
 /* =============================================
        DRAW PAGE
     ============================================= */
@@ -3625,97 +3391,6 @@
 
   <div id="yt-iframe"></div>
 
-  <script>
-    var ytPlayer = null;
-    var musicPlaying = false;
-
-    // Load YouTube IFrame API
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-
-    window.onYouTubeIframeAPIReady = function() {
-      ytPlayer = new YT.Player('yt-iframe', {
-        videoId: 'Dg0IjOzopYU',
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          loop: 1,
-          playlist: 'Dg0IjOzopYU',
-          modestbranding: 1,
-          rel: 0
-        },
-        events: {
-          onReady: function(e) {
-            e.target.setVolume(50);
-          }
-        }
-      });
-    };
-
-    document.getElementById('music-toggle-btn').addEventListener('click', function() {
-      if (!ytPlayer) return;
-      var player = document.getElementById('music-player');
-      if (musicPlaying) {
-        ytPlayer.pauseVideo();
-        this.textContent = '▶';
-        player.classList.add('paused');
-        musicPlaying = false;
-      } else {
-        ytPlayer.playVideo();
-        this.textContent = '⏸';
-        player.classList.remove('paused');
-        musicPlaying = true;
-      }
-    });
-
-    document.getElementById('music-volume').addEventListener('input', function() {
-      if (ytPlayer) ytPlayer.setVolume(parseInt(this.value));
-    });
-
-    // Hide / show music player
-    var musicHidden = false;
-    document.getElementById('music-hide-btn').addEventListener('click', function() {
-      var player = document.getElementById('music-player');
-      musicHidden = !musicHidden;
-      if (musicHidden) {
-        player.classList.add('hidden-player');
-        this.textContent = '🎵';
-        this.title = 'Show music player';
-      } else {
-        player.classList.remove('hidden-player');
-        this.textContent = '✕';
-        this.title = 'Hide music player';
-      }
-    });
-  </script>
-
-
-  <!-- ══ AI PAGE ══ -->
-  <div class="page" id="page-ai">
-    <div class="ai-page">
-      <div class="ai-topbar">
-        <h2>✨ AI Assistant</h2>
-        <button class="ai-clear-btn" id="ai-clear-btn">🗑 Clear chat</button>
-      </div>
-      <div class="ai-messages" id="ai-messages">
-        <div class="ai-empty" id="ai-empty">
-          <span>✨</span>
-          <p>Ask me anything — I can help with your notes,<br>homework, ideas, or just a chat.</p>
-          <div class="ai-suggestions">
-            <button class="ai-suggestion-btn">Summarise my notes</button>
-            <button class="ai-suggestion-btn">Help me brainstorm ideas</button>
-            <button class="ai-suggestion-btn">Explain something to me</button>
-            <button class="ai-suggestion-btn">Write a to-do list</button>
-          </div>
-        </div>
-      </div>
-      <div class="ai-input-row">
-        <textarea id="ai-input" placeholder="Message AI… (Enter to send, Shift+Enter for new line)" rows="1"></textarea>
-        <button class="ai-send-btn" id="ai-send-btn" title="Send">↑</button>
-      </div>
-    </div>
-  </div>
 
 <!-- ══ DRAW PAGE ══ -->
   <div class="page" id="page-draw">
@@ -3844,11 +3519,7 @@
     </div>
   </div>
 
-    <!-- Toast -->
-  <div class="toast" id="toast"></div>
 
-  <!-- Pocket Bird -->
-  <script src="https://cdn.jsdelivr.net/gh/IdreesInc/Pocket-Bird@main/dist/web/birb.embed.js"></script>
 
 
   <script>
@@ -4364,147 +4035,41 @@
   })();
   </script>
 
-
   <script>
+    /* ── Music Player ── */
     var ytPlayer = null;
     var musicPlaying = false;
-
-    // Load YouTube IFrame API
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
-
     window.onYouTubeIframeAPIReady = function() {
       ytPlayer = new YT.Player('yt-iframe', {
         videoId: 'Dg0IjOzopYU',
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          loop: 1,
-          playlist: 'Dg0IjOzopYU',
-          modestbranding: 1,
-          rel: 0
-        },
-        events: {
-          onReady: function(e) {
-            e.target.setVolume(50);
-          }
-        }
+        playerVars: { autoplay:0, controls:0, loop:1, playlist:'Dg0IjOzopYU', modestbranding:1, rel:0 },
+        events: { onReady: function(e) { e.target.setVolume(50); } }
       });
     };
-
     $('music-toggle-btn').addEventListener('click', function() {
       if (!ytPlayer) return;
       var player = $('music-player');
       if (musicPlaying) {
-        ytPlayer.pauseVideo();
-        this.textContent = '▶';
-        player.classList.add('paused');
-        musicPlaying = false;
+        ytPlayer.pauseVideo(); this.textContent = '▶'; player.classList.add('paused'); musicPlaying = false;
       } else {
-        ytPlayer.playVideo();
-        this.textContent = '⏸';
-        player.classList.remove('paused');
-        musicPlaying = true;
+        ytPlayer.playVideo(); this.textContent = '⏸'; player.classList.remove('paused'); musicPlaying = true;
       }
     });
-
-    $('music-volume').addEventListener('input', function() {
-      if (ytPlayer) ytPlayer.setVolume(parseInt(this.value));
-    });
-
-    // Hide / show music player
+    $('music-volume').addEventListener('input', function() { if (ytPlayer) ytPlayer.setVolume(parseInt(this.value)); });
     var musicHidden = false;
     $('music-hide-btn').addEventListener('click', function() {
       var player = $('music-player');
       musicHidden = !musicHidden;
-      if (musicHidden) {
-        player.classList.add('hidden-player');
-        this.textContent = '🎵';
-        this.title = 'Show music player';
-      } else {
-        player.classList.remove('hidden-player');
-        this.textContent = '✕';
-        this.title = 'Hide music player';
-      }
+      if (musicHidden) { player.classList.add('hidden-player'); this.textContent = '🎵'; this.title = 'Show music player'; }
+      else { player.classList.remove('hidden-player'); this.textContent = '✕'; this.title = 'Hide music player'; }
     });
   </script>
 
-  <script>
-  /* ── AI Chat ── */
-  (function() {
-    var history = [];
-    var busy = false;
-    var messagesEl = document.getElementById('ai-messages');
-    var inputEl    = document.getElementById('ai-input');
-    var sendBtn    = document.getElementById('ai-send-btn');
-    var emptyEl    = document.getElementById('ai-empty');
 
-    function addBubble(role, text, thinking) {
-      if (emptyEl) emptyEl.style.display = 'none';
-      var row = document.createElement('div');
-      row.className = 'ai-msg ' + role;
-      var avatar = document.createElement('div');
-      avatar.className = 'ai-msg-avatar';
-      avatar.textContent = role === 'user' ? '🧑' : '✨';
-      var bubble = document.createElement('div');
-      bubble.className = 'ai-msg-bubble' + (thinking ? ' thinking' : '');
-      bubble.textContent = text;
-      row.appendChild(avatar);
-      row.appendChild(bubble);
-      messagesEl.appendChild(row);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-      return bubble;
-    }
 
-    async function send() {
-      var text = inputEl.value.trim();
-      if (!text || busy) return;
-      busy = true; sendBtn.disabled = true;
-      inputEl.value = ''; inputEl.style.height = 'auto';
-      addBubble('user', text);
-      history.push({ role: 'user', content: text });
-      var thinking = addBubble('assistant', 'Thinking…', true);
-      try {
-        var res = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514', max_tokens: 1024,
-            system: 'You are a helpful AI assistant built into a personal notes and productivity app called Soups Gallery. Be concise, friendly, and helpful.',
-            messages: history
-          })
-        });
-        var data = await res.json();
-        var reply = (data.content && data.content[0] && data.content[0].text) || 'Sorry, something went wrong.';
-        history.push({ role: 'assistant', content: reply });
-        thinking.classList.remove('thinking');
-        thinking.textContent = reply;
-      } catch(e) {
-        thinking.classList.remove('thinking');
-        thinking.textContent = '⚠️ Could not reach the AI. Check your connection.';
-      }
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-      busy = false; sendBtn.disabled = false; inputEl.focus();
-    }
-
-    sendBtn.addEventListener('click', send);
-    inputEl.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
-    });
-    inputEl.addEventListener('input', function() {
-      this.style.height = 'auto';
-      this.style.height = Math.min(this.scrollHeight, 180) + 'px';
-    });
-    document.getElementById('ai-clear-btn').addEventListener('click', function() {
-      history = []; messagesEl.innerHTML = '';
-      if (emptyEl) { messagesEl.appendChild(emptyEl); emptyEl.style.display = ''; }
-    });
-    document.querySelectorAll('.ai-suggestion-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() { inputEl.value = this.textContent; send(); });
-    });
-  })();
-  </script>
 
 </body>
 </html>
