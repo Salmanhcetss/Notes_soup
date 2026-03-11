@@ -275,19 +275,22 @@
     .notes-page {
       flex: 1;
       display: flex;
-      gap: 1.5rem;
+      gap: 1.2rem;
       padding: 1.2rem 1.5rem;
-      max-width: 1200px;
       width: 100%;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 0;
+      overflow: hidden;
+      height: calc(100vh - 112px);
     }
 
     .compose-panel {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      width: 340px;
+      width: 280px;
       flex-shrink: 0;
+      overflow-y: auto;
     }
 
     .compose-panel h2, .notes-panel h2 { margin: 0 0 0.2rem; font-size: 1.1rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
@@ -322,9 +325,10 @@
       flex-direction: column;
       gap: 0.75rem;
       min-width: 0;
+      overflow: hidden;
     }
     .notes-header-row {
-      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; flex-shrink: 0;
     }
     .notes-header-row h2 { flex-shrink: 0; }
     .notes-controls { display: flex; gap: 0.5rem; flex: 1; flex-wrap: wrap; }
@@ -342,6 +346,9 @@
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 0.75rem;
       align-content: start;
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 0.25rem;
     }
 
     .note-card {
