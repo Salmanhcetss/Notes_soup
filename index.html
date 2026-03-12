@@ -275,20 +275,35 @@
     .notes-page {
       flex: 1;
       display: flex;
-      gap: 1.2rem;
-      padding: 1.2rem 1.5rem;
+      flex-direction: column;
+      padding: 0.75rem 1.2rem 1rem;
       width: 100%;
       max-width: 100%;
-      margin: 0;
-      overflow: hidden;
+      gap: 0.75rem;
       height: calc(100vh - 112px);
+      overflow: hidden;
+    }
+
+    .notes-topbar {
+      display: flex;
+      gap: 0.6rem;
+      flex-shrink: 0;
+      align-items: center;
+    }
+
+    .notes-body {
+      display: flex;
+      gap: 1.2rem;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
     }
 
     .compose-panel {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      width: 280px;
+      width: 260px;
       flex-shrink: 0;
       overflow-y: auto;
     }
@@ -338,7 +353,7 @@
       background: var(--bg-input); color: var(--text-primary);
       border: 1px solid var(--border); border-radius: 8px; outline: none;
     }
-    .search-input { flex: 1; min-width: 100px; }
+    .search-input { flex: 1; }
     .search-input:focus, .filter-select:focus { border-color: var(--accent); }
 
     .notes-grid {
@@ -1537,6 +1552,20 @@
   <!-- ══ NOTES PAGE ══ -->
   <div class="page" id="page-notes">
     <div class="notes-page">
+      <!-- Top bar: search + tag filter -->
+      <div class="notes-topbar">
+        <input type="text" class="search-input" id="search-input" placeholder="🔍 Search notes…">
+        <select class="filter-select" id="filter-tag">
+          <option value="">All tags</option>
+          <option value="school">🎒 School</option>
+          <option value="ideas">💡 Ideas</option>
+          <option value="reminders">🔔 Reminders</option>
+          <option value="other">📌 Other</option>
+        </select>
+      </div>
+
+      <!-- Main row: compose + grid -->
+      <div class="notes-body">
       <div class="compose-panel">
         <h2>New Note</h2>
         <input type="text" id="note-title" placeholder="Title…" maxlength="80">
@@ -1560,22 +1589,10 @@
       </div>
       </div>
       <div class="notes-panel">
-        <div class="notes-header-row">
-          <h2>Saved Notes</h2>
-          <div class="notes-controls">
-            <input type="text" class="search-input" id="search-input" placeholder="Search…">
-            <select class="filter-select" id="filter-tag">
-              <option value="">All tags</option>
-              <option value="school">🎒 School</option>
-              <option value="ideas">💡 Ideas</option>
-              <option value="reminders">🔔 Reminders</option>
-              <option value="other">📌 Other</option>
-            </select>
-          </div>
-        </div>
         <div class="notes-grid" id="notes-grid"></div>
         <p class="empty-state" id="empty-state">No notes yet. Create one!</p>
       </div>
+      </div><!-- end notes-body -->
     </div>
   </div>
 
@@ -1806,6 +1823,9 @@
        TOAST
     ============================================================ */
     var toastTimer;
+    function lsGet(k, d) { try { var v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : d; } catch(e) { return d; } }
+    function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
+
     function showToast(msg) {
       var t = document.getElementById('toast');
       t.textContent = msg;
