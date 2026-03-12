@@ -2840,53 +2840,62 @@
       var title   = document.getElementById('viewer-title');
       var dlBtn   = document.getElementById('viewer-dl');
       body.innerHTML = '';
+      body.removeAttribute('style');
       title.textContent = f.name;
       dlBtn.href     = f.objectUrl;
       dlBtn.download = f.name;
 
-      var type = f.type;
+      // Detect by extension first (more reliable than MIME type from file picker)
+      var ext = f.name.split('.').pop().toLowerCase();
+      var type = f.type || '';
 
-      if (type.startsWith('image/')) {
+      var isImage = type.startsWith('image/') || /^(jpg|jpeg|png|gif|webp|svg|bmp|ico|avif)$/.test(ext);
+      var isVideo = type.startsWith('video/') || /^(mp4|webm|ogg|mov|avi|mkv)$/.test(ext);
+      var isAudio = type.startsWith('audio/') || /^(mp3|wav|ogg|flac|aac|m4a|opus)$/.test(ext);
+      var isPDF   = type === 'application/pdf' || ext === 'pdf';
+      var isText  = type.startsWith('text/') ||
+                    ['application/json','application/xml','application/javascript'].includes(type) ||
+                    /^(txt|md|csv|json|js|ts|jsx|html|css|xml|log|py|java|c|cpp|cs|rb|go|rs|sh|yaml|yml|toml|ini|env|php|swift|kt|sql)$/.test(ext);
+
+      if (isImage) {
         var img = document.createElement('img');
         img.src = f.objectUrl;
         img.alt = f.name;
         body.appendChild(img);
 
-      } else if (type.startsWith('video/')) {
+      } else if (isVideo) {
         var vid = document.createElement('video');
         vid.src = f.objectUrl;
         vid.controls = true;
-        vid.autoplay = false;
+        vid.style.cssText = 'max-width:100%;max-height:70vh;border-radius:8px;';
         body.appendChild(vid);
 
-      } else if (type.startsWith('audio/')) {
+      } else if (isAudio) {
         var aud = document.createElement('audio');
         aud.src = f.objectUrl;
         aud.controls = true;
-        body.style.justifyContent = 'center';
-        body.style.alignItems = 'center';
+        body.style.cssText = 'justify-content:center;align-items:center;';
         body.appendChild(aud);
 
-      } else if (type === 'application/pdf') {
+      } else if (isPDF) {
         renderPDF(f.objectUrl, body, f.name);
 
-      } else if (
-        type.startsWith('text/') ||
-        ['application/json','application/xml','application/javascript'].includes(type) ||
-        /\.(txt|md|csv|json|js|ts|html|css|xml|log|py|java|c|cpp|cs|rb|go|rs|sh|yaml|yml|toml|ini|env)$/i.test(f.name)
-      ) {
+      } else if (isText) {
         var reader = new FileReader();
         reader.onload = function(e) {
           var pre = document.createElement('pre');
           pre.textContent = e.target.result;
           body.appendChild(pre);
         };
+        reader.onerror = function() {
+          body.innerHTML = '<div class="unsupported"><span>⚠️</span><p>Could not read file.</p></div>';
+        };
         reader.readAsText(f.file);
 
       } else {
         var unsup = document.createElement('div');
         unsup.className = 'unsupported';
-        unsup.innerHTML = '<span>' + getIcon(type) + '</span><p>Preview not available for this file type.<br>You can still download it below.</p>';
+        unsup.innerHTML = '<span>' + getIcon(type) + '</span><p>Preview not available for this file type.<br>Use the Download button to open it.</p>';
         body.appendChild(unsup);
       }
 
@@ -4027,6 +4036,7 @@
 
   <script>
     /* ── Music Player ── */
+    function $(id) { return document.getElementById(id); }
     var ytPlayer = null;
     var musicPlaying = false;
     var tag = document.createElement('script');
