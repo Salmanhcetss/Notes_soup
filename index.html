@@ -1686,7 +1686,7 @@
       <h2>📂 File Opener</h2>
 
       <!-- Drop zone -->
-      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+      <div class="drop-zone" id="drop-zone">
         <input type="file" id="file-input" multiple style="display:none"
           accept="image/*,video/*,audio/*,.pdf,.txt,.md,.csv,.json,.js,.ts,.html,.css,.xml,.log,.py,.java,.c,.cpp,.cs,.rb,.go,.rs,.sh">
         <div class="drop-zone-icon">📁</div>
@@ -2828,7 +2828,9 @@
         thumb.appendChild(sizeEl);
         thumb.appendChild(delBtn);
 
-        thumb.addEventListener('click', function() { openViewer(f); });
+        (function(file) {
+          thumb.addEventListener('click', function() { openViewer(file); });
+        })(f);
         grid.appendChild(thumb);
       });
     }
@@ -2946,6 +2948,11 @@
     document.getElementById('file-input').addEventListener('change', function() {
       addFiles(this.files);
       this.value = ''; // allow re-picking same file
+    });
+
+    // Drop zone click → open file picker
+    document.getElementById('drop-zone').addEventListener('click', function() {
+      document.getElementById('file-input').click();
     });
 
     // Drag & drop
