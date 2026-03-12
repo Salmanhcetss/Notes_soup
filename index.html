@@ -303,7 +303,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      width: 260px;
+      width: 50%;
       flex-shrink: 0;
       overflow-y: auto;
     }
@@ -475,31 +475,6 @@
       background: var(--bg-btn); color: var(--text-muted);
       border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
     }
-
-    /* Translator */
-    .gtranslate-wrap {
-      display: flex; flex-direction: column; gap: 0.4rem; flex-shrink: 0;
-    }
-    .gtranslate-label {
-      font-size: 0.85rem; color: var(--text-muted);
-    }
-    .translate-input {
-      width: 100%; resize: none; padding: 0.65rem 0.85rem;
-      font-size: 0.95rem; font-family: 'Fredoka', sans-serif;
-      background: var(--bg-input); color: var(--text-primary);
-      border: 1px solid var(--border); border-radius: 10px; outline: none;
-      line-height: 1.5; box-sizing: border-box;
-    }
-    .translate-input:focus { border-color: var(--accent); }
-    .translate-open-btn {
-      align-self: flex-start; padding: 0.45rem 1rem;
-      font-size: 0.88rem; font-family: 'Fredoka', sans-serif;
-      background: var(--accent); color: #fff;
-      border: none; border-radius: 8px; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .translate-open-btn:hover { opacity: 0.85; }
-
 
     /* =============================================
        TO-DO PAGE
@@ -1579,14 +1554,6 @@
         </select>
         <div class="colour-row" id="colour-row"><span>Colour:</span></div>
         <button class="notes-save-btn" id="notes-save-btn">＋ Save Note</button>
-
-        <!-- Translator -->
-        <div class="gtranslate-wrap">
-          <div class="gtranslate-label">🌐 Translate</div>
-          <textarea id="translate-input" class="translate-input" placeholder="Type text to translate…" rows="3"></textarea>
-          <button class="translate-open-btn" id="translate-open-btn">Open in Google Translate ↗</button>
-        </div>
-      </div>
       </div>
       <div class="notes-panel">
         <div class="notes-grid" id="notes-grid"></div>
@@ -2148,14 +2115,6 @@
       saveNotes(notes);
       renderNotes();
     }
-
-    // Translator — open Google Translate in new tab with prefilled text
-    document.getElementById('translate-open-btn').addEventListener('click', function() {
-      var text = document.getElementById('translate-input').value.trim();
-      if (!text) { showToast('Type something to translate first!'); return; }
-      var url = 'https://translate.google.com/?sl=auto&tl=en&text=' + encodeURIComponent(text) + '&op=translate';
-      window.open(url, '_blank');
-    });
 
     document.getElementById('notes-save-btn').addEventListener('click', function() {
       var title = document.getElementById('note-title').value;
