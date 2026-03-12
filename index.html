@@ -980,10 +980,7 @@
       border-color: var(--accent);
       background: var(--accent-dim);
     }
-    .drop-zone input[type="file"] {
-      position: absolute; inset: 0;
-      opacity: 0; cursor: pointer; width: 100%; height: 100%;
-    }
+    .drop-zone input[type="file"] { display: none; }
     .drop-zone-icon  { font-size: 2.8rem; margin-bottom: 0.5rem; }
     .drop-zone-label { font-size: 1.1rem; color: var(--text-secondary); }
     .drop-zone-sub   { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; }
@@ -1689,8 +1686,8 @@
       <h2>📂 File Opener</h2>
 
       <!-- Drop zone -->
-      <div class="drop-zone" id="drop-zone">
-        <input type="file" id="file-input" multiple
+      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+        <input type="file" id="file-input" multiple style="display:none"
           accept="image/*,video/*,audio/*,.pdf,.txt,.md,.csv,.json,.js,.ts,.html,.css,.xml,.log,.py,.java,.c,.cpp,.cs,.rb,.go,.rs,.sh">
         <div class="drop-zone-icon">📁</div>
         <div class="drop-zone-label">Click or drag &amp; drop files here</div>
