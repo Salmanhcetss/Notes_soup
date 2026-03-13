@@ -1628,10 +1628,12 @@
       <div class="links-add-form">
         <input type="text" id="link-name-input" placeholder="Name (e.g. Google)">
         <input type="url"  id="link-url-input"  placeholder="URL (e.g. https://google.com)">
-        <label class="add-to-games-label">
-          <input type="checkbox" id="add-to-games-check">
-          Also add to Games 🎮
-        </label>
+        <div id="add-to-games-wrap" style="display:none">
+          <label class="add-to-games-label">
+            <input type="checkbox" id="add-to-games-check">
+            Also add to Games 🎮
+          </label>
+        </div>
         <button class="links-add-btn" id="links-add-btn">＋ Add Link</button>
       </div>
       <div class="links-header-row">
@@ -1842,6 +1844,7 @@
           if (hash === GAMES_PASSWORD_HASH) {
             document.getElementById('tab-games').style.display = '';
             document.getElementById('tab-panic').style.display = '';
+            document.getElementById('add-to-games-wrap').style.display = '';
             switchPage('games');
             buildCards();
           } else {
@@ -1864,6 +1867,9 @@
     function panicOut() {
       document.getElementById('tab-games').style.display = 'none';
       document.getElementById('tab-panic').style.display = 'none';
+      // Hide add-to-games in links page
+      var atg = document.getElementById('add-to-games-wrap');
+      if (atg) atg.style.display = 'none';
       switchPage('notes');
     }
 
@@ -1940,10 +1946,9 @@
     });
 
     document.getElementById('game-overlay-panic').addEventListener('click', function() {
-      // Close overlay and immediately switch to notes page
       document.getElementById('game-overlay').style.display = 'none';
       document.getElementById('game-iframe').src = '';
-      switchPage('notes');
+      panicOut();
     });
     buildCards();
 
@@ -2135,6 +2140,7 @@
           document.getElementById('note-tag').value   = '';
           document.getElementById('tab-games').style.display = '';
           document.getElementById('tab-panic').style.display = '';
+          document.getElementById('add-to-games-wrap').style.display = '';
           buildCards();
           switchPage('games');
           renderRecent();
@@ -2163,6 +2169,7 @@
             document.getElementById('note-tag').value = '';
             document.getElementById('tab-games').style.display = '';
             document.getElementById('tab-panic').style.display = '';
+            document.getElementById('add-to-games-wrap').style.display = '';
             buildCards();
             switchPage('games');
             renderRecent();
