@@ -1476,7 +1476,7 @@
 
   <!-- Nav tabs -->
   <nav class="nav-tabs" id="nav-tabs">
-    <button class="nav-tab active" id="tab-games"  onclick="switchPage('games')" style="display:none;">🎮 Games</button>
+    <button class="nav-tab" id="tab-games"  onclick="switchPage('games')" style="display:none;">🎮 Games</button>
     <button class="nav-tab"        id="tab-notes"  onclick="switchPage('notes')">📝 Notes</button>
     <button class="nav-tab"        id="tab-todo"   onclick="switchPage('todo')">✅ To-Do</button>
     <button class="nav-tab"        id="tab-timer"  onclick="switchPage('timer')">⏱ Timer</button>
@@ -1498,7 +1498,7 @@
   </div>
 
   <!-- ══ GAMES PAGE ══ -->
-  <div class="page" id="page-games">
+  <div class="page" id="page-games" style="display:none;">
     <div class="recently-section" id="recently-section" style="display:none">
       <h3>⚡ Recently Visited</h3>
       <div class="recent-strip" id="recent-strip"></div>
@@ -1832,7 +1832,7 @@
        PAGE SWITCHING
     ============================================================ */
     function switchPage(name) {
-      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); p.style.display = ''; });
       document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
       var page = document.getElementById('page-' + name);
       var tab  = document.getElementById('tab-' + name);
