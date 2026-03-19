@@ -2942,10 +2942,11 @@
         body.style.cssText = 'justify-content:center;align-items:center;';
         body.appendChild(aud);
 
-      if (isPDF) {
+      } else if (isPDF) {
         document.getElementById('file-viewer-overlay').classList.add('open');
         renderPDF(f.objectUrl, body, f.name);
         return;
+
       } else if (isText) {
         var reader = new FileReader();
         reader.onload = function(e) {
