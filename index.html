@@ -1555,6 +1555,7 @@
       { name: "portal (scratch)",       url: "https://turbowarp.org/1165334435/embed",                                                              embed: true },
       { name: "YouTube",                url: "https://www.youtube.com/" },
       { name: "Blooket",                url: "https://www.blooket.com/" },
+      { name: "MESλREDUX",              url: "https://mesaredux.duccman99.workers.dev/", emoji: "🎮", embed: true },
     ];
 
     // SHA-256 hashes — plaintext passwords never stored in source
@@ -1605,9 +1606,6 @@
       applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
-    /* ============================================================
-       PAGE SWITCHING
-    ============================================================ */
     function switchPage(name) {
       document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); p.style.display = ''; });
       document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -1746,8 +1744,22 @@
     function openGameOverlay(site) {
       document.getElementById('game-overlay-title').textContent = '🎮 ' + site.name;
       document.getElementById('game-overlay-newtab').href = site.url;
-      document.getElementById('game-iframe').src = site.url;
+      var iframe = document.getElementById('game-iframe');
+      iframe.src = site.url;
       document.getElementById('game-overlay').style.display = 'flex';
+      // If iframe is blocked (X-Frame-Options), fall back to new tab
+      iframe.onload = function() {
+        try {
+          // If we can't access contentDocument it's cross-origin — that's fine, it loaded
+          var cd = iframe.contentDocument;
+          // If contentDocument exists and has no body, likely blocked
+          if (cd && !cd.body) {
+            document.getElementById('game-overlay').style.display = 'none';
+            iframe.src = '';
+            window.open(site.url, '_blank');
+          }
+        } catch(e) { /* cross-origin = loaded fine */ }
+      };
     }
 
     document.getElementById('game-overlay-close').addEventListener('click', function() {
